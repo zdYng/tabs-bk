@@ -1,57 +1,49 @@
 <template>
     <div class="query-select">
         <div class="select-input">
-            <el-select v-model="value1" placeholder="请选择搜索类型">
+            <el-select v-model="groupId" @change="selectGroupId($event)" clearable filterable :placeholder="placeholder1">
                 <el-option
                     v-for="item in itemList1"
                     :key="item.id"
-                    :value="item.value"
+                    :value="item.id"
                     :label="item.label">
                 </el-option>
             </el-select>
-            <el-select v-model="value2" placeholder="请选择搜索条件">
+            <el-select v-model="conditionId" clearable filterable :placeholder="placeholder2">
                 <el-option
                     v-for="item in itemList2"
                     :key="item.id"
-                    :value="item.value"
+                    :value="item.id"
                     :label="item.label">
                 </el-option>
             </el-select>
-        <button class="select-btn">查询</button>
+        <button class="select-btn">{{buttonText}}</button>
         </div>
     </div>
 </template>
 <script>
 export default {
     name: 'QuerySelect',
+    props:{
+        placeholder1: String,
+        placeholder2: String,
+        itemList1: Array,
+        buttonText: String
+    },
     data(){
         return {
-            value1: '',
-            value2: '',
-            itemList1:[
-                {
-                    id: 1,
-                    label: 'label1',
-                    value: 'value1'
-                },
-                {
-                    id: 2,
-                    label: 'label2',
-                    value: 'value2'
-                }
-            ],
-            itemList2:[
-                {
-                    id: 3,
-                    label: 'label3',
-                    value: 'value1'
-                },
-                {
-                    id: 4,
-                    label: 'label4',
-                    value: 'value2'
-                }
-            ]
+            groupId: '',
+            conditionId: '',
+            itemList2:[],
+        }
+    },
+    methods:{
+        selectGroupId(val){
+            if(val === 1){
+                this.itemList2 = [{id: 3, label: '条件1'}, {id: 4, label: '条件2'}]
+            }else if(val === 2){
+                this.itemList2 = [{id: 5, label: '条件3'}, {id: 6, label: '条件4'}]
+            }
         }
     }
 }
@@ -64,6 +56,9 @@ export default {
     border-radius: .066667rem;
     width: 1.041667rem;
 }
+>>> .el-input__inner::-webkit-input-placeholder{
+    font-weight: 200;
+}
 .select-btn{
     width: .416667rem;
     height: .182292rem;
@@ -73,5 +68,6 @@ export default {
     font-size: .083333rem;
     color: #0066cc;
     margin-left: .104167rem;
+    outline: none;
 }
 </style>
