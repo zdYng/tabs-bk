@@ -1,5 +1,5 @@
 <template>
-    <!-- 数据字典 -->
+    <!-- 数据字典页面-->
     <div class="data-dictionary">
         <el-row>
             <el-col :span="24">

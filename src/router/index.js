@@ -21,12 +21,12 @@ Vue.use(VueRouter)
     component: () => import('../components/Home.vue'),
     children: [
       {
-        path: 'ProjectManagement',
-        component: () => import('../components/taskManagement/projectManagement/ProjectManagement.vue')
+        path: 'ProInfoMaintain',
+        component: () => import('../components/taskManagement/projectManagement/ProInfoMaintain.vue')
       },
       {
         path: '',
-        redirect: 'ProjectManagement'
+        redirect: 'ProInfoMaintain'
       }
       // {
       //   path: 'MainArea',
