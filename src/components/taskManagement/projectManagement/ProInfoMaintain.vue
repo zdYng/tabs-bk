@@ -26,8 +26,8 @@
                         <i class="iconfont icon-bitian">&#xe603;</i>
                         <span>项目类型</span>
                     </div>
-                    <el-select clearable placeholder="请选择">
-                        <el-option>选择一</el-option>
+                    <el-select :value="value" clearable placeholder="请选择">
+                        <el-option :value="option">选择一</el-option>
                     </el-select>
                 </div>
             </el-col>
@@ -37,14 +37,14 @@
                         <i class="iconfont icon-bitian">&#xe603;</i>
                         <span>项目阶段</span>
                     </div>
-                    <el-select clearable placeholder="请选择">
-                        <el-option>选择一</el-option>
+                    <el-select :value="value" clearable placeholder="请选择">
+                        <el-option :value="option">选择一</el-option>
                     </el-select>
                 </div>
                 <div class="item-input">
                     <div class="title">项目经理</div>
-                    <el-select clearable placeholder="请选择">
-                        <el-option>选择一</el-option>
+                    <el-select :value="value" clearable placeholder="请选择">
+                        <el-option :value="option">选择一</el-option>
                     </el-select>
                 </div>
             </el-col>
@@ -63,14 +63,14 @@
                     <div class="title">
                         <span>项目BD</span>
                     </div>
-                    <el-select clearable placeholder="请选择">
-                        <el-option>选择一</el-option>
+                    <el-select :value="value" clearable placeholder="请选择">
+                        <el-option :value="option">选择一</el-option>
                     </el-select>
                 </div>
                 <div class="item-input">
                     <div class="title">客户名称</div>
-                    <el-select clearable placeholder="请选择">
-                        <el-option>选择一</el-option>
+                    <el-select :value="value" clearable placeholder="请选择">
+                        <el-option :value="option">选择一</el-option>
                     </el-select>
                 </div>
             </el-col>
@@ -151,6 +151,8 @@ export default {
     name:'ProInfoMaintain',
     data(){
         return{
+            value: 'aa',
+            option: '选项一',
             category_name: ''
         }
     }
