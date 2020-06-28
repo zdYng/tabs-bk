@@ -20,52 +20,6 @@ Vue.use(VueRouter)
     name: 'Home',
     component: () => import('../components/Home.vue'),
     children: [
-<<<<<<< HEAD
-      {
-        path: 'ProScheduleMantain',
-        component: () => import('../components/taskManagement/projectManagement/ProScheduleMantain.vue')
-      },
-      {
-        path: '',
-        redirect: 'ProScheduleMantain'
-      }
-      // {
-      //   path: 'MainArea',
-      //   component: () => import('../components/MainArea.vue'),
-      //   children: [
-      //     {
-      //       name: 'MenuDetail',
-      //       path: 'MenuDetail/:id',
-      //       component: () => import('../components/common/MenuDetail.vue')
-      //     },
-      //     {
-      //       path: '',
-      //       redirect: 'MenuDetail/0'
-      //     }
-      //   ]
-      // },
-      // {
-      //   path: 'DictionaryClass',
-      //   component: () => import('../components/dataDictionary/DictionaryClass.vue'),
-      //   children:[
-      //     {
-      //       name: 'DictionaryDetail',
-      //       path: 'DictionaryDetail',
-      //       component: () => import('../components/dataDictionary/DictionaryDetail.vue')
-      //     },
-      //     {
-      //       name: 'DataDictionary',
-      //       path: 'DataDictionary/:id',
-      //       component: () => import('../components/dataDictionary/DataDictionary.vue')
-      //     },
-      //     // {
-      //     //   path: '',
-      //     //   redirect: 'DictionaryDetail/id=0'
-      //     // }
-      //   ]
-      // },
-=======
->>>>>>> d662af41df185d9b070733038b1e89ae44f18f3c
       // {
       //   path: 'ProInfoMaintain',
       //   component: () => import('../components/taskManagement/projectManagement/ProInfoMaintain.vue')
