@@ -30,6 +30,8 @@
                               class="hover" 
                               v-for="item in item.children" 
                               :key="item.id"
+                              @click="handleMemoryStrick(item.name,item.url)"
+
                               >
                               <router-link
                                 :to="{path: item.url}" 
@@ -41,9 +43,22 @@
                 </el-aside>
                 <el-main>
                     <!-- 记忆条 -->
-                    <div class="lable-bar">
-                        <span class="item"><span>菜单维护</span><i class="el-icon-close"></i></span>
-                        <span class="item"><span>数据字典</span><i class="el-icon-close"></i></span>
+                    <div class="lable-bar"    
+                    >
+                        <span class="item"
+                          v-for="(item, index) in memoryList"
+                          :key="index"
+                        >
+                            <span
+                                @click="handleMemoryLink"
+                            >
+                                {{item}}
+                            </span>
+                            <i class="el-icon-close"
+                              @click="handleMemoryDelete(index)"
+                            ></i>
+                           
+                        </span>
                     </div>
                     <div class="main-area">
                         <!-- <MainArea /> -->
@@ -64,13 +79,34 @@ export default {
     data(){
         return {
             dataList: [],
+            memoryList:[],
+            memoryId:[]
         }
     },
     created(){
         get(homeAPI).then(res => {
             this.dataList = res;
+            console.log('res->',res);
+            
         })
     },
+    methods: {
+        handleMemoryStrick(type,url) {    
+            console.log(url);
+                       
+            if (this.memoryList.indexOf(type)== -1 ) {
+                this.memoryList.push(type) 
+            }            
+        },
+        handleMemoryDelete(index) {
+            this.memoryList.splice(index,1)
+        },
+        handleMemoryLink() {
+            console.log('suc');
+            this.$router.push({path:''})
+            
+        }
+    }
 }
 </script>
 <style scoped>
