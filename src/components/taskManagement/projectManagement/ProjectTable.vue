@@ -1,4 +1,5 @@
 <template>
+    <!-- 项目信息列表 -->
     <div class="pro-table">
         <el-table class="tab-border-radius scroll-bar" :data="list" height="500px" border style="width: 100%;">
             <el-table-column
