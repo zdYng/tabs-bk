@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <el-container class="container">
-            <el-header height=".885rem">
+            <el-header height="17%">
                 <div class="left">
                     <img src="../assets/img/logo.png" alt="">
                     <span>极联智能制造SaaS平台管理系统</span>
@@ -73,60 +73,122 @@ export default {
     },
 }
 </script>
-<style scoped>
-    .home{
-        position: absolute;
-        width: 100%;
+<style lang="less" scoped>
+.home{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    overflow: hidden;
+    .container{
         height: 100%;
-        overflow-y: hidden;
-        overflow: hidden;
+        .el-header{
+            // tips: header的高度是17%,写在el-header的内嵌样式中
+            background: url('../assets/img/header.png') no-repeat center center;
+            background-size: 100% 100%;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            .left{
+                height: .520833rem;
+                display: flex;
+                vertical-align: -webkit-baseline-middle;
+                img{
+                    width: .3125rem;
+                    height: .3125rem;
+                    margin: .104167rem 0 0 .15625rem;
+                }
+                span{
+                    font-size: .1875rem;
+                    color: #fff;
+                    align-self: flex-start;
+                    margin: .182292rem 0 0 0;
+                }
+            }
+            .right{
+                height: .520833rem;
+                padding: .15625rem .15625rem 0 0;
+                .buju{
+                    margin-right: .104167rem;
+                }
+                span{
+                    font-size:20px;
+                    font-family:Microsoft YaHei;
+                    color: #fff;
+                    margin-right: .104167rem;
+                }
+            }
+        }
+        .el-container{
+            height: 83%;
+             /* aside面板 */
+            .el-aside{
+                height: 100%;
+                background:rgba(235,245,255,1);
+                .el-collapse{
+                    border: none;
+                    overflow-y: hidden;
+                    /deep/ .el-collapse-item__header{
+                        height: .416667rem;
+                        font-size: .083333rem;
+                        padding-left: .260417rem;
+                        border: none;
+                        background:rgba(235,245,255,1);
+                        .icon-header{
+                            margin-right: .078125rem;
+                            font-size: .104167rem;
+                        }
+                    }
+                    /deep/ .el-collapse-item__wrap{
+                        border: none;
+                        background:rgba(217,236,255,1);
+                        /deep/ .el-collapse-item__content{
+                            div{
+                                font-size: 14px;
+                                height: .3125rem;
+                                padding-left: .442708rem;
+                                line-height: .3125rem;
+                            }
+                        }
+                    }
+                }
+            }
+            /* main功能区域 */
+            /deep/ .el-main{
+                padding: 0;
+                height: 100%;;
+                .lable-bar{
+                    height: 7%;
+                    line-height: .3125rem;
+                    box-shadow:0px 0px 15px 0px rgba(0, 0, 0, 0.05);
+                    display: flex;
+                    align-items: center;
+                    .item{
+                        display: flex;
+                        width: .625rem;
+                        height: .234375rem;
+                        justify-content: space-around;
+                        align-items: center;
+                        font-size: .072917rem;
+                    }
+                    span{
+                        i{
+                            align-self: center;
+                            font-size: .0625rem;
+                        }
+                    }
+                }
+                .main-area{
+                    height: 93%;
+                    display: flex;
+                    justify-content: start;
+                }
+            }
+        }
     }
-    /* header */
-    .el-header{
-        background: url('../assets/img/header.png') no-repeat center center;
-        background-size: 100% 100%;
-        padding: 0;
-        display: flex;
-        justify-content: space-between;
-    }
-    .left{
-       height: .520833rem;
-       display: flex;
-       vertical-align: -webkit-baseline-middle;
-    }
-    .left img{
-        width: .3125rem;
-        height: .3125rem;
-        margin: .104167rem 0 0 .15625rem;
-    }
-     .left span{
-         font-size: .1875rem;
-         color: #fff;
-         align-self: flex-start;
-         margin: .182292rem 0 0 0;
-     }
-     .right{
-        height: .520833rem;
-        padding: .15625rem .15625rem 0 0;
-     }
-     .right .buju{
-         margin-right: .104167rem;
-     }
-     .right span{
-        font-size:20px;
-        font-family:Microsoft YaHei;
-        color: #fff;
-        margin-right: .104167rem;
-     }
-     /* aside面板 */
-     .el-aside{
-         height: 10.416667rem;
-         background:rgba(235,245,255,1);
-     }
-    .el-collapse{
-         border: none;
-         overflow-y: hidden;
-     }
+}
+</style>
+<style scoped>
      .el-collapse::-webkit-scrollbar{
         overflow: hidden;
      }
@@ -139,54 +201,4 @@ export default {
          width: 100%;
          height: 100%;
      }
-     >>> .el-collapse-item__header{
-        height: .416667rem;
-        font-size: .083333rem;
-        padding-left: .260417rem;
-        border: none;
-        background:rgba(235,245,255,1);
-     }
-     >>> .el-collapse-item__wrap{
-        border: none;
-        background:rgba(217,236,255,1);
-     }
-     >>> .el-collapse-item__content div{
-        font-size: 14px;
-        height: .3125rem;
-        padding-left: .442708rem;
-        line-height: .3125rem;
-     }
-     .icon-header{
-         margin-right: .078125rem;
-         font-size: .104167rem;
-     }
-     /* main功能区域 */
-    >>> .el-main{
-        padding: 0;
-        height: 10.416667rem;
-    }
-    .lable-bar{
-        height: .3125rem;
-        line-height: .3125rem;
-        box-shadow:0px 0px 15px 0px rgba(0, 0, 0, 0.05);
-        display: flex;
-        align-items: center;
-    }
-    .lable-bar .item{
-        display: flex;
-        width: .625rem;
-        height: .234375rem;
-        justify-content: space-around;
-        align-items: center;
-        font-size: .072917rem;
-    }
-    .lable-bar span i{
-        align-self: center;
-        font-size: .0625rem;
-    }
-    /* main-area */
-    .main-area{
-        display: flex;
-        justify-content: start;
-    }
 </style>

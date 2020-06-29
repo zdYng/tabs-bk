@@ -1,36 +1,28 @@
 <template>
-    <div class="select-box">
+    <div class="input-box">
         <div class="title">
             <i v-if="showIcon" class="iconfont icon-bitian">&#xe603;</i>
-            <span>{{title}}</span>
+                <span>{{title}}</span>
         </div>
-        <el-select class="select-box" v-model="value" clearable placeholder="请选择">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-        </el-select>
+        <el-input v-model="value" placeholder="请输入内容"></el-input>
     </div>
 </template>
 <script>
 export default {
-    name: 'SelectBox',
+    name:'InputBox',
     props:{
-        options: Array,
-        title: String,
-        showIcon: Boolean,
+        title:String,
+        showIcon: Boolean
     },
     data(){
-        return{
+        return {
             value:''
         }
     }
 }
 </script>
 <style lang="less" scoped>
-.select-box{
+.input-box{
     .title{
         display: flex;
         font-size: .083333rem;
