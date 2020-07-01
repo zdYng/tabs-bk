@@ -4,10 +4,10 @@
             <!-- -------------基础信息--------------------- -->
             <el-row>
                 <el-col :span="24">
-                    <BannerBar :showDisappear="true" bannerText="基础信息"/>
+                    <BannerBar :isShow="true" :showDisappear="true" bannerText="基础信息" @listenChildEvent="getBaseInfoData"/>
                 </el-col>
             </el-row>
-            <div v-show="true">
+            <div v-show="isShowBaseInfo">
                 <el-row>
                     <el-col :span="12" class="el-col-class">
                         <div class="item-input">
@@ -50,7 +50,7 @@
                             <div class="title">
                                 <span>计划周期</span>
                             </div>
-                            <el-input class="input-code" v-model="category_name" placeholder="请输入内容"></el-input>
+                            <DateSelect/>
                         </div>
                     </el-col>
                     <el-col :span="12" class="el-col-class">
@@ -58,7 +58,7 @@
                             <div class="title">
                                 <span>实际周期</span>
                             </div>
-                            <el-input class="input-code" v-model="category_name" placeholder="请输入内容"></el-input>
+                            <DateSelect/>
                         </div>
                     </el-col>
                 </el-row>
@@ -76,54 +76,58 @@
             <!-- -------------自定义信息--------------------- -->
             <el-row>
                 <el-col :span="24">
-                <BannerBar :showDisappear="true" bannerText="自定义信息"/>
+                <BannerBar :isShow="true" :showDisappear="true" bannerText="自定义信息" @listenChildEvent="getCustomData"/>
                 </el-col>
             </el-row>
-            <el-row class="row-custom">
-                <el-col :span="6" class="col-custom">
-                    <div class="item-input">
-                        <InputBox :showIcon="false" title="自定义"/>
-                    </div>
-                </el-col>
-                <el-col :span="6" class="col-custom">
-                    <div class="item-input">
-                        <InputBox :showIcon="false" title="自定义"/>
-                    </div>
-                </el-col>
-            </el-row>
+            <div v-show="isShowCustomInfo">
+                <el-row class="row-custom">
+                    <el-col :span="6" class="col-custom">
+                        <div class="item-input">
+                            <InputBox :showIcon="false" title="自定义"/>
+                        </div>
+                    </el-col>
+                    <el-col :span="6" class="col-custom">
+                        <div class="item-input">
+                            <InputBox :showIcon="false" title="自定义"/>
+                        </div>
+                    </el-col>
+                </el-row>
+            </div>
             <!-- -------------客户信息--------------------- -->
             <el-row>
                 <el-col :span="24">
-                <BannerBar :showDisappear="true" bannerText="客户信息"/>
+                <BannerBar :isShow="true" :showDisappear="true" bannerText="客户信息" @listenChildEvent="getUserMsgData"/>
                 </el-col>
             </el-row>
-            <el-row class="row-user-info">
-                <el-col :span="6" class="col-user-info">
-                    <div class="item-input">
-                        <InputBox :showIcon="false" title="客户名称"/>
-                    </div>
-                </el-col>
-                <el-col :span="6" class="col-user-info">
-                    <div class="item-input">
-                        <InputBox :showIcon="false" title="客户等级"/>
-                    </div>
-                </el-col>
-                <el-col :span="6" class="col-user-info">
-                    <div class="item-input">
-                        <InputBox :showIcon="false" title="客户类型"/>
-                    </div>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="24" class="el-col-class">
-                    <div style="height: 120px" class="item-input">
-                        <div class="title">
-                            <span>客户信息描述</span>
+            <div v-show="isShowUserInfo">
+                <el-row class="row-user-info">
+                    <el-col :span="6" class="col-user-info">
+                        <div class="item-input">
+                            <InputBox :showIcon="false" title="客户名称"/>
                         </div>
-                        <el-input type="textarea" rows="3" class="input-code" v-model="category_name"></el-input>
-                    </div>
-                </el-col>
-            </el-row>
+                    </el-col>
+                    <el-col :span="6" class="col-user-info">
+                        <div class="item-input">
+                            <InputBox :showIcon="false" title="客户等级"/>
+                        </div>
+                    </el-col>
+                    <el-col :span="6" class="col-user-info">
+                        <div class="item-input">
+                            <InputBox :showIcon="false" title="客户类型"/>
+                        </div>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="24" class="el-col-class">
+                        <div style="height: 120px" class="item-input">
+                            <div class="title">
+                                <span>客户信息描述</span>
+                            </div>
+                            <el-input type="textarea" rows="3" class="input-code" v-model="category_name"></el-input>
+                        </div>
+                    </el-col>
+                </el-row>
+            </div>
             <el-row class="row-btn">
                 <button class="save-btn">保&nbsp;存</button>
             </el-row>
@@ -146,14 +150,32 @@ export default {
                     label:'类型二',
                     value: '2'
                 }
-            ]
+            ],
+            isShowBaseInfo: true,
+            isShowCustomInfo:true,
+            isShowUserInfo: true
         }
     },
     components:{
         SelectBox: () =>  import('../../common/SelectBox'),
         InputBox: () => import('../../common/InputBox'),
-        BannerBar: () => import('../../common/BannerBar')
+        BannerBar: () => import('../../common/BannerBar'),
+        DateSelect: () => import('./DateSelect')
     },
+    methods:{
+        getBaseInfoData(data){
+            this.isShowBaseInfo = data;
+            console.log(this.isShowBaseInfo);
+        },
+        getCustomData(data){
+            this.isShowCustomInfo = data;
+            console.log(this.isShowCustomInfo);
+        },
+        getUserMsgData(data){
+            this.isShowUserInfo = data;
+            console.log(this.isShowUserInfo);
+        }
+    }
 }
 </script>
 <style lang="less" scoped>

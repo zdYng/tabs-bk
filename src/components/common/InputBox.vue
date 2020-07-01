@@ -2,7 +2,7 @@
     <div class="input-box">
         <div class="title">
             <i v-if="showIcon" class="iconfont icon-bitian">&#xe603;</i>
-                <span>{{title}}</span>
+            <span>{{title}}</span>
         </div>
         <el-input v-model="value" placeholder="请输入内容"></el-input>
     </div>
