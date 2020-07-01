@@ -22,3 +22,7 @@ export const setDicNodeId = ({ commit }, data) => {
 export const setDicMenuMessage = ({ commit }, data) => {
     commit('setDicMenuMessage', data);
 }
+
+export const memoryTab = ({commit}, data) => {
+    commit("memoryTab", data);
+}
