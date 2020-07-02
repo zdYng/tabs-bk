@@ -13,7 +13,8 @@ const state = {
   menuData: [],
   nodeId: '',
   DicNodeId: '',
-  dicMenuMessage:''
+  dicMenuMessage:'',
+  // memoryList:[]
 }
 
 export default new Vuex.Store({

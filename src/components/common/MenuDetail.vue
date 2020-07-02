@@ -263,7 +263,7 @@ export default {
     }
     .el-input{
         width: 1.25rem;
-    }
+    }f
     >>> .el-input__inner{
        width: 1.25rem;
        height: .260417rem;

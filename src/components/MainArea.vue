@@ -50,9 +50,9 @@ export default {
     created(){
         get(menuAPI).then(res => {
             this.menuData = res;
-            console.log(this.menuData);
+            // console.log(this.menuData);
         })
-        console.log('Main created')
+        // console.log('Main created')
     },
     destroyed(){
         console.log('MainArea destoryed');
