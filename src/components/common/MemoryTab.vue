@@ -1,6 +1,5 @@
 <template>
-  <div class="memory-tab">
-   
+  <div class="memory-tab">  
     <span class="item"
           v-for="(item, index) in memoryList"
           :key="index"

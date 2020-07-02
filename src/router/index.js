@@ -54,13 +54,13 @@ Vue.use(VueRouter)
           },
           {
             name: 'DataDictionary',
-            path: 'DataDictionary/:id',
+            path: 'DataDictionary',
             component: () => import('../components/dataDictionary/DataDictionary.vue')
           },
-          {
-            path: '',
-            redirect: 'DictionaryDetail/id=0'
-          }
+          // {
+          //   path: '',
+          //   redirect: 'DictionaryDetail/id=0'
+          // }
         ]
       },
       {
@@ -77,6 +77,7 @@ Vue.use(VueRouter)
       },
       {
         path: 'MessageRemind',
+        name: 'MessageRemind',
         component: () => import('../components/serviceCounter/MessageRemind.vue')
       },
       {
