@@ -14,7 +14,7 @@
       </el-header>
       <el-container>
         <!-- 一级菜单面板 -->
-        <el-aside width="1.302rem">
+        <el-aside width="1.5625rem">
           <!-- element-ui里面的折叠面板组件 -->
           <el-collapse>
             <el-collapse-item class="tab-item" v-for="item in dataList" :key="item.id">
@@ -51,7 +51,6 @@
               </span>
           </div>
           <div class="main-area">
-            <!-- <MainArea /> -->
             <keep-alive>
               <router-view></router-view>
             </keep-alive>
@@ -245,8 +244,8 @@ export default {
           //   color: #fff;
           // }
           .active{
-            background-color: #0066cc;
-            color: #fff;
+            background-color: #a6d2ff;
+            // color: #fff;
           }
         }
         .main-area {

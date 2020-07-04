@@ -21,58 +21,17 @@ Vue.use(VueRouter)
     component: () => import('../components/Home.vue'),
     children: [
       {
-        path: 'TaskDecomposition',
-        component: () => import('../components/taskManagement/taskDecomposition/TaskDecomposition.vue')
-      },
-      {
-        path: '',
-<<<<<<< HEAD
-        redirect: 'TaskDecomposition'
-      }
-      // {
-      //   path: 'MainArea',
-      //   component: () => import('../components/MainArea.vue'),
-      //   children: [
-      //     {
-      //       name: 'MenuDetail',
-      //       path: 'MenuDetail/:id',
-      //       component: () => import('../components/common/MenuDetail.vue')
-      //     },
-      //     {
-      //       path: '',
-      //       redirect: 'MenuDetail/0'
-      //     }
-      //   ]
-      // },
-      // {
-      //   path: 'DictionaryClass',
-      //   component: () => import('../components/dataDictionary/DictionaryClass.vue'),
-      //   children:[
-      //     {
-      //       name: 'DictionaryDetail',
-      //       path: 'DictionaryDetail',
-      //       component: () => import('../components/dataDictionary/DictionaryDetail.vue')
-      //     },
-      //     {
-      //       name: 'DataDictionary',
-      //       path: 'DataDictionary/:id',
-      //       component: () => import('../components/dataDictionary/DataDictionary.vue')
-      //     },
-=======
-        redirect: 'ProInfoMaintain'
-      },
-      {
         path: 'MainArea',
-        component: () => import('../components/MainArea.vue'),
+        component: () => import('../components/menuMaintain/MainArea.vue'),
         children: [
           {
             name: 'MenuDetail',
-            path: 'MenuDetail/:id',
-            component: () => import('../components/common/MenuDetail.vue')
+            path: 'MenuDetail',
+            component: () => import('../components/menuMaintain/MenuDetail.vue')
           },
           // {
           //   path: '',
-          //   redirect: 'MenuDetail/0'
+          //   redirect: 'MenuDetail'
           // }
         ]
       },
@@ -87,10 +46,9 @@ Vue.use(VueRouter)
           },
           {
             name: 'DataDictionary',
-            path: 'DataDictionary',
+            path: 'DataDictionary/',
             component: () => import('../components/dataDictionary/DataDictionary.vue')
           },
->>>>>>> localdev
           // {
           //   path: '',
           //   redirect: 'DictionaryDetail/id=0'
