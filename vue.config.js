@@ -14,7 +14,7 @@ module.exports = {
                 }
             },
             '/menu': {
-                target: 'http://47.111.232.105:7002/',
+                target: 'http://47.111.232.105:8769/',
                 changOrigin: true,
                 pathRewrite: {
                     '^/menu': '/'

@@ -55,14 +55,6 @@ Vue.use(VueRouter)
       //     // }
       //   ]
       // },
-      {
-        path: 'manage',
-        component: () => import('../components/authorizationManagement/turnAuthorization/TurnAuthorization.vue')
-      },
-      {
-        path: '',
-        redirect: 'manage'
-      },
       // {
       //   path: 'MainArea',
       //   component: () => import('../components/MainArea.vue'),
@@ -81,7 +73,8 @@ Vue.use(VueRouter)
       {
         path: 'DictionaryClass',
         component: () => import('../components/dataDictionary/DictionaryClass.vue'),
-        // 任务分解页面
+      },
+      { // 任务分解页面
         path:'TaskDecomposition',
         component: () => import('../components/taskManagement/taskDecomposition/TaskDecomposition.vue'),
         children:[
@@ -97,7 +90,7 @@ Vue.use(VueRouter)
           },
           {
             path: '',
-            redirect: 'DictionaryDetail'
+            redirect: 'TaskBoard'
           }
         ]
       },
@@ -132,10 +125,10 @@ Vue.use(VueRouter)
         path: 'LogoMaintain',
         component: () => import('../components/taskManagement/taskDecomposition/LogoMaintain.vue')
       },
-      {
-        path: '',
-        redirect: 'LogoMaintain'
-      }
+      // {
+      //   path: '',
+      //   redirect: 'LogoMaintain'
+      // }
     ]
   }
 ]

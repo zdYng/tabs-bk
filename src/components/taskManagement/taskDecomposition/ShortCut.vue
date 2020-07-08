@@ -27,7 +27,7 @@
 </template>
 <script>
 export default {
-    name: 'SaveModelDialog',
+    name: 'ShortCut',
     data(){
         return {
             dialogData: {

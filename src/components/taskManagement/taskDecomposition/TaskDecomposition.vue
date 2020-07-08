@@ -1,8 +1,10 @@
 <template>
+<!-- 任务分解页面 -->
     <div class="main">
         <section class="left">
             <div class="top">
-                <ShortCut />
+                <BtnGroup :btnGroup="btnGroup"/>
+                <DialogBtnGroup />
             </div>
             <TableTree />
         </section>
@@ -21,13 +23,15 @@ export default {
             CutBarList: [
                 { id: 1, value: '任务信息', path: 'TaskMsgPanel'},
                 { id: 2, value: '任务看板', path: 'TaskBoard'},
-            ]
+            ],
+            btnGroup:['新增分组', '新增任务', '新增子任务']
         }
     },
     components:{ 
         TableTree: () => import('./TableTree'),
         CutBar: () => import('../../common/CutBar'),
-        ShortCut: () => import('./ShortCut')
+        BtnGroup: () => import('../../common/BtnGroup'),
+        DialogBtnGroup: () => import('./DialogBtnGroup')
     },
 }
 </script>
@@ -41,7 +45,9 @@ export default {
         overflow: hidden;
         overflow-y: scroll;
         .top{
+            height: 7%;
             display: flex;
+            align-items: center;
         }
     }
     // 解决div溢出部分滚动且隐藏滚动条

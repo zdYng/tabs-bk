@@ -1,9 +1,9 @@
 <template>
     <div class="select-box">
-        <!-- <div class="title">
+        <div class="title">
             <i v-if="showIcon" class="iconfont icon-bitian">&#xe603;</i>
             <span>{{title}}</span>
-        </div> -->
+        </div>
         <el-select class="select-box" v-model="value" clearable placeholder="请选择">
             <el-option
               v-for="item in options"

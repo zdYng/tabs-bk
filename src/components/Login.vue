@@ -64,15 +64,17 @@ export default {
                 this.error.password = '密码不能少于8位'
             }
             if (!this.error.account && !this.error.password){
-                post(loginAPI, { username: '测试用户3', password: 'aabbcc123'})
+                post(loginAPI, { username: 'testUser001', password: 'aabbcc123'})
                     .then(res => {
                         console.log(res);
-                        // 存储token
-                        localStorage.setItem('token', res.token);
+                        // // 存储token
+                        // localStorage.setItem('token', res.token);
+                        // 把tokenid存储到cookie里面，让后端读取
+                        document.cookie = "token=" + res.tokenid;
 
                         //分发action，更改store里面的state
                         this.$store.dispatch('setIsAuthorization', !this.isEmpty(res.token));
-                        this.$store.dispatch('setUser', {username: '测试用户3', password: 'aabbcc123'});
+                        this.$store.dispatch('setUser', {username: 'testUser001', password: 'aabbcc123'});
 
                         // 页面跳转
                         this.$router.push({
