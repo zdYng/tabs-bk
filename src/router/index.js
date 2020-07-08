@@ -21,28 +21,28 @@ Vue.use(VueRouter)
     component: () => import('../components/Home.vue'),
     children: [
       {
-        path: 'ProInfoMaintain',
-        component: () => import('../components/taskManagement/projectManagement/ProInfoMaintain.vue')
+        path: 'manage',
+        component: () => import('../components/authorizationManagement/turnAuthorization/TurnAuthorization.vue')
       },
       {
         path: '',
-        redirect: 'ProInfoMaintain'
+        redirect: 'manage'
       },
-      {
-        path: 'MainArea',
-        component: () => import('../components/MainArea.vue'),
-        children: [
-          {
-            name: 'MenuDetail',
-            path: 'MenuDetail/:id',
-            component: () => import('../components/common/MenuDetail.vue')
-          },
-          // {
-          //   path: '',
-          //   redirect: 'MenuDetail/0'
-          // }
-        ]
-      },
+      // {
+      //   path: 'MainArea',
+      //   component: () => import('../components/MainArea.vue'),
+      //   children: [
+      //     {
+      //       name: 'MenuDetail',
+      //       path: 'MenuDetail/:id',
+      //       component: () => import('../components/common/MenuDetail.vue')
+      //     },
+      //     {
+      //       path: '',
+      //       redirect: 'MenuDetail/0'
+      //     }
+      //   ]
+      // },
       {
         path: 'DictionaryClass',
         component: () => import('../components/dataDictionary/DictionaryClass.vue'),
@@ -59,7 +59,7 @@ Vue.use(VueRouter)
           },
           {
             path: '',
-            redirect: 'DictionaryDetail/id=0'
+            redirect: 'DictionaryDetail'
           }
         ]
       },
