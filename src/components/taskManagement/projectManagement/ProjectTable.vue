@@ -4,7 +4,8 @@
         <el-table class="tab-border-radius scroll-bar" :data="list" height="500px" border style="width: 100%;">
             <el-table-column
               type="selection"
-              width="50">
+              width="50"
+              align="center">
               </el-table-column>
             <el-table-column
               v-for="item in itemOptions"

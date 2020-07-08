@@ -3,7 +3,7 @@
     <div class="task-msg">
         <el-row>
             <el-col :span="12">
-                <InputBox title="字典分类名称" />
+                <InputBox v-model="value" title="字典分类名称" />
             </el-col>
             <el-col :span="12">
                 <SelectBox title="负责人" :options="maintainer"/>
@@ -34,7 +34,7 @@
                 <SelectBox title="任务优先级" :options="priority"/>
             </el-col>
             <el-col :span="12">
-                <InputBox title="计划投入工作量" />
+                <InputBox v-model="value" title="计划投入工作量" />
             </el-col>
         </el-row>
         <!-- ---------------------标准工时----------------------------- -->
@@ -49,7 +49,7 @@
         <!-- ---------------------任务完成百分比----------------------------- -->
         <el-row>
             <el-col :span="12">
-                <InputBox title="任务完成百分比" />
+                <InputBox v-model="value" title="任务完成百分比" />
             </el-col>
         </el-row>
         <!-- ---------------------任务描述----------------------------- -->
@@ -59,7 +59,7 @@
                     <div class="title">
                         <span>任务描述</span>
                     </div>
-                    <el-input type="textarea"></el-input>
+                    <el-input v-model="value" type="textarea"></el-input>
                 </div>
             </el-col>
         </el-row>
@@ -79,6 +79,7 @@ export default {
     name:'TaskMsgPanel',
     data(){
         return{
+            value: '',
             // 负责人下拉选项
             maintainer: [
                 {
@@ -141,7 +142,7 @@ export default {
                 padding: 0 0 .078125rem 0;
            }
            /deep/ .el-input__inner{
-                width: 2.8125rem;
+                width: 3.359375rem;
                 height: .260417rem;
                 border-radius: .078125rem;
                 .el-range-separator{
@@ -157,7 +158,7 @@ export default {
             padding: 0 0 .078125rem 0;
         }
         /deep/ .el-textarea__inner{
-            width: 2.8125rem;
+            width: 3.359375rem;
             height: .416667rem;
             border-radius: .078125rem;
             resize: none;

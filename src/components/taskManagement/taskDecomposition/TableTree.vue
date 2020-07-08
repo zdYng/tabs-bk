@@ -115,19 +115,3 @@ export default {
     }
 }
 </style>
-<style scoped>
-.pro-table{
-    width: 100%;
-}
-.tab-border-radius{
-    /* border-radius: .052083rem; */
-}
->>> .el-table__header .has-gutter{
-    /* color:rgba(51,51,51,1); */
-    
-}
->>> .el-table__row{
-    /* color:rgba(102,102,102,1); */
-
-}
-</style>

@@ -1,4 +1,5 @@
 <template>
+<!-- 菜单设置页面 -->
     <div class="menu-main">
         <MenuLeft />
         <span class="change">
