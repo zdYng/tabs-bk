@@ -56,7 +56,6 @@ Vue.use(VueRouter)
       //   ]
       // },
       {
-<<<<<<< HEAD
         path: 'manage',
         component: () => import('../components/authorizationManagement/turnAuthorization/TurnAuthorization.vue')
       },
@@ -82,11 +81,9 @@ Vue.use(VueRouter)
       {
         path: 'DictionaryClass',
         component: () => import('../components/dataDictionary/DictionaryClass.vue'),
-=======
         // 任务分解页面
         path:'TaskDecomposition',
         component: () => import('../components/taskManagement/taskDecomposition/TaskDecomposition.vue'),
->>>>>>> c141ff76ee6eaec3da0b46e6ef42233a1c008585
         children:[
           {
             path: 'TaskMsgPanel',
@@ -100,11 +97,7 @@ Vue.use(VueRouter)
           },
           {
             path: '',
-<<<<<<< HEAD
             redirect: 'DictionaryDetail'
-=======
-            redirect: 'TaskMsgPanel'
->>>>>>> c141ff76ee6eaec3da0b46e6ef42233a1c008585
           }
         ]
       },
