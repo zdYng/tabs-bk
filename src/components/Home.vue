@@ -14,7 +14,7 @@
       </el-header>
       <el-container>
         <!-- 一级菜单面板 -->
-        <el-aside width="1.302rem">
+        <el-aside width="1.5625rem">
           <!-- element-ui里面的折叠面板组件 -->
           <el-collapse>
             <el-collapse-item class="tab-item" v-for="item in dataList" :key="item.id">
@@ -26,9 +26,13 @@
                 class="hover"
                 v-for="item in item.children"
                 :key="item.id"
-                @click="handleMemoryStrick(item.name)"
+                @click="handleMemoryStrick"
               >
-                <router-link :to="{path: item.url}">{{item.name}}</router-link>
+                <router-link
+                  :to="{path: item.url}"
+                >
+                  {{item.name}}
+                </router-link>
               </div>
             </el-collapse-item>
           </el-collapse>
@@ -36,10 +40,17 @@
         <el-main>
           <!-- 记忆条 -->
           <div class="lable-bar">
-            <MemoryTab />
+              <span class="item"
+                v-for="(item, index) in memoryList"
+                :key="index"
+                @click="toPages(item.path)"
+                :class="isActive(item.path)?'active' : '' "
+              >
+                <span class="tags-view" :to="item.path">{{item.title}}</span>
+                <i class="el-icon-close" @click.stop="handleMemoryDelete(index, item.path)"></i>
+              </span>
           </div>
           <div class="main-area">
-            <!-- <MainArea /> -->
             <keep-alive>
               <router-view></router-view>
             </keep-alive>
@@ -58,38 +69,67 @@ export default {
     return {
       dataList: [],
       memoryList: [],
-      urlList: []
+      urlList: [],
     };
   },
   components: {
-    MemoryTab: () => import("./common/MemoryTab.vue")
+    
   },
   created() {
     get(homeAPI).then(res => {
       this.dataList = res;
-      // console.log('res->',res);
     });
   },
-  mounted() {
-    // console.log(this.$route);
-  },
   methods: {
-    handleMemoryStrick(title) {
-      const route = this.$route;
-      let data = Object.assign({}, route);
-      
-      data["title"] = title;
-      this.$store.dispatch({
-        type: "memoryTab",
-        data
-      });
+    handleMemoryStrick(e) {
+      if(this.memoryList.length > 0){
+        let flag = this.memoryList.some(item => {
+          return item.path === e.target.getAttribute('href');
+        })
+        if(!flag){
+          this.memoryList.push(
+            Object.assign(
+              {},
+              {
+                "path": e.target.getAttribute('href'),
+                "title": e.target.innerHTML
+              }
+            )
+          )
+        }
+      }else {
+        this.memoryList.push(
+          Object.assign(
+            {},
+            {
+              "path": e.target.getAttribute('href'),
+              "title": e.target.innerHTML
+            }
+          )
+        )
+      }
     },
-    handleMemoryDelete(index) {
+    handleMemoryDelete(index, path){
       this.memoryList.splice(index, 1);
-    }
+      if(this.isActive(path)){
+        if(this.memoryList.length > 0){
+          const latest = this.memoryList.slice(-1);
+          this.$router.push({path: latest[0].path});
+        }else {
+          this.$router.push({path: '/Home'})
+        }
+      }else {
+        // this.$router.push({path: '/Home'});
+      }
+    },
+    toPages(path){
+      this.$router.push({"path": path});
+    },
+    isActive(path){
+      return path === this.$route.path;
+    },
   },
-
-};
+}
 </script>
 <style lang="less" scoped>
 .home {
@@ -164,8 +204,12 @@ export default {
               div {
                 font-size: 14px;
                 height: 0.3125rem;
-                padding-left: 0.442708rem;
+                // padding-left: 0.442708rem;
                 line-height: 0.3125rem;
+                a{
+                  padding-left: .416667rem;
+                  box-sizing: border-box;
+                }
               }
             }
           }
@@ -183,17 +227,25 @@ export default {
           align-items: center;
           .item {
             display: flex;
-            width: 0.625rem;
-            height: 0.234375rem;
+            height: .15625rem;
             justify-content: space-around;
             align-items: center;
             font-size: 0.072917rem;
-          }
-          span {
-            i {
-              align-self: center;
-              font-size: 0.0625rem;
+            padding: 0 .026042rem;
+            span{
+              width: .520833rem;
+              height: .15625rem;
+              line-height: .15625rem;
+              text-align: center;
             }
+          }
+          // .item:hover{
+          //   background-color: #0066cc;
+          //   color: #fff;
+          // }
+          .active{
+            background-color: #a6d2ff;
+            // color: #fff;
           }
         }
         .main-area {

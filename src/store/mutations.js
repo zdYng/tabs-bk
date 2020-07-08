@@ -24,20 +24,33 @@ export const setDicMenuMessage = (state, data) => {
   state.dicMenuMessage = data;
 }
 
-export const memoryTab = (state, data) => {
-  let flag = state.memoryList.some(
-    item => item.path === data.data.path
-  );//打开标签后，判断数组中是否已经存在该路由
-  if (!flag) {
-    state.memoryList.push(
-      Object.assign(
-        {},
-        {
-          path: data.data.path,
-          title: data.data.title,
-        }
-      )
-    );
-  } //数组中路由存在不push ,单击左侧路由变化,点击标签路由变化均触发
-} 
+// export const memoryTab = (state, data) => {
+//   // let flag = false; 
+//   // console.log(state.memoryList);
+//   // let result = [];
+//   // if(state.memoryList.length){
+//   //   state.memoryList.forEach(item => {
+//   //     if(item.path === data.path){
+//   //       result.push('true');
+//   //     }else{
+//   //       result.push('false');
+//   //     }
+//   //   });
+//   // }else {
+//   //   flag = false;
+//   // }
+//   // console.log(state.memoryList);
+//   // console.log(result);
+//   // if (flag === false) {
+//     state.memoryList.push(
+//       Object.assign(
+//         {},
+//         {
+//           "path": data.path,
+//           "title": data.title,
+//         }
+//       )
+//     );
+//   // } 
+// } 
 

@@ -14,7 +14,7 @@ const state = {
   nodeId: '',
   DicNodeId: '',
   dicMenuMessage:'',
-  memoryList:[]
+  // memoryList:[]
 }
 
 export default new Vuex.Store({

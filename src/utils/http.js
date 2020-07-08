@@ -11,7 +11,7 @@ console.log(process.env.NODE_ENV);
 axios.interceptors.request.use(
     config => {
         // config.headers = {
-        //     // 'Content-Type': 'application/x-www-form-urlencoded'
+        //     'Content-Type': 'application/x-www-form-urlencoded'
         // }
         config.headers['Content-Type'] = 'application/json;charset=UTF-8';
         let token = localStorage.getItem('token');

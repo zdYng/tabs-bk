@@ -64,7 +64,7 @@ export default {
                 this.error.password = '密码不能少于8位'
             }
             if (!this.error.account && !this.error.password){
-                post(loginAPI, this.user)
+                post(loginAPI, { username: '测试用户3', password: 'aabbcc123'})
                     .then(res => {
                         console.log(res);
                         // 存储token
@@ -72,7 +72,7 @@ export default {
 
                         //分发action，更改store里面的state
                         this.$store.dispatch('setIsAuthorization', !this.isEmpty(res.token));
-                        this.$store.dispatch('setUser', {username: 'dujj', password: 123456});
+                        this.$store.dispatch('setUser', {username: '测试用户3', password: 'aabbcc123'});
 
                         // 页面跳转
                         this.$router.push({

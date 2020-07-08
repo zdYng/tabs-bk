@@ -6,31 +6,13 @@
     </div>
 </template>
 <script>
-import { get } from '../utils/http'
-import { menuAPI } from '../utils/apiList'
+import { get } from '../../utils/http'
+import { menuAPI } from '../../utils/apiList'
 export default {
     name: 'MainArea',
     data(){
         return {
             menuData: [],
-            menuTypeOptions: [
-                {
-                    value: '选项1',
-                    label: '黄金糕'
-                },
-                {
-                    value: '选项2',
-                    label: '双皮奶'
-                },
-                {
-                    value: '选项3',
-                    label: '龙须面'
-                },
-                {
-                    value:'选项4',
-                    label:'大乖'
-                }
-            ],
             menuTypeSys: '',
             menuNameSys: '',
             toolFunctionSys: '',
@@ -45,7 +27,7 @@ export default {
         }
     },
     components:{
-        LeftPanel: () => import('./common/LeftPanel'),
+        LeftPanel: () => import('../common/LeftPanel'),
     },
     created(){
         get(menuAPI).then(res => {
@@ -65,5 +47,6 @@ export default {
         display: flex;
         flex-grow: 1;
         justify-content: flex-start;
+        overflow: hidden;
     }
 </style>

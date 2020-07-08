@@ -5,7 +5,7 @@
                 <span class="before-span"></span>
                 <span style="margin-left: .078125rem">{{bannerText}}</span>
             </span>
-            <span v-if="showDisappear" class="disappear">隐藏信息</span>
+            <span v-if="showDisappear" class="disappear" :isShow="isShow" @click="sendChildData">隐藏信息</span>
         </div>
     </div>
 </template>
@@ -14,11 +14,24 @@ export default {
     name:'BannerBar',
     props:{
         bannerText: String,
-        showDisappear: Boolean
+        showDisappear: Boolean,
+        isShow: Boolean,
     },
     data(){
         return{
-
+            showContent: this.isShow,
+        }
+    },
+    methods:{
+        // 子组件把是否隐藏的状态传给父组件
+        sendChildData(e){
+            this.showContent = !this.showContent;
+            this.$emit('listenChildEvent', this.showContent);
+            if(!this.showContent){
+                e.target.innerHTML = '展开信息'
+            }else{
+                e.target.innerHTML = '隐藏信息'
+            }
         }
     }
 }

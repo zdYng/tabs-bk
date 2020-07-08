@@ -1,30 +1,41 @@
 <template>
-    <div class="input-box">
+<!-- 可搜索的下拉框 -->
+    <div class="search-select">
         <div class="title">
             <i v-if="showIcon" class="iconfont icon-bitian">&#xe603;</i>
             <span>{{title}}</span>
         </div>
-        <el-input v-model="value" :disabled="disable" :placeholder="placeholder"></el-input>
+        <el-select
+          v-model="value"
+          filterable
+          clearable
+          placeholder="请选择">  
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"></el-option>
+        </el-select>
     </div>
 </template>
 <script>
 export default {
-    name:'InputBox',
+    name: 'SearchSelect',
     props:{
-        title:String,
+        title: String,
+        options: Array,
         showIcon: Boolean,
-        disable: Boolean,
-        placeholder: String
+
     },
     data(){
         return {
-            value:''
+            value: ''
         }
     }
 }
 </script>
 <style lang="less" scoped>
-.input-box{
+.search-select{
     .title{
         display: flex;
         font-size: .083333rem;

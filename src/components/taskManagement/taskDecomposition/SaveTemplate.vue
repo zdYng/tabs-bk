@@ -1,4 +1,5 @@
 <template>
+<!-- 任务分解页面下的保存模版弹窗 -->
     <div class="save-template">
         <el-button type="text" @click="dialogFormVisible = true">保存模版</el-button>
         <el-dialog 
@@ -7,7 +8,7 @@
           center
           top="30vh"
           :title="dialogData.title">
-          <el-form model="form">
+          <el-form :model="form">
               <el-form-item 
               label="模版名称"
               :label-width="formLableWidth">

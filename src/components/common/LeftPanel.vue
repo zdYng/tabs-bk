@@ -54,8 +54,8 @@ export default {
 </script>
 <style scoped>
     .left-panel{
-        width: 1.5625rem;
-        height: 3.75rem;
+        width: 20%;
+        height: 100%;
         box-shadow:0px 0px 15px 0px rgba(0, 0, 0, 0.05);
         /* padding: .09375rem .104167rem 0 0; */
         /* overflow: auto; */
