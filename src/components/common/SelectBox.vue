@@ -1,13 +1,18 @@
 <template>
-  <div class="select-box">
-    <!-- <div class="title">
+    <div class="select-box">
+        <div class="title">
             <i v-if="showIcon" class="iconfont icon-bitian">&#xe603;</i>
             <span>{{title}}</span>
-    </div>-->
-    <el-select class="select-box" v-model="value" clearable placeholder="请选择">
-      <el-option v-for="item in options" :key="item.label" :label="item.label" :value="item.value"></el-option>
-    </el-select>
-  </div>
+        </div>
+        <el-select class="select-box" v-model="value" clearable placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.label"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+        </el-select>
+    </div>
 </template>
 <script>
 export default {

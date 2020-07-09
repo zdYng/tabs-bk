@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 
-axios.defaults.baseURL = '/menu';
+axios.defaults.baseURL = '/api';
 axios.defaults.timeout = 10000;
 axios.defaults.withCredentials = true; // 让axios跨域携带cookie
 
@@ -14,11 +14,11 @@ axios.interceptors.request.use(
         //     'Content-Type': 'application/x-www-form-urlencoded'
         // }
         config.headers['Content-Type'] = 'application/json;charset=UTF-8';
-        let token = localStorage.getItem('token');
+        // let token = localStorage.getItem('token');
         // console.log(token);
-        if(token){
-            config.headers.Authorization = token;
-        }
+        // if(token){
+        //     config.headers.Authorization = token;
+        // }
         return config;
     }, 
     error => {
@@ -60,7 +60,7 @@ export default axios
 
  export function post(url, data ={}){
      return new Promise((resolve, reject) => {
-        axios.post(url, qs.stringify(data))
+        axios.post(url, data)
             .then(response => {
                 resolve(response.data);
             }, err => {

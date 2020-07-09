@@ -61,6 +61,7 @@ export default {
     .log-table{
         width: 100%;
         padding: .104167rem .104167rem 0 .104167rem;
+        box-sizing: border-box;
     }
 }
 </style>

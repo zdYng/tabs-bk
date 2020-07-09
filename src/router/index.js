@@ -11,82 +11,85 @@ Vue.use(VueRouter)
 
   const routes = [
   {
+    // 登录页面
     path: '/',
     name: 'Login',
     component: Login
   },
-  {
+  { 
+    // Home页面
     path: '/Home',
     // name: 'Home',
     component: () => import('../components/Home.vue'),
     children: [
-      // {
-      //   path: 'MainArea',
-      //   component: () => import('../components/menuMaintain/MainArea.vue'),
-      //   children: [
-      //     {
-      //       name: 'MenuDetail',
-      //       path: 'MenuDetail',
-      //       component: () => import('../components/menuMaintain/MenuDetail.vue')
-      //     },
-      //     // {
-      //     //   path: '',
-      //     //   redirect: 'MenuDetail'
-      //     // }
-      //   ]
-      // },
-      // {
-      //   path: 'DictionaryClass',
-      //   component: () => import('../components/dataDictionary/DictionaryClass.vue'),
-      //   children:[
-      //     {
-      //       name: 'DictionaryDetail',
-      //       path: 'DictionaryDetail',
-      //       component: () => import('../components/dataDictionary/DictionaryDetail.vue')
-      //     },
-      //     {
-      //       name: 'DataDictionary',
-      //       path: 'DataDictionary/',
-      //       component: () => import('../components/dataDictionary/DataDictionary.vue')
-      //     },
-      //     // {
-      //     //   path: '',
-      //     //   redirect: 'DictionaryDetail/id=0'
-      //     // }
-      //   ]
-      // },
       {
-        path: 'manage',
-        component: () => import('../components/authorizationManagement/turnAuthorization/TurnAuthorization.vue')
+        // 菜单维护页面
+        path: 'MainArea',
+        component: () => import('../components/menuMaintain/MainArea.vue'),
+        children: [
+          {
+            name: 'MenuDetail',
+            path: 'MenuDetail',
+            component: () => import('../components/menuMaintain/MenuDetail.vue')
+          },
+          // {
+          //   path: '',
+          //   redirect: 'MenuDetail'
+          // }
+        ]
       },
       {
-        path: '',
-        redirect: 'manage'
-      },
-      // {
-      //   path: 'MainArea',
-      //   component: () => import('../components/MainArea.vue'),
-      //   children: [
-      //     {
-      //       name: 'MenuDetail',
-      //       path: 'MenuDetail/:id',
-      //       component: () => import('../components/common/MenuDetail.vue')
-      //     },
-      //     {
-      //       path: '',
-      //       redirect: 'MenuDetail/0'
-      //     }
-      //   ]
-      // },
-      {
+        // 数据字典页面
         path: 'DictionaryClass',
         component: () => import('../components/dataDictionary/DictionaryClass.vue'),
+        children:[
+          {
+            name: 'DictionaryDetail',
+            path: 'DictionaryDetail',
+            component: () => import('../components/dataDictionary/DictionaryDetail.vue')
+          },
+          {
+            name: 'DataDictionary',
+            path: 'DataDictionary/',
+            component: () => import('../components/dataDictionary/DataDictionary.vue')
+          },
+        ]
       },
       {
+        // 个性化设置页面
+        path: 'CustomSettings',
+        component: () => import('../components/customSet/CustomSettings.vue')
+      },
+      {
+        // 个人信息页面
+        path: 'PersonInfo',
+        component: () => import('../components/serviceCounter/PersonInfo.vue')
+      },
+      {
+        // 菜单设置页面
+        path: 'MenuMain',
+        component: () => import('../components/menuSetting/MenuMain.vue')
+      },
+      {
+        // 消息提醒设置页面
+        path: 'MessageRemind',
+        name: 'MessageRemind',
+        component: () => import('../components/serviceCounter/MessageRemind.vue')
+      },
+      {
+        // 修改密码页面
+        path: 'ResetPassword',
+        name: 'ResetPassword',
+        component: () => import('../components/serviceCounter/ResetPassword.vue')
+      },
+      {
+        // 项目管理页面
         path: 'ProjectManagement',
+        name: 'ProjectManagement',
         component: () => import('../components/taskManagement/projectManagement/ProjectManagement.vue')
       },
-      { // 任务分解页面
+      { 
+        // 任务分解页面
         path:'TaskDecomposition',
         component: () => import('../components/taskManagement/taskDecomposition/TaskDecomposition.vue'),
         children:[
@@ -102,41 +105,22 @@ Vue.use(VueRouter)
           },
           {
             path: '',
-            redirect: 'TaskMsgPanel'
+            redirect: 'TaskBoard'
           }
         ]
       },
       {
-        // 个性化设置页面
-        path: 'CustomSettings',
-        component: () => import('../components/customSet/CustomSettings.vue')
+        // 标准工时设置页面
+        path: 'StandardManHourSet',
+        name: 'StandardManHourSet',
+        component: () =>import('../components/taskManagement/taskDecomposition/StandardManHourSet.vue')
       },
       {
-        // 菜单设置页面
-        path: 'MenuMain',
-        component: () => import('../components/menuSetting/MenuMain.vue')
-      },
-      {
-        // 个人信息页面
-        path: 'PersonInfo',
-        component: () => import('../components/serviceCounter/PersonInfo.vue')
-      },
-      {
-        // 消息提醒页面
-        path: 'MessageRemind',
-        name: 'MessageRemind',
-        component: () => import('../components/serviceCounter/MessageRemind.vue')
-      },
-      {
-        // 修改密码页面
-        path: 'ResetPassword',
-        name: 'ResetPassword',
-        component: () => import('../components/serviceCounter/ResetPassword.vue')
-      },
-      {
+        // 日志管理页面
         path: 'LogoMaintain',
+        name: 'LogoMaintain',
         component: () => import('../components/taskManagement/taskDecomposition/LogoMaintain.vue')
-      },
+      }
     ]
   }
 ]

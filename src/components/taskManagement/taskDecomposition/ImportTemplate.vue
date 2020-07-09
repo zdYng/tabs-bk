@@ -61,27 +61,38 @@ export default {
     }
 }
 </script>
-<style scoped>
->>> .custom-dialog .el-dialog {
-    width: 2.604167rem;
-    border-radius: .078125rem;
-}
->>> .custom-dialog .el-dialog .el-dialog__header{
-    background:rgba(184,218,252,1);
-    border-top-left-radius: .078125rem;
-    border-top-right-radius: .078125rem;
-}
->>> .el-input__inner{
-    height: .15625rem;
-    border-radius: .052083rem;
-    width: 1.5625rem;
-}
->>> .custom-dialog .el-dialog .dialog-footer .el-button{
-    border-radius: .052083rem;
-    width: 100px;
-    margin-right: .104167rem;
-}
->>> .custom-dialog .el-dialog .dialog-footer .el-button--primary{
-    background-color: #0066cc;
+<style lang="less" scoped>
+.import-templat{
+    /deep/ .el-button{
+        span{
+            font-size: .072917rem;
+        }
+    }
+    /deep/ .custom-dialog{
+        .el-dialog{
+            width: 2.604167rem;
+            border-radius: .078125rem;
+            .el-dialog__header{
+                background:rgba(184,218,252,1);
+                border-top-left-radius: .078125rem;
+                border-top-right-radius: .078125rem;
+            }
+            .dialog-footer{
+                .el-button{
+                    border-radius: .052083rem;
+                    width: 100px;
+                    margin-right: .104167rem;
+                }
+                .el-button--primar{
+                    background-color: #0066cc;
+                }
+            }
+        }
+    }
+    /deep/ .el-input__inner{
+        height: .15625rem;
+        border-radius: .052083rem;
+        width: 1.5625rem;
+    }
 }
 </style>

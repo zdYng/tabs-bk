@@ -92,7 +92,7 @@ export default {
 <style lang="less" scoped>
 .table{
     width: 100%;
-    height: 100%;
+    height: 93%;
     .el-table{
         /deep/ .el-table__header{
             .has-gutter{

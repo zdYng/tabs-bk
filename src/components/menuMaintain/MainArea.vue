@@ -32,13 +32,9 @@ export default {
     created(){
         get(menuAPI).then(res => {
             this.menuData = res;
-            // console.log(this.menuData);
+            console.log(res);
         })
-        // console.log('Main created')
     },
-    destroyed(){
-        console.log('MainArea destoryed');
-    }
 }
 </script>
 <style scoped>

@@ -27,7 +27,7 @@
 </template>
 <script>
 export default {
-    name: 'SaveModelDialog',
+    name: 'ShortCut',
     data(){
         return {
             dialogData: {
@@ -50,6 +50,11 @@ export default {
 </script>
 <style lang="less" scoped>
 .short-cut{
+    /deep/ .el-button{
+        span{
+            font-size: .072917rem;
+        }
+    }
     .custom-dialog{
         /deep/ .el-dialog{
             width: 2.604167rem;

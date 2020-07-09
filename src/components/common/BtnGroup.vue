@@ -1,6 +1,6 @@
 <template>
     <div class="add-btn-group">
-        <img :src="url">
+        <img src="http://127.0.0.1:8080/img/add.png">
         <span class="btn-group">
             <span 
               v-for="(item, index) in btnGroup"
@@ -44,12 +44,12 @@ export default {
         padding: 0 .052083rem;
         margin-left: .104167rem;
         .btn-item{
-            font-size: .083333rem;
+            font-size: .072917rem;
             color:rgba(102,102,102,1);
             padding: 0 .052083rem;
         }
         .btn-item:hover{
-            color: #0066cc;
+            color: #409EFF;
         }
     }
 }

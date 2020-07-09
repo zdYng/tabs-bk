@@ -1,0 +1,68 @@
+<template>
+<!-- 弹窗按钮组件 -->
+    <div class="dialog-group">
+        <img src="http://127.0.0.1:8080/img/menu.png">
+        <span class="btn-group">
+            <span class="delete-btn btn-item">删除</span>
+            <span class="btn-item">
+                <ShortCut />
+            </span>
+            <span class="btn-item">
+                <SaveModelDialog />
+            </span>
+            <span class="btn-item">
+                <ImportTemplate />
+            </span>
+        </span>
+    </div>
+</template>
+<script>
+export default {
+    name: 'DialogBtnGroup',
+    data(){
+        return{
+
+        }
+    },
+    components:{
+        ShortCut: () => import('./ShortCut'),
+        SaveModelDialog: () => import('./SaveTemplate'),
+        ImportTemplate: () => import('./ImportTemplate')
+    }
+}
+</script>
+<style lang="less" scoped>
+.dialog-group{
+    display: flex;
+    align-items: center;
+    margin-left: .104167rem;
+    img{
+        width: .130208rem;
+        height: .130208rem;
+    }
+    .btn-group{
+        display: flex;
+        align-items: center;
+        box-shadow:0px 0px 10px 0px rgba(0,102,204,0.05);
+        border-radius: 20px;
+        // .delete-btn{
+        //     display: inline-block;
+        //     color:rgba(102,102,102,1);
+        //     font-size: .078125rem;
+        // }
+        .btn-item{
+            color:rgba(102,102,102,1);
+            padding: 0 .052083rem;
+        }
+        .btn-item:hover{
+            color: #409EFF;
+        }
+    }
+    /deep/ .el-button--text{
+        color:rgba(102,102,102,1);
+    }
+    /deep/ .el-button--text:hover{
+        color: #409EFF;
+    }
+}
+</style>
