@@ -24,33 +24,5 @@ export const setDicMenuMessage = (state, data) => {
   state.dicMenuMessage = data;
 }
 
-// export const memoryTab = (state, data) => {
-//   // let flag = false; 
-//   // console.log(state.memoryList);
-//   // let result = [];
-//   // if(state.memoryList.length){
-//   //   state.memoryList.forEach(item => {
-//   //     if(item.path === data.path){
-//   //       result.push('true');
-//   //     }else{
-//   //       result.push('false');
-//   //     }
-//   //   });
-//   // }else {
-//   //   flag = false;
-//   // }
-//   // console.log(state.memoryList);
-//   // console.log(result);
-//   // if (flag === false) {
-//     state.memoryList.push(
-//       Object.assign(
-//         {},
-//         {
-//           "path": data.path,
-//           "title": data.title,
-//         }
-//       )
-//     );
-//   // } 
-// } 
+// 模块查询接口
 

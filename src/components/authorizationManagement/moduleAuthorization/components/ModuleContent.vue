@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "TurnContent",
+  name: "ModuleContent",
   components: {
     NavBar: () => import('../../NavBar')
   },
@@ -36,48 +36,40 @@ export default {
           id:1,
           date: "2016-05-03",
           name: "王小虎",
-          code: "001",
           type: "研发",
-          time1: "2020-06-23/2020-06-25",
-          time2:"2020-06-23/2020-06-25",
-          time3:"2020-06-23/2020-06-25",
-          time4:"2020-06-23/2020-06-25",
-          status:"已完成"
+          code: "001",    
+          person:"张三",
+          time:"2020-06-23/2020-06-25",
+          detail:"备注。。。"
         },
         {
           id:2,
           date: "2016-05-03",
           name: "王小虎",
-          code: "001",
           type: "研发",
-          time1: "2020-06-23/2020-06-25",
-          time2:"2020-06-23/2020-06-25",
-          time3:"2020-06-23/2020-06-25",
-          time4:"2020-06-23/2020-06-25",
-          status:"已完成"
+          code: "001",    
+          person:"张三",
+          time:"2020-06-23/2020-06-25",
+          detail:"备注。。。"
         },{
           id:3,
           date: "2016-05-03",
           name: "王小虎",
-          code: "001",
           type: "研发",
-          time1: "2020-06-23/2020-06-25",
-          time2:"2020-06-23/2020-06-25",
-          time3:"2020-06-23/2020-06-25",
-          time4:"2020-06-23/2020-06-25",
-          status:"已完成"
+          code: "001",    
+          person:"张三",
+          time:"2020-06-23/2020-06-25",
+          detail:"备注。。。"
         },
       ],
       itemOptions:[
                 { id: 1, title:'序号',type: 'text', key: 'id', width:'70'},
-                { id: 2, title: "人员名字", type: "text", key: "name", width:'100'},
-                { id: 3, title: "人员编号", type: "text", key: "code", width:'100' },
-                { id: 4, title: "所属部门", type: "text", key: "type", width:'100' },
-                { id: 5, title: "转授权时间", type: "text", key: "time1", width:'180' },
-                { id: 6, title: "授权开始时间", type: "text", key: "time2", width:'180' },
-                { id: 7, title: "授权结束时间", type: "text", key: "time3", width:'180' },
-                { id: 8, title: "中止时间", type: "text", key: "time4", width:'180' },
-                { id: 9, title: "状态", type: "text", key: "status", width:'110' }, 
+                { id: 2, title: "主体名称", type: "text", key: "name", width:'150'},
+                { id: 3, title: "主体类型", type: "text", key: "type", width:'150' },
+                { id: 4, title: "主体编码", type: "text", key: "code", width:'150' },
+                { id: 5, title: "授权人", type: "text", key: "person", width:'150' },
+                { id: 6, title: "授权时间", type: "text", key: "time", width:'230' },
+                { id: 7, title: "说明", type: "text", key: "detail", width:'300' },
               ],
       cutbarList:[
         { id: 1, value: '新增',},

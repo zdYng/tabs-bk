@@ -10,4 +10,6 @@ export const dropAPI = '/basic/menu/selmenudrop/'
 export const dictionaryAPI = '/basic/datadictionary/seldictree/'
 // 数据字典项接口
 export const termDicAPI = `/basic/datadictionary/seldatadic/`
+// 模块查询接口
+export const moduleQueryAPI = '/basic/module/seltree'
 // http://47.111.232.105:8769/login-authority-system/passport/api/login
