@@ -98,7 +98,6 @@ export default {
             this.menuData = res;
         });
         get(dropAPI).then(res => {
-            console.log(res);
             // 把后端传过来的值进行复制，好在select组件上用
             let propArr = Object.keys(res);
             propArr.forEach(item => {
@@ -154,17 +153,6 @@ export default {
     watch:{
         $route(to, from){
             let detailData = this.deepQuery(this.menuData,this.$store.state.nodeId);
-            // this.menuNameSys = detailData.name;
-            // this.menuTypeSys = detailData.typeName;
-            // this.menuCodeSys = detailData.code;
-            // this.toolFunctionSys = detailData.mfunctionName;
-            // this.iconSys = detailData.icon;
-            // this.statuSys = detailData.mstatu;
-            // this.creatPersonSys = detailData.created_by;
-            // this.numberSys = detailData.number;
-            // this.creatTimeSys = detailData.created_time;
-            // this.remarkSys = detailData.remark;
-            // console.log(detailData);
         }
     }
 }

@@ -44,13 +44,12 @@ export default {
         display: flex;
         align-items: center;
         box-shadow:0px 0px 10px 0px rgba(0,102,204,0.05);
-        border-radius:20px;
-        .delete-btn{
-            color:rgba(102,102,102,1);
-            font-size: .078125rem;
-            height: .208333rem;
-            line-height: .208333rem;
-        }
+        border-radius: 20px;
+        // .delete-btn{
+        //     display: inline-block;
+        //     color:rgba(102,102,102,1);
+        //     font-size: .078125rem;
+        // }
         .btn-item{
             color:rgba(102,102,102,1);
             padding: 0 .052083rem;
