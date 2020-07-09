@@ -15,9 +15,9 @@ export default {
 
 <style lang="less" scoped>
 .turn-left {
-  width: 16.6%;
+  width: 1.666667rem;
   height: 4.145833rem;
   float: left;
-  background: chartreuse;
+  // background: chartreuse;
 }
 </style>

@@ -81,7 +81,12 @@ Vue.use(VueRouter)
       {
         path: 'DictionaryClass',
         component: () => import('../components/dataDictionary/DictionaryClass.vue'),
-        // 任务分解页面
+      },
+      {
+        path: 'ProjectManagement',
+        component: () => import('../components/taskManagement/projectManagement/ProjectManagement.vue')
+      },
+      { // 任务分解页面
         path:'TaskDecomposition',
         component: () => import('../components/taskManagement/taskDecomposition/TaskDecomposition.vue'),
         children:[
@@ -97,7 +102,7 @@ Vue.use(VueRouter)
           },
           {
             path: '',
-            redirect: 'DictionaryDetail'
+            redirect: 'TaskMsgPanel'
           }
         ]
       },
@@ -132,10 +137,6 @@ Vue.use(VueRouter)
         path: 'LogoMaintain',
         component: () => import('../components/taskManagement/taskDecomposition/LogoMaintain.vue')
       },
-      {
-        path: '',
-        redirect: 'LogoMaintain'
-      }
     ]
   }
 ]

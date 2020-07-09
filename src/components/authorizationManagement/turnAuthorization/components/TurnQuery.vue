@@ -21,8 +21,8 @@ export default {
 .turn-query {
   height: 0.625rem;
   width: 100%;
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.05);
+  background: rgba(255,255,255,1);
+  box-shadow: 15px 0px 15px 0px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
   position: relative;
@@ -33,12 +33,13 @@ export default {
     align-items: center;
 
     
-    height: 0.260417rem;
-    border: 1px solid rgba(0, 102, 204, 1);
-    border-radius: 20px;
+   width: .416667rem;
+    height: .182292rem;
+    border-radius: .052083rem;
+    border: solid 1px #0066cc;
     font-family: Microsoft YaHei;
-    color: rgba(0, 102, 204, 1);
-    font-size: 0.104167rem;
+    font-size: .083333rem;
+    color: #0066cc;
     text-align: center;
     line-height: 0.260417rem;
   }
@@ -49,13 +50,11 @@ export default {
   div:nth-child(1) {
     margin: 0 0.161458rem;
   }
-  div:nth-child(2){
-    width: .46875rem;
-  }
+
   div:nth-child(3){
     position: absolute;
     width: .520833rem;
-    right: 1.703125rem;
+    right: 327px;
   }
   div:nth-child(4){
     position: absolute;
