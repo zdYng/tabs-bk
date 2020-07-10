@@ -2,7 +2,8 @@
   <div class="turn-container">
     <module-query></module-query>
     <module-left></module-left>
-    <module-content></module-content>
+    <!-- <module-content ></module-content> -->
+    <person-select></person-select>
   </div>
 </template>
 
@@ -12,7 +13,8 @@ export default {
     components:{
       ModuleQuery:()=> import('./components/ModuleQuery'),
       ModuleLeft:()=> import('./components/ModuleLeft'),
-      ModuleContent:()=> import('./components/ModuleContent')
+      // ModuleContent:()=> import('./components/ModuleContent')
+      PersonSelect: ()=> import('../PersonSelect')
     }
 }
 </script>

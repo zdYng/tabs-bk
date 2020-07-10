@@ -1,7 +1,6 @@
 <template>
   <div class="turn-content">
     <NavBar :NavBar='cutbarList' /> 
-
     <div class="tab-secton">
       <el-table :data="tableData" border height="200" class="tab-border-radius scroll-bar" >
         <el-table-column 
@@ -34,7 +33,6 @@ export default {
       tableData: [
         {
           id:1,
-          date: "2016-05-03",
           name: "王小虎",
           type: "研发",
           code: "001",    
@@ -44,7 +42,6 @@ export default {
         },
         {
           id:2,
-          date: "2016-05-03",
           name: "王小虎",
           type: "研发",
           code: "001",    
@@ -53,7 +50,6 @@ export default {
           detail:"备注。。。"
         },{
           id:3,
-          date: "2016-05-03",
           name: "王小虎",
           type: "研发",
           code: "001",    
