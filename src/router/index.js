@@ -132,6 +132,12 @@ Vue.use(VueRouter)
         path:'Module',
         name:'Module',
         component: () =>import('../components/authorizationManagement/moduleAuthorization/ModuleAuthorization.vue')
+      },
+      {
+        //授权管理-范围授权
+        path:'Range',
+        name:'Range',
+        component: () =>import('../components/authorizationManagement/rangeAuthorization/RangeAuthorization.vue')
       }
     ]
   }
