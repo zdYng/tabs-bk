@@ -14,9 +14,25 @@
       </el-header>
       <el-container>
         <!-- 一级菜单面板 -->
-        <el-aside width="1.5625rem">
+        <div class="home-left-panel">
+          <el-tree
+              class="menu-tree"
+              :data="dataList" 
+              :props="defaultProps" 
+              @node-click="handleNodeClick"
+              :expand-on-click-node="false" 
+              >
+              <span @click="handleMemoryStrick"  class="menu-icon" slot-scope="{node, data}">
+                  <router-link :id="data.id" :to="{path: data.url}">
+                      {{node.label}}
+                  </router-link>
+                  <i class="el-icon-setting"></i>
+              </span>
+          </el-tree>
+        </div>
+        <!-- <el-aside width="1.5625rem"> -->
           <!-- element-ui里面的折叠面板组件 -->
-          <el-collapse>
+          <!-- <el-collapse>
             <el-collapse-item class="tab-item" v-for="item in dataList" :key="item.id">
               <template slot="title">
                 <i class="icon-header el-icon-setting"></i>
@@ -35,8 +51,8 @@
                 </router-link>
               </div>
             </el-collapse-item>
-          </el-collapse>
-        </el-aside>
+          </el-collapse> -->
+        <!-- </el-aside> -->
         <el-main>
           <!-- 记忆条 -->
           <div class="lable-bar">
@@ -51,9 +67,9 @@
               </span>
           </div>
           <div class="main-area">
-            <keep-alive>
+            <!-- <keep-alive> -->
               <router-view></router-view>
-            </keep-alive>
+            <!-- </keep-alive> -->
           </div>
         </el-main>
       </el-container>
@@ -70,6 +86,10 @@ export default {
       dataList: [],
       memoryList: [],
       urlList: [],
+      defaultProps: {
+        children: 'children',
+        label: 'name'
+      }
     };
   },
   components: {
@@ -128,6 +148,10 @@ export default {
     isActive(path){
       return path === this.$route.path;
     },
+    // 左侧菜单面板点击触发
+    handleNodeClick(){
+
+    }
   },
 }
 </script>
@@ -214,6 +238,79 @@ export default {
             }
           }
         }
+      }
+      .home-left-panel{
+        width: 300px;
+        min-width: 250px;
+        height: 100%;
+        background:rgba(235,245,255,1);
+        overflow: hidden;
+        overflow-y: scroll;
+        /deep/ .el-tree{
+          background:rgba(235,245,255,1);
+          .el-tree-node:focus{
+              .el-tree-node__content{
+                background:rgba(235,245,255,1);
+            }
+          }
+          .el-tree-node__content{
+            height: .3125rem;
+            font-size: 16px;
+            color: #303133;
+            box-sizing: border-box;
+            padding-right: .104167rem;
+            .menu-icon{
+                width: 200px;
+                a{
+                   width: 80%;
+                   height: .3125rem;
+                   line-height: .3125rem;
+                   font-size: .083333rem;
+                }
+                i{
+                    width: 20%;
+                    height: .3125rem;
+                    line-height: .3125rem;
+                    text-align: end;
+                    font-size: .104167rem;
+                }
+            }
+            .el-tree-node__expand-icon{
+                font-size: .104167rem;
+                color: #000;
+                margin-left: .104167rem;
+            }
+            .el-tree-node__expand-icon.expanded{
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+                font-size: .104167rem;
+                color: #000;
+            }
+            .el-icon-caret-right:before{
+                content: "\e6e0";
+            }
+            .el-tree-node__expand-icon.expanded.el-icon-caret-right:before{
+                content: '\e6df';
+            }
+            .el-tree-node__expand-icon.is-leaf{
+                color: transparent;
+                cursor: default;
+            }
+            .menu-icon{
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+          }
+          .el-tree-node__content:hover{
+            cursor: pointer;
+            background:rgba(166,210,255,1);
+          }
+
+        }
+      }
+      .home-left-panel::-webkit-scrollbar{
+        display: none;
       }
       /* main功能区域 */
       /deep/ .el-main {

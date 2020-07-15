@@ -4,7 +4,7 @@
             <i v-if="showIcon" class="iconfont icon-bitian">&#xe603;</i>
             <span>{{title}}</span>
         </div>
-        <el-input v-model="value" :disabled="disable" :placeholder="placeholder"></el-input>
+        <el-input v-model="itemValue" :disabled="disable" :placeholder="placeholder"></el-input>
     </div>
 </template>
 <script>
@@ -14,11 +14,12 @@ export default {
         title:String,
         showIcon: Boolean,
         disable: Boolean,
-        placeholder: String
+        placeholder: String,
+        itemValue: String
     },
     data(){
         return {
-            value:''
+           
         }
     }
 }

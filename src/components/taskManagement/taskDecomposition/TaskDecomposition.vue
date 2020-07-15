@@ -6,33 +6,42 @@
                 <BtnGroup :btnGroup="btnGroup"/>
                 <DialogBtnGroup />
             </div>
-            <TableTree />
+            <FixTableTree />
         </section>
         <section class="right">
             <CutBar :CutBar="CutBarList"/>
-            <router-view></router-view>
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
         </section>
     </div>
 </template>
 <script>
+import { get } from '@/utils/http';
+import { queryTaskInfoAPI } from '@/utils/apiList'
 export default {
     name: 'TaskDecomposition',
     data(){
         return {
             value:'',
+            tableList:[],//渲染列表树形列表数据
             CutBarList: [
                 { id: 1, value: '任务信息', path: 'TaskMsgPanel'},
                 { id: 2, value: '任务看板', path: 'TaskBoard'},
             ],
-            btnGroup:['新增分组', '新增任务', '新增子任务']
+            btnGroup:['新增分组', '新增任务', '新增子任务','新增子任务']
         }
     },
     components:{ 
-        TableTree: () => import('./TableTree'),
+        // TableTree: () => import('./TableTree'),
+        FixTableTree: () => import('./FixTableTree'),
         CutBar: () => import('../../common/CutBar'),
         BtnGroup: () => import('../../common/BtnGroup'),
         DialogBtnGroup: () => import('./DialogBtnGroup')
     },
+    mounted(){
+        
+    }
 }
 </script>
 <style lang="less" scoped>
@@ -42,8 +51,6 @@ export default {
     display: flex;
     .left{
         width: 50%;
-        overflow: hidden;
-        overflow-y: scroll;
         .top{
             height: 7%;
             display: flex;

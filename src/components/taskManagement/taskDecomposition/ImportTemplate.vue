@@ -56,26 +56,51 @@ export default {
                 desc: '',
                 remark:''
             },
-            formLableWidth: '80px'
+            formLableWidth: '100px'
         }
     }
 }
 </script>
 <style lang="less" scoped>
-.import-templat{
+.import-template{
     /deep/ .el-button{
         span{
-            font-size: .072917rem;
+            font-size: 14px;
         }
     }
     /deep/ .custom-dialog{
         .el-dialog{
-            width: 2.604167rem;
+            width: 500px;
+            height: 300px;
             border-radius: .078125rem;
             .el-dialog__header{
                 background:rgba(184,218,252,1);
                 border-top-left-radius: .078125rem;
                 border-top-right-radius: .078125rem;
+            }
+            /deep/ .el-dialog__body{
+                height: 150px;
+                display: flex;
+                align-items: center;
+                padding: 0;
+                .el-form{
+                    padding-left: 20px;
+                    display: flex;
+                    align-items: center;
+                    .el-form-item{
+                        margin-bottom: 0;
+                        .el-form-item__label{
+                            height: 50px;
+                            font-size: 16px;
+                            line-height: 50px;
+                        }
+                        .el-input__inner{
+                            width: 300px;
+                            height: 50px;
+                        }
+                    }
+                }
+                
             }
             .dialog-footer{
                 .el-button{
@@ -83,7 +108,7 @@ export default {
                     width: 100px;
                     margin-right: .104167rem;
                 }
-                .el-button--primar{
+                .el-button--primary{
                     background-color: #0066cc;
                 }
             }

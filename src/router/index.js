@@ -86,7 +86,19 @@ Vue.use(VueRouter)
         // 项目管理页面
         path: 'ProjectManagement',
         name: 'ProjectManagement',
-        component: () => import('../components/taskManagement/projectManagement/ProjectManagement.vue')
+        component: () => import('../components/taskManagement/projectManagement/ProjectManagement.vue'),
+      },
+      {
+        // 项目信息维护页面
+        path: 'ProInfoMaintain',
+        name: 'ProInfoMaintain',
+        component: () => import('../components/taskManagement/projectManagement/ProInfoMaintain')
+      },
+      {
+        //项目进度维护页面
+        path: 'ProScheduleMantain',
+        name: 'ProScheduleMantain',
+        component: () => import('../components/taskManagement/projectManagement/ProScheduleMantain.vue')
       },
       { 
         // 任务分解页面
@@ -120,6 +132,23 @@ Vue.use(VueRouter)
         path: 'LogoMaintain',
         name: 'LogoMaintain',
         component: () => import('../components/taskManagement/taskDecomposition/LogoMaintain.vue')
+      },
+      {
+        // 测试页面
+        path: 'Test',
+        name: 'Test',
+        component: () => import('../components/common/Test')
+      },
+      {
+        // 空白页面
+        path: 'EmptyPage',
+        name: 'EmptyPage',
+        component: () => import('../components/common/EmptyPage')
+      },
+      {
+        path: 'FixTableTree',
+        name: 'FixTableTree',
+        component: () => import('../components/taskManagement/taskDecomposition/FixTableTree')
       }
     ]
   }

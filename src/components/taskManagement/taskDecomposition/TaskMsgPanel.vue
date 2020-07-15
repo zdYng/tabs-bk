@@ -3,10 +3,10 @@
     <div class="task-msg">
         <el-row>
             <el-col :span="12">
-                <InputBox v-model="value" title="字典分类名称" />
+                <InputBox :itemValue='taskMsgData.taskName' title="任务名称" />
             </el-col>
             <el-col :span="12">
-                <SelectBox title="负责人" :options="maintainer"/>
+                <SelectBox :itemValue="taskMsgData.principal" title="负责人" :options="maintainer"/>
             </el-col>
         </el-row>
         <!-- ---------------------日期选择----------------------------- -->
@@ -18,7 +18,7 @@
                             <span>计划任务周期</span>
                         </div>
                         <el-date-picker
-                        v-model="value"
+                        v-model="formDate"
                         type="daterange"
                         range-separator="至"
                         start-placeholder="开始日期"
@@ -31,25 +31,25 @@
         <!-- ---------------------任务优先级----------------------------- -->
         <el-row>
             <el-col :span="12">
-                <SelectBox title="任务优先级" :options="priority"/>
+                <SelectBox :itemValue="taskMsgData.priority"  title="任务优先级" :options="priority"/>
             </el-col>
             <el-col :span="12">
-                <InputBox v-model="value" title="计划投入工作量" />
+                <InputBox :itemValue="taskMsgData.workload" v-model="value" title="计划投入工作量" />
             </el-col>
         </el-row>
         <!-- ---------------------标准工时----------------------------- -->
         <el-row>
             <el-col :span="12">
-                <SelectBox title="标准工时" :options="priority"/>
+                <SelectBox :itemValue="taskMsgData.timeSheet" title="标准工时" :options="priority"/>
             </el-col>
             <el-col :span="12">
-                <SelectBox title="任务当前阶段" :options="priority"/>
+                <SelectBox :itemValue="taskMsgData.stage" title="任务当前阶段" :options="priority"/>
             </el-col>
         </el-row>
         <!-- ---------------------任务完成百分比----------------------------- -->
         <el-row>
             <el-col :span="12">
-                <InputBox v-model="value" title="任务完成百分比" />
+                <InputBox :itemValue="taskMsgData.percentage" title="任务完成百分比" />
             </el-col>
         </el-row>
         <!-- ---------------------任务描述----------------------------- -->
@@ -59,7 +59,7 @@
                     <div class="title">
                         <span>任务描述</span>
                     </div>
-                    <el-input v-model="value" type="textarea"></el-input>
+                    <el-input v-model="taskMsgData.description" type="textarea"></el-input>
                 </div>
             </el-col>
         </el-row>
@@ -75,11 +75,15 @@
     </div>
 </template>
 <script>
+import {get} from '@/utils/http'
+import {getTaskByIdAPI} from '@/utils/apiList'
 export default {
     name:'TaskMsgPanel',
     data(){
         return{
+            formDate: '',
             value: '',
+            taskMsgData:{},
             // 负责人下拉选项
             maintainer: [
                 {
@@ -118,6 +122,18 @@ export default {
     components:{
         InputBox: () => import('../../common/InputBox'),
         SelectBox: () => import('../../common/SelectBox')
+    },
+    created(){
+        get(getTaskByIdAPI, {id: 1}).then(res => {
+            console.log(res);
+            this.taskMsgData = res.data;
+            this.getDetails(res.data);
+        })
+    },
+    methods:{
+        getDetails(obj){
+            this.formDate = [obj.planStartTime,obj.planEndTime];
+        }
     }
 }
 </script>

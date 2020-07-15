@@ -1,7 +1,8 @@
 <template>
     <div class="date-select">
         <el-date-picker
-          v-model="value"
+          @change="getPickDate"
+          v-model="planDate"
           type="daterange"
           range-separator="至"
           start-placeholder="开始日期"
@@ -14,7 +15,13 @@ export default {
     name:'DateSelect',
     data(){
         return{
-            value: ''
+            planDate: '',
+        }
+    },
+    methods:{
+        getPickDate(){
+            console.log(this.planDate);
+            this.$emit('pickDate', this.planDate);
         }
     }
 }

@@ -4,12 +4,17 @@
             <i v-if="showIcon" class="iconfont icon-bitian">&#xe603;</i>
             <span>{{title}}</span>
         </div>
-        <el-select class="select-box" v-model="value" clearable placeholder="请选择">
+        <el-select 
+          class="select-box" 
+          @change="handelSelectChange" 
+          v-model="itemValue" 
+          clearable 
+          placeholder="请选择">
             <el-option
               v-for="item in options"
-              :key="item.label"
-              :label="item.label"
-              :value="item.value"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
             ></el-option>
         </el-select>
     </div>
@@ -20,12 +25,18 @@ export default {
   props: {
     options: Array,
     title: String,
-    showIcon: Boolean
+    showIcon: Boolean,
+    itemValue: String
   },
   data() {
     return {
-      value: ""
+     
     };
+  },
+  methods:{
+    handelSelectChange(){
+      this.$emit('selectEvent', this.itemValue);
+    }
   }
 };
 </script>
@@ -53,7 +64,8 @@ export default {
 //   }
   /deep/ .el-input__inner {
     border-radius: 0.066667rem;
-    width: 1.041667rem;
+    width: 1.25rem;
+    height: 0.260417rem;
   }
   /deep/ .el-input__inner::-webkit-input-placeholder {
     font-weight: 200;

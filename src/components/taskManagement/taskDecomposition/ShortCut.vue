@@ -43,7 +43,7 @@ export default {
                 desc: '',
                 remark:''
             },
-            formLableWidth: '120px'
+            formLableWidth: '130px'
         }
     }
 }
@@ -52,23 +52,55 @@ export default {
 .short-cut{
     /deep/ .el-button{
         span{
-            font-size: .072917rem;
+            font-size: 14px;
         }
     }
     .custom-dialog{
         /deep/ .el-dialog{
-            width: 2.604167rem;
-            border-radius: .078125rem;
+            width: 550px;
+            border-radius: 15px;
             .el-dialog__header{
+                height: 80px;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 background:rgba(184,218,252,1);
-                border-top-left-radius: .078125rem;
-                border-top-right-radius: .078125rem;
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
             }
-            .dialog-footer{
+            .el-dialog__body{
+                height: 280px;
+                display: flex;
+                align-items: center;
+                padding: 0;
+                box-sizing: border-box;
+                .el-form{
+                    padding-left: 30px;
+                    height: 200px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    .el-form-item{
+                        margin-bottom: 0;
+                        .el-form-item__label{
+                            height: 50px;
+                            line-height: 50px;
+                            font-size: 16px;
+                        }
+                        .el-input__inner{
+                            height: 50px;
+                        }
+                    }
+                }
+            }
+            /deep/ .el-dialog__footer{
+                padding: 0;
+                height: 80px;
                 .el-button{
-                    border-radius: .052083rem;
+                    border-radius: 10px;
                     width: 100px;
-                    margin-right: .104167rem;
+                    margin-right: 20px;
                 }
                 .el-button--primary{
                     background-color: #0066cc;
@@ -76,15 +108,15 @@ export default {
             }
         }
         /deep/ .el-input__inner{
-            height: .208333rem;
-            border-radius: .052083rem;
-            width: 1.5625rem;
+            height: 40px;
+            border-radius: 10px;
+            width: 300px;
         }
         /deep/ .el-textarea__inner{
-            width: 1.5625rem;
-            height: .520833rem;
+            width: 300px;
+            height: 100px;
             resize: none;
-            border-radius: .052083rem;
+            border-radius: 10px;
         }
     }
 }

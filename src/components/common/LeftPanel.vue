@@ -12,7 +12,7 @@
                     <span @click="handle(data.id)">{{node.label}}</span>
                 </router-link>
             </span>
-            </el-tree>
+        </el-tree>
     </div>
 </template>
 <script>
@@ -45,6 +45,7 @@ export default {
 <style lang="less" scoped>
 .left-panel{
     width: 1.5625rem;
+    min-width: 200px;
     height: 100%;
     box-shadow:0px 0px 15px 0px rgba(0, 0, 0, 0.05);
     .menu-tree{

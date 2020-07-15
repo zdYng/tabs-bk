@@ -22,68 +22,16 @@
 <script>
 export default {
     name: 'ProjectTable',
+    props:{
+        list:Array
+    },
     data(){
         return{
-            list:[
-                {
-                    id:1,
-                    taskName: '任务名称',
-                    principal: '负责人',
-                    taskCycle:'项目类型1',
-                    progress:'当前完成百分比',
-                    children:[
-                        {
-                            id:11,
-                            taskName: '任务名称',
-                            principal: '负责人',
-                            taskCycle:'项目类型1',
-                            progress:'当前完成百分比',
-                            children:[
-                                {
-                                    id:111,
-                                    taskName: '任务名称',
-                                    principal: '负责人',
-                                    taskCycle:'项目类型1',
-                                    progress:'当前完成百分比',
-                                },
-                                {
-                                    id:112,
-                                    taskName: '任务名称',
-                                    principal: '负责人',
-                                    taskCycle:'项目类型1',
-                                    progress:'当前完成百分比',
-                                }
-                            ]
-                        },
-                        {
-                            id:12,
-                            taskName: '任务名称',
-                            principal: '负责人',
-                            taskCycle:'项目类型1',
-                            progress:'当前完成百分比',
-                        },
-                        {
-                            id:13,
-                            taskName: '任务名称',
-                            principal: '负责人',
-                            taskCycle:'项目类型1',
-                            progress:'当前完成百分比',
-                        },
-                        {
-                            id:14,
-                            taskName: '任务名称',
-                            principal: '负责人',
-                            taskCycle:'项目类型1',
-                            progress:'当前完成百分比',
-                        },
-                    ]
-                },
-            ],
             itemOptions:[
-                { id: 1, title:'任务名称',type: 'text', key: 'taskName', width:'300'},
-                { id: 2, title: "负责人", type: "text", key: "principal", width:'100'},
-                { id: 3, title: "任务周期", type: "text", key: "taskCycle", width:'200' },
-                { id: 4, title: "当前完成百分比", type: "text", key: "progress", width:'150' },
+                { id: 1, title:'任务名称',type: 'text', key: 'name', width:'300'},
+                { id: 2, title: "负责人", type: "text", key: "id", width:'100'},
+                { id: 3, title: "任务周期", type: "text", key: "id", width:'200' },
+                { id: 4, title: "当前完成百分比", type: "text", key: "id", width:'150' },
             ]
         }
     }

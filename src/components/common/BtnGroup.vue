@@ -1,7 +1,7 @@
 <template>
     <div class="add-btn-group">
-        <img src="http://127.0.0.1:8080/img/add.png">
-        <span class="btn-group">
+        <img @click="handleClick" src="http://127.0.0.1:8080/img/add.png">
+        <span v-show="isShow" class="btn-group">
             <span 
               v-for="(item, index) in btnGroup"
               :key="index"
@@ -20,7 +20,12 @@ export default {
     },
     data(){
         return{
-
+            isShow: false
+        }
+    },
+    methods:{
+        handleClick(){
+            this.isShow = !this.isShow;
         }
     }
 }
@@ -36,6 +41,7 @@ export default {
         margin-left: .104167rem;
     }
     .btn-group{
+        font-size: 14px;
         display: flex;
         align-items: center;
         height: .208333rem;
@@ -44,7 +50,8 @@ export default {
         padding: 0 .052083rem;
         margin-left: .104167rem;
         .btn-item{
-            font-size: .072917rem;
+            width: 70px;
+            font-size: 14px;
             color:rgba(102,102,102,1);
             padding: 0 .052083rem;
         }

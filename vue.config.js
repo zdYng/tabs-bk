@@ -19,7 +19,15 @@ module.exports = {
                 pathRewrite: {
                     '^/menu': '/'
                 }
-            }
+            },
+            // '/ssm': {
+            //     target: 'http://192.168.1.37:8080/',
+            //     changOrigin: true,
+            //     ws: true,
+            //     pathRewrite: {
+            //         '^/ssm': '/'
+            //     }
+            // }
         }
     },
     chainWebpack: config => {

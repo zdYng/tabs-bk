@@ -6,7 +6,7 @@
           class="custom-dialog"
           :visible.sync="dialogFormVisible"
           center
-          top="30vh"
+          top="20vh"
           :title="dialogData.title">
           <el-form :model="form">
               <el-form-item 
@@ -74,40 +74,59 @@ export default {
 .save-template{
     /deep/ .el-button{
         span{
-            font-size: .072917rem;
+            font-size: 14px;
         }
     }
     /deep/ .custom-dialog{
         .el-dialog{
-            width: 2.604167rem;
-            border-radius: .078125rem;
+            width: 550px;
+            border-radius: 15px;
             .el-dialog__header{
+                padding: 0;
+                height: 80px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 background:rgba(184,218,252,1);
-                border-top-left-radius: .078125rem;
-                border-top-right-radius: .078125rem;
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
             }
-            .dialog-footer{
+            /deep/ .el-dialog__body{
+                padding: 0;
+                height: 350px;
+                display: flex;
+                align-items: center;
+                box-sizing: border-box;
+                .el-form{
+                    padding-left: 40px;
+                    .el-input__inner{
+                        width: 350px;
+                        height: 50px;
+                        border-radius: 10px;
+                    }
+                    .el-form-item{
+                        .el-textarea__inner{
+                            width: 350px;
+                            height: 100px;
+                            resize: none;
+                            border-radius: 10px;
+                        }
+                    }
+                }
+            }
+            .el-dialog__footer{
+                padding: 0;
+                height: 80px;
                 .el-button{
-                    border-radius: .052083rem;
+                    border-radius: 10px;
                     width: 100px;
-                    margin-right: .104167rem;
+                    margin-right: 20px;
                 }
                 .el-button--primary{
                     background-color: #0066cc;
                 }
             }
         }
-    }
-    /deep/ .el-input__inner{
-        height: .15625rem;
-        border-radius: .052083rem;
-        width: 1.5625rem;
-    }
-    /deep/ .el-textarea__inner{
-        width: 1.5625rem;
-        height: .416667rem;
-        resize: none;
-        border-radius: .052083rem;
     }
 }
 </style>

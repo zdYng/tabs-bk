@@ -11,18 +11,18 @@
                 <el-row>
                     <el-col :span="12" class="el-col-class">
                         <div class="item-input">
-                            <InputBox :showIcon="true" title="项目名称"/>
+                            <InputBox v-model="value" :showIcon="true" title="项目名称"/>
                         </div>
                         <div class="item-input">
-                            <SelectBox :options="proType" :showIcon="true" title="项目类型"/>
+                            <SelectBox @selectEvent="getProTypeId" :options="proTypeSelect" :showIcon="true" title="项目类型"/>
                         </div>
                     </el-col>
                     <el-col :span="12" class="el-col-class">
                         <div class="item-input">
-                            <SelectBox :options="proType" :showIcon="true" title="项目阶段"/>
+                            <SelectBox @selectEvent="getProStageId" :options="proStageSelect" :showIcon="true" title="项目阶段"/>
                         </div>
                         <div class="item-input">
-                            <SelectBox :options="proType" :showIcon="false" title="项目经理"/>
+                            <SelectBox @selectEvent="getProManagerId" :options="proManagerSelect" :showIcon="false" title="项目经理"/>
                         </div>
                     </el-col>
                 </el-row>
@@ -37,10 +37,10 @@
                     </el-col>
                     <el-col :span="12" class="el-col-class">
                         <div class="item-input">
-                        <SelectBox :options="proType" :showIcon="false" title="项目BD"/>
+                        <SelectBox @selectEvent="getProBDId" :options="proBDSelect" :showIcon="false" title="项目BD"/>
                         </div>
                         <div class="item-input">
-                            <SelectBox :options="proType" :showIcon="false" title="项目名称"/>
+                            <SelectBox :options="customerSelect" :showIcon="false" title="客户名称"/>
                         </div>
                     </el-col>
                 </el-row>
@@ -50,7 +50,7 @@
                             <div class="title">
                                 <span>计划周期</span>
                             </div>
-                            <DateSelect/>
+                            <DateSelect @pickDate="getPickDate"/>
                         </div>
                     </el-col>
                     <el-col :span="12" class="el-col-class">
@@ -129,32 +129,49 @@
                 </el-row>
             </div>
             <el-row class="row-btn">
-                <button class="save-btn">保&nbsp;存</button>
+                <button @click="submitData" class="save-btn">保&nbsp;存</button>
             </el-row>
     </div>
 </template>
 <script>
+import { get, post } from "@/utils/http";
+import { projectSelectAPI, addProjectAPI } from "@/utils/apiList";
 export default {
     name:'ProInfoMaintain',
     data(){
         return{
+            selectId:{
+                projectName: '', // 项目名称
+                projectTypeId: Number,//项目类型id
+                projectStageId: Number, //项目阶段id
+                projectManagerId: Number,//项目经理id
+                projectBDId: Number, //项目BD id
+                customerId: Number, //客户id
+                planStartTime: '', //计划开始时间
+                planEndTime: '', //、计划结束时间
+            },
             name:'baseInfo',
             value: 'aa',
             category_name: '',
-            proType:[
-                {
-                    label:'类型一',
-                    value: '1'
-                },
-                {
-                    label:'类型二',
-                    value: '2'
-                }
-            ],
+            projectCod: Number, // 项目code  
+            proTypeSelect: [], // 项目类型下拉选项
+            proStageSelect:[], //项目阶段下拉选项
+            proManagerSelect: [], //项目经理下拉选项
+            proBDSelect:[], //项目BD下拉选项
+            customerSelect: [],//客户名称下拉选项
             isShowBaseInfo: true,
             isShowCustomInfo:true,
             isShowUserInfo: true
         }
+    },
+    mounted(){
+        get(projectSelectAPI).then(res => {
+            console.log(res);
+            this.proTypeSelect = res.data.type;
+            this.proStageSelect = res.data.stage;
+            this.proManagerSelect = res.data.user;
+            this.proBDSelect = res.data.user;
+        })
     },
     components:{
         SelectBox: () =>  import('../../common/SelectBox'),
@@ -174,6 +191,28 @@ export default {
         getUserMsgData(data){
             this.isShowUserInfo = data;
             console.log(this.isShowUserInfo);
+        },
+        // 每个下拉菜单，选择后获取对应的id值传给后端
+        getProTypeId(id){
+            this.selectId.projectTypeId = id;
+        },
+        getProStageId(id){
+            this.selectId.projectStageId = id;
+        },
+        getProManagerId(id){
+            this.selectId.projectManagerId = id;
+        },
+        getProBDId(id){
+            this.selectId.projectBDId = id;
+        },
+        getPickDate(data){
+            this.selectId.planStartTime = data[0];
+            this.selectId.planEndTime = data[1];
+        },
+        submitData(){
+            post(addProjectAPI, this.selectId).then(res => {
+                console.log(res);
+            })
         }
     }
 }

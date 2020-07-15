@@ -48,10 +48,17 @@ export default {
                     ]
                 }
             ],
+            itmeList:[
+                {
+                    id: 1,
+                    label: 'aaa'
+                }
+            ]
         }
     },
     components:{
         LeftPanel: () => import('../../common/LeftPanel'),
+        SingleSelectBox: () => import('../../common/SingleSelectBox')
     }
 }
 </script>
