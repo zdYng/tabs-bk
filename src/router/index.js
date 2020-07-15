@@ -149,6 +149,22 @@ Vue.use(VueRouter)
         path: 'FixTableTree',
         name: 'FixTableTree',
         component: () => import('../components/taskManagement/taskDecomposition/FixTableTree')
+        //授权管理-转授权
+        path:'Turn',
+        name:'Turn',
+        component: () =>import('../components/authorizationManagement/turnAuthorization/TurnAuthorization.vue')
+      },
+      {
+        //授权管理-模块授权
+        path:'Module',
+        name:'Module',
+        component: () =>import('../components/authorizationManagement/moduleAuthorization/ModuleAuthorization.vue')
+      },
+      {
+        //授权管理-范围授权
+        path:'Range',
+        name:'Range',
+        component: () =>import('../components/authorizationManagement/rangeAuthorization/RangeAuthorization.vue')
       }
     ]
   }

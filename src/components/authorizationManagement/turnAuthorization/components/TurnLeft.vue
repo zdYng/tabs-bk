@@ -1,23 +1,52 @@
 <template>
   <div class="turn-left">
-    <left-panel></left-panel>
+    <LeftPanel :data="moduleTreeList" />
   </div>
 </template>
 
 <script>
 export default {
-    name:'TurnLeft',
-    components :{
-      LeftPanel:() => ('../../../common/LeftPanel.vue')
-    }
-}
+  name: "TurnLeft",
+  props: {
+    moduleTreeList: Array
+  },
+  data() {
+    return {
+      menuList: [
+        {
+          id: 1,
+          name: "茶却文化有限公司",
+          children: [
+            {
+              id: 2,
+              name: "采购部"
+            },
+            {
+              id: 3,
+              name: "养护部"
+            }
+          ]
+        }
+      ]
+    };
+  },
+  components: {
+    LeftPanel: () => import("../../../common/LeftPanel")
+  }
+};
 </script>
 
 <style lang="less" scoped>
 .turn-left {
-  width: 1.666667rem;
-  height: 4.145833rem;
+  width: 1.5625rem;
+  height: 84%;
   float: left;
+  overflow: hidden;
+  overflow-y: scroll;
   // background: chartreuse;
+  
 }
+::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
+  }
 </style>

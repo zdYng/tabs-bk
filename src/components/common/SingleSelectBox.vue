@@ -8,7 +8,7 @@
                 :label="item.label">
             </el-option>
         </el-select>
-        <button class="select-btn">{{buttonText}}</button>
+        <!-- <button class="select-btn">{{buttonText}}</button> -->
     </div>
 </template>
 <script>

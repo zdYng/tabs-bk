@@ -1,12 +1,10 @@
 <template>
-  <div>
-      aaaa
-  </div>
+  <div>部门选择</div>
 </template>
 
 <script>
 export default {
- name:'manage'
+  name:"DepartSelect"
 }
 </script>
 

@@ -2,15 +2,18 @@
   <div class="turn-query">
     <select-box class="turn-sleect-box"></select-box>
     <div class="box1">查询</div>
-    <div class="box1">再授权</div>
-    <div class="box1">中止授权</div>
-    <div class="box2">新增授权人员</div>
+    <div class="box1">删除</div>
+    <div class="box2">设定范围</div>
+    <div class="box2">选择人员授权</div>
+    <div class="box2">选择部门授权</div>
+    <div class="box2">选择角色授权</div>
+
   </div>
 </template>
 
 <script>
 export default {
-  name: "TurnQuery",
+  name: "ModuleQuery",
   components: {
     SelectBox: () => import("../../../common/SingleSelectBox")
   }
@@ -19,7 +22,7 @@ export default {
 
 <style lang="less" scoped>
 .turn-query {
-  height: 16%;
+  height: 0.625rem;
   width: 100%;
   background: rgba(255,255,255,1);
   box-shadow: 15px 0px 15px 0px rgba(0, 0, 0, 0.05);
@@ -30,7 +33,7 @@ export default {
   .box2 {
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     width: .416667rem;
     height: .182292rem;
     border-radius: .052083rem;
@@ -44,6 +47,7 @@ export default {
   .box2 {
     background: rgba(0, 102, 204, 1);
     color: #ffffff;
+    width: .78125rem;
   }
   div:nth-child(1) {
     margin: 0 0.161458rem;
@@ -51,18 +55,23 @@ export default {
 
   div:nth-child(3){
     position: absolute;
-    width: .520833rem;
-    right: 327px;
+    right: 3.645833rem;
   }
   div:nth-child(4){
     position: absolute;
-    right: .979167rem;
-    width: .625rem;
+    right: 2.760417rem;
   }
-  div:nth-child(5) {
+  div:nth-child(5){
+    position: absolute;
+    right: 1.875rem;
+  }
+  div:nth-child(6) {
+    position: absolute;
+    right: .989583rem;
+  }
+  div:nth-child(7) {
     position: absolute;
     right: .09375rem;
-    width: .78125rem;
   }
 }
 </style>
