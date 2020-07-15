@@ -148,7 +148,9 @@ Vue.use(VueRouter)
       {
         path: 'FixTableTree',
         name: 'FixTableTree',
-        component: () => import('../components/taskManagement/taskDecomposition/FixTableTree')
+        component: () => import('../components/taskManagement/taskDecomposition/FixTableTree'),
+      },
+      {
         //授权管理-转授权
         path:'Turn',
         name:'Turn',
