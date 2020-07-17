@@ -3,34 +3,35 @@ function resolve(dir){
     return path.join(__dirname, dir)
 }
 module.exports = {
-    publicPath: "./",
-    devServer: {
-        proxy: {
-            '/api': {
-                target: 'http://47.111.232.105:8769/',
-                changOrigin: true,
-                ws: true,
-                pathRewrite: {
-                    '^/api': '/'
-                }
-            },
-            '/menu': {
-                target: 'http://47.111.232.105:8769/',
-                changOrigin: true,
-                pathRewrite: {
-                    '^/menu': '/'
-                }
-            },
-            // '/ssm': {
-            //     target: 'http://192.168.1.37:8080/',
-            //     changOrigin: true,
-            //     ws: true,
-            //     pathRewrite: {
-            //         '^/ssm': '/'
-            //     }
-            // }
-        }
-    },
+    publicPath: '/',
+    // runtimeCompiler: true,
+    // devServer: {
+    //     proxy: {
+    //         '/api': {
+    //             target: 'http://47.111.232.105:8769/',
+    //             changOrigin: true,
+    //             ws: true,
+    //             pathRewrite: {
+    //                 '^/api': '/'
+    //             }
+    //         },
+    //         '/menu': {
+    //             target: 'http://47.111.232.105:8769/',
+    //             changOrigin: true,
+    //             pathRewrite: {
+    //                 '^/menu': '/'
+    //             }
+    //         },
+    //         // '/ssm': {
+    //         //     target: 'http://192.168.1.37:8080/',
+    //         //     changOrigin: true,
+    //         //     ws: true,
+    //         //     pathRewrite: {
+    //         //         '^/ssm': '/'
+    //         //     }
+    //         // }
+    //     }
+    // },
     chainWebpack: config => {
         config.resolve.alias
         .set('@', resolve('./src'))
