@@ -29,7 +29,7 @@ export default {
                 { id: 1, value: '任务信息', path: 'TaskMsgPanel'},
                 { id: 2, value: '任务看板', path: 'TaskBoard'},
             ],
-            btnGroup:['新增分组', '新增任务', '新增子任务','新增子任务']
+            btnGroup:['新增分组', '新增任务', '新增子任务']
         }
     },
     components:{ 
@@ -52,6 +52,7 @@ export default {
     .left{
         width: 50%;
         .top{
+            overflow: hidden;
             height: 7%;
             display: flex;
             align-items: center;
@@ -66,6 +67,7 @@ export default {
         overflow: hidden;
         overflow-y: scroll;
         scrollbar-width: none;
+        margin-left: 10px;
     }
     .right::-webkit-scrollbar{
         display: none;

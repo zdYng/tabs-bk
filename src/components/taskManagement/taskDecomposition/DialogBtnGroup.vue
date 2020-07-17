@@ -1,11 +1,11 @@
 <template>
 <!-- 弹窗按钮组件 -->
     <div class="dialog-group">
-        <img @click="handleClick" src="http://127.0.0.1:8080/img/menu.png">
+        <img @click="handleClick" src="http://47.111.232.105:5000/img/menu.png">
         <span v-show="isShow" class="btn-group">
             <span class="delete-btn btn-item">删除</span>
             <span class="btn-item">
-                <ShortCut />
+                <ShortCut btnText="快捷维护"/>
             </span>
             <span class="btn-item">
                 <SaveModelDialog />
@@ -50,6 +50,7 @@ export default {
         align-items: center;
         box-shadow:0px 0px 10px 0px rgba(0,102,204,0.05);
         border-radius: 20px;
+        overflow: hidden;
         .delete-btn{
             width: 40px;
             display: inline-block;

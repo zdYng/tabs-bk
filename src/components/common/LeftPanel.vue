@@ -2,20 +2,18 @@
     <div class="left-panel">
         <el-tree
             class="menu-tree"
-            :data="data" 
-            :props="defaultProps" 
+            :load="loadNode"
+            :props="props"
             @node-click="handleNodeClick"
+            :default-expand-all="false"
             :expand-on-click-node="false" 
-            >
-            <span class="menu-icon" slot-scope="{node, data}">
-                <router-link :id="data.id" to="#">
-                    <span @click="handle(data.id)">{{node.label}}</span>
-                </router-link>
-            </span>
+            lazy>
         </el-tree>
     </div>
 </template>
 <script>
+import {get} from '@/utils/http'
+import {queryTaskTreeAPI} from '@/utils/apiList'
 export default {
     name: 'LeftPanel',
     props: {
@@ -23,14 +21,18 @@ export default {
     },
     data(){
         return {
-            defaultProps: {
+            props:{
+                label:'label',
                 children: 'children',
-                label: 'name'
+                // isLeaf: 'parent'
             }
         }
     },
     components:{
        
+    },
+    mounted(){
+        console.log(this.data);
     },
     methods: {
         handleNodeClick(data){
@@ -38,6 +40,46 @@ export default {
         },
         handle(id){
             this.$store.dispatch('setNodeId', id);
+        },
+        // 树形数据逐级加载
+        loadNode(node, resolve){
+            // console.log(node);
+            if(node.level === 0){
+                return resolve(this.data);
+            }else{
+                    let id = node.data.id;
+                    let level = node.data.level;
+                    let value = level + '_' + id;
+                    console.log(value);
+                    get(queryTaskTreeAPI,{"id": value, "flag": level})
+                        .then(res => {
+                            if(Object.keys(res.task).length > 0){
+                                let treeArr = [];
+                                 res.task.forEach(item => {
+                                    if(item.parent){
+                                        treeArr.push(
+                                            Object.assign(
+                                                {},
+                                                {
+                                                    "id": item.id,
+                                                    "level": item.level,
+                                                    "label": item.name,
+                                                    "children": item.parent,
+                                                    "parentId": item.parentId,
+                                                    "projectId": item.projectId
+                                                }
+                                            )
+                                        );
+                                        resolve(treeArr);
+                                    }else{
+                                        resolve([]);
+                                    }
+                                });
+                            }else{
+                                resolve([]);
+                            } 
+                        })
+            }
         }
     }
 }

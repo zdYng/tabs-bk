@@ -34,7 +34,7 @@
                 <SelectBox :itemValue="taskMsgData.priority"  title="任务优先级" :options="priority"/>
             </el-col>
             <el-col :span="12">
-                <InputBox :itemValue="taskMsgData.workload" v-model="value" title="计划投入工作量" />
+                <InputBox :itemValue="taskMsgData.workload" title="计划投入工作量" />
             </el-col>
         </el-row>
         <!-- ---------------------标准工时----------------------------- -->
@@ -65,10 +65,10 @@
         </el-row>
         <!-----------------------按钮------------------------------->
         <el-row class="btn-group">
-            <el-col>
+            <el-col :span="8" :offset="2">
                 <button class="affirm">确&nbsp;定</button>
             </el-col>
-            <el-col>
+            <el-col :span="8" :offset="2">
                 <button class="delete">清&nbsp;空</button>
             </el-col>
         </el-row>
@@ -83,7 +83,16 @@ export default {
         return{
             formDate: '',
             value: '',
-            taskMsgData:{},
+            taskMsgData:{
+                taskName: '',
+                principal: '',
+                priority: '',
+                workload: '',
+                timeSheet: '',
+                stage: '',
+                percentage: '',
+                description: ''
+            },
             // 负责人下拉选项
             maintainer: [
                 {
@@ -123,16 +132,32 @@ export default {
         InputBox: () => import('../../common/InputBox'),
         SelectBox: () => import('../../common/SelectBox')
     },
-    created(){
-        get(getTaskByIdAPI, {id: 1}).then(res => {
-            console.log(res);
-            this.taskMsgData = res.data;
-            this.getDetails(res.data);
-        })
+    computed:{
+        rowId(){
+            return this.$store.state.taskRowId;
+        }
+    },
+    watch:{
+        rowId: function(){
+            this.getTaskMsg();
+        }
     },
     methods:{
+        // 给日历组件回填数据
         getDetails(obj){
             this.formDate = [obj.planStartTime,obj.planEndTime];
+        },
+        getTaskMsg(){
+            if(Object.keys(this.rowId).length>0){
+                get(getTaskByIdAPI, {"id": this.rowId.id, "flag": this.rowId.flag})
+                    .then(res => {
+                        if(res.data.flag){
+                            this.taskMsgData = res.data;
+                            // 把数据传给日历
+                            this.getDetails(res.data);
+                        }
+                    })
+            }
         }
     }
 }
@@ -145,12 +170,12 @@ export default {
         align-items: center;
         .el-col{
             display: flex;
-            justify-content: center;
+            // justify-content: center;
         }
     }
     .date-select{
        display: flex;
-       justify-content: center;
+    //    justify-content: center;
        .el-row{
         //    width: 2.708333rem;
            .title{
@@ -181,6 +206,7 @@ export default {
         }
     }
     .btn-group{
+        height: .364583rem;
         button{
             width: .520833rem;
             height: .208333rem;

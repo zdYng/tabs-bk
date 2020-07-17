@@ -1,7 +1,7 @@
 <template>
 <!-- 任务分解页面下的快捷维护弹窗 -->
     <div class="short-cut">
-        <el-button type="text" @click="dialogFormVisible = true">快捷维护</el-button>
+        <el-button type="text" @click="dialogFormVisible = true">{{btnText}}</el-button>
         <el-dialog 
           class="custom-dialog"
           :visible.sync="dialogFormVisible"
@@ -28,6 +28,9 @@
 <script>
 export default {
     name: 'ShortCut',
+    props:{
+        btnText:String
+    },
     data(){
         return {
             dialogData: {

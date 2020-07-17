@@ -1,6 +1,6 @@
 <template>
     <div class="task-table">
-        <el-table class="tab-border-radius scroll-bar" :data="tabList" height="200px" border style="width: 100%;">
+        <el-table class="tab-border-radius scroll-bar" :data="tabList" height="150px" border style="width: 100%;">
             <el-table-column
               type="selection"
               width="50"
@@ -38,9 +38,9 @@ export default {
             ],
             itemOptions:[
                 { id: 1, title:'序号',type: 'text', key: 'number', width:'50'},
-                { id: 2, title:'维护时间',type: 'text', key: 'maintainTime', width:'200'},
+                { id: 2, title:'维护时间',type: 'text', key: 'maintainTime', width:'250'},
                 { id: 3, title:'维护人',type: 'text', key: 'maintainPerson', width:'100'},
-                { id: 4, title:'任务完成百分比',type: 'text', key: 'taskPercentage', width:'199'},
+                { id: 4, title:'任务完成百分比',type: 'text', key: 'taskPercentage', width:'200'},
             ]
 
         }
@@ -49,18 +49,29 @@ export default {
 </script>
 <style lang="less" scoped>
 .task-table{
-    width: 3.125rem;
     .tab-border-radius{
-        border-radius: .052083rem;
+        border: none;
+        // border-left: 1px solid rgb(235, 238, 245);
         /deep/ .el-table__header{
+            border-left: 1px solid rgb(235, 238, 245);
+            border-top: 1px solid rgb(235, 238, 245);
             .has-gutter{
                 font-family:Microsoft YaHei;
                 color: #000;
             }
         }
+        /deep/ .el-table__body{
+            border-left: 1px solid rgb(235, 238, 245);
+        }
         /deep/ .el-table__row{
             color:rgba(102,102,102,1);
         }
+    }
+    /deep/ .tab-border-radius::before{
+        height: 0;
+    }
+    /deep/ .tab-border-radius::after{
+        height: 0;
     }
 }
 </style>

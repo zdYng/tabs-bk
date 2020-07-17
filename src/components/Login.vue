@@ -6,7 +6,7 @@
                 type='text'
                 name='user'
                 class="account"
-                imgURL= 'http://localhost:8080/img/zhanghao.png'
+                imgURL= 'http://47.111.232.105:5000/img/zhanghao.png'
                 placeholder='请输入您的账号'
                 :error='error.account'
                 v-model="user.username"
@@ -15,7 +15,7 @@
                 type='password'
                 name='password'
                 class="password"
-                imgURL= 'http://localhost:8080/img/mima.png'
+                imgURL= 'http://47.111.232.105:5000/img/mima.png'
                 placeholder='请输入您的密码'
                 :error='error.password'
                 v-model="user.password"
@@ -30,7 +30,7 @@
 import TextField from './common/TextField'
 import { post } from '../utils/http'
 import { loginAPI } from '../utils/apiList'
-// import jwtDecode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 export default {
     name:'Login',
     data(){
@@ -46,7 +46,7 @@ export default {
         }
     },
     methods:{
-        submitHandel(){ 
+        submitHandel(){
             // 每次点击之后清空error的值
             this.error.account = '';
             this.error.password = '';

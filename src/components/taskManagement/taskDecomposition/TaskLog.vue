@@ -22,7 +22,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .task-log{
-    width: 3.125rem;
+    width: 80%;
     border:1px solid rgba(221,221,221,1);
     // border-radius: .078125rem;
     margin-top: .104167rem;
@@ -47,14 +47,14 @@ export default {
         }
     }
     .log-text{
-        width: 100%;
+        width: 100%;   
         .logo-item{
             width: 100%;
-            height: 200px;
+            height: 100px;
         }
         /deep/ .el-textarea{
             .el-textarea__inner{
-                height: 150px;
+                height: .520833rem;
                 resize: none;
                 border-right: none;
                 border-left: none;

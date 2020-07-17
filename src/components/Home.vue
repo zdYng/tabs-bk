@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <el-container class="container">
-      <el-header height="17%">
+      <el-header height="15%">
         <div class="left">
           <img src="../assets/img/logo.png" alt />
           <span>极联智能制造SaaS平台管理系统</span>
@@ -202,7 +202,7 @@ export default {
       }
     }
     .el-container {
-      height: 83%;
+      height: 85%;
       /* aside面板 */
       .el-aside {
         height: 100%;

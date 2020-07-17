@@ -50,7 +50,7 @@ export default {
 </script>
 <style scoped>
 .el-select{
-    margin-left: .133333rem;
+    /* margin-left: .133333rem; */
 }
 >>> .el-input__inner{
     border-radius: .066667rem;

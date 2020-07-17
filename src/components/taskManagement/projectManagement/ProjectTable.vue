@@ -1,12 +1,19 @@
 <template>
     <!-- 项目信息列表 -->
     <div class="pro-table">
-        <el-table class="tab-border-radius scroll-bar" :data="list" height="500px" border style="width: 100%;">
+        <el-table 
+          class="tab-border-radius scroll-bar" 
+          :data="list" 
+          height="500px" 
+          highlight-current-row
+          @row-click="handleRowClick"
+          border style="width: 100%;">
             <el-table-column
-              type="selection"
+              type="index"
               width="50"
-              align="center">
-              </el-table-column>
+              align="center"
+              label="序号">
+            </el-table-column>
             <el-table-column
               v-for="item in itemOptions"
               :key="item.id"
@@ -23,17 +30,19 @@ export default {
     name: 'ProjectTable',
     props:{
         list: Array,
-        itemOptions: Array
+        itemOptions: Array,
+        chooseData: Object
     },
     data(){
         return{
-
+            
         }
     },
     methods:{
-        getDataName(scope, items){
-            return scope[items]
-        }
+        // 当点击列表的某行执行的函数
+       handleRowClick(row, column, event){
+           console.log(row);
+       }
     }
 }
 </script>
@@ -59,6 +68,9 @@ export default {
         }
         .el-table__body-wrapper::-webkit-scrollbar{
             display: none;
+        }
+        .el-radio__label{
+           margin-left: 30px;
         }
     }
 }

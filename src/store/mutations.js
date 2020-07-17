@@ -23,6 +23,8 @@ export const setDicNodeId = (state, data) => {
 export const setDicMenuMessage = (state, data) => {
   state.dicMenuMessage = data;
 }
-
-// 模块查询接口
+// 任务分解页面，当点击某行时获取当前行的id
+export const setTaskRowId = (state, data) => {
+  state.taskRowId = data;
+}
 

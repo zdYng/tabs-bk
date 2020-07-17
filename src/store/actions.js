@@ -22,3 +22,7 @@ export const setDicNodeId = ({ commit }, data) => {
 export const setDicMenuMessage = ({ commit }, data) => {
     commit('setDicMenuMessage', data);
 }
+// 任务分解页面，当点击某行时获取当前行的id
+export const setTaskRowId = ({commit}, data) => {
+    commit('setTaskRowId', data);
+  }

@@ -1,0 +1,50 @@
+<template>
+    <div class="menu-left-panel">
+        <el-tree
+            class="menu-tree"
+            :data="data"
+            :props="props"
+            highlight-current
+            :default-expand-all="false"
+            :expand-on-click-node="false">
+        </el-tree>
+    </div>
+</template>
+<script>
+export default {
+    name:'MenuLeftPanel',
+    props:{
+        data:Array
+    },
+    data(){
+        return{
+            props:{
+                children: 'children',
+                label: 'name'
+            }
+        }
+    }
+}
+</script>
+<style lang="less" scoped>
+.menu-left-panel{
+    width: 1.5625rem;
+    min-width: 200px;
+    height: 100%;
+    box-shadow:0px 0px 15px 0px rgba(0, 0, 0, 0.05);
+    .menu-tree{
+        height: 100%;
+        /deep/ .el-tree-node__content{
+            height: .260417rem;
+            font-size: .067708rem;
+            color: #303133;
+            position: relative;
+            .menu-icon{
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    }
+}
+</style>

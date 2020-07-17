@@ -6,6 +6,8 @@
           row-key="id"
           lazy
           :load="load"
+          highlight-current-row
+          @row-click="handleRowClick"
           :default-expand-all="false"
           :tree-props="{children: 'taskInfo', hasChildren: 'parent'}">
           <el-table-column
@@ -93,13 +95,22 @@ export default {
                     resolve(res.task);
                   }
               })    
+        },
+        // 表格当某一行被点击时会触发该事件
+        handleRowClick(row, column, event){
+            let str = row.id;
+            this.$store.dispatch('setTaskRowId', {
+                "id": str.substring(str.indexOf('_') + 1),
+                "flag": row.level
+                }
+            )
         }
     }
 }
 </script>
 <style lang="less" scoped>
 .fix-table{
-    margin-left: .15625rem;
+    // margin-left: .15625rem;
     width: 100%;
     height: 93%;
     overflow: hidden;

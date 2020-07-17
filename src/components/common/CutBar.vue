@@ -37,7 +37,6 @@ export default {
     height: .3125rem;
     display: flex;
     align-items: center;
-    padding-left: .427083rem;
     box-sizing: border-box;
     .cut-item{
         width: .625rem;

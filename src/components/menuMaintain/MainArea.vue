@@ -1,7 +1,7 @@
 <template>
     <!-- 菜单维护 -->
     <div class="container">
-        <LeftPanel :data='menuData' />
+        <MenuLeftPanel :data='menuData' />
         <router-view></router-view>  
     </div>
 </template>
@@ -27,12 +27,12 @@ export default {
         }
     },
     components:{
-        LeftPanel: () => import('../common/LeftPanel'),
+        MenuLeftPanel: () => import('./MenuLeftPanel'),
     },
     created(){
         get(menuAPI).then(res => {
             this.menuData = res;
-            console.log(res);
+            console.log(this.menuData);
         })
     },
 }

@@ -105,8 +105,8 @@
                 <div 
                 class="btn-group">
                     <button class="save-btn">保&nbsp;存</button>
-                    <img class="edit" src="http://127.0.0.1:8080/img/add.png">
-                    <img class="delete" src="http://127.0.0.1:8080/img/delet.png">
+                    <img class="edit" src="http://47.111.232.105:5000/img/add.png">
+                    <img class="delete" src="http://47.111.232.105:5000/img/delet.png">
                 </div>
             </el-col>
         </el-row>

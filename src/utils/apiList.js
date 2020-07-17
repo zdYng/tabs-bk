@@ -26,4 +26,3 @@ export const quertTaskInfoAPI = '/ssm/ssm/task/queryTaskInfo/'
 export const getTaskByIdAPI = '/ssm/ssm/task/getTaskById'
 // 模块查询接口
 export const moduleQueryAPI = '/basic/module/seltree'
-// http://47.111.232.105:8769/login-authority-system/passport/api/login

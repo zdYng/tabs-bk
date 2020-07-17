@@ -5,6 +5,7 @@
             :data="menuList" 
             :props="defaultProps" 
             @node-click="handleNodeClick"
+            highlight-current
             :expand-on-click-node="false" 
             >
             <span class="menu-icon" slot-scope="{node, data}">
@@ -55,7 +56,7 @@ export default {
         background:rgba(235,245,255,1);
         .el-tree-node:focus{
             .el-tree-node__content{
-                background:rgba(235,245,255,1);
+                background:rgba(235,245,255,1) !important;
             }
         }
         .el-tree-node__content{
