@@ -104,6 +104,7 @@ export default {
     handleMemoryStrick(e) {
       if(this.memoryList.length > 0){
         let flag = this.memoryList.some(item => {
+          console.log(item.path);
           return item.path === e.target.getAttribute('href');
         })
         if(!flag){

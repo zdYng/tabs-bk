@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 
-axios.defaults.baseURL = '';
+axios.defaults.baseURL = '/api';
 axios.defaults.timeout = 10000;
 axios.defaults.withCredentials = true; // 让axios跨域携带cookie
 
