@@ -84,7 +84,7 @@ export default {
   data() {
     return {
       dataList: [],
-      memoryList: [],
+      memoryList: [],// 记忆条数组
       urlList: [],
       defaultProps: {
         children: 'children',
@@ -129,13 +129,14 @@ export default {
           )
         )
       }
+      console.log(this.memoryList);
     },
     handleMemoryDelete(index, path){
       this.memoryList.splice(index, 1);
       if(this.isActive(path)){
         if(this.memoryList.length > 0){
           const latest = this.memoryList.slice(-1);
-          this.$router.push({path: latest[0].path});
+          this.$router.push({path: latest[0].path.substr(1)});
         }else {
           this.$router.push({path: '/Home'})
         }
@@ -144,10 +145,14 @@ export default {
       }
     },
     toPages(path){
-      this.$router.push({"path": path});
+      let substrPath = path.substr(1);
+      console.log(substrPath);
+      this.$router.push({"path": substrPath});
     },
     isActive(path){
-      return path === this.$route.path;
+      let thisRoutePath = this.$route.path;
+      let isInclude = path.indexOf(thisRoutePath);
+      return isInclude > 0;
     },
     // 左侧菜单面板点击触发
     handleNodeClick(){
@@ -266,7 +271,8 @@ export default {
                    width: 80%;
                    height: .3125rem;
                    line-height: .3125rem;
-                   font-size: .083333rem;
+                   font-size: 14px;
+                   color: #333;
                 }
                 i{
                     width: 20%;

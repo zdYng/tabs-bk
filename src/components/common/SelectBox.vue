@@ -7,8 +7,7 @@
         <el-select 
           class="select-box" 
           @change="handelSelectChange" 
-          v-model="itemValue" 
-          clearable 
+          v-model="itemValueId" 
           placeholder="请选择">
             <el-option
               v-for="item in options"
@@ -26,16 +25,21 @@ export default {
     options: Array,
     title: String,
     showIcon: Boolean,
-    itemValue: String
+    defaultValue: String
+  },
+  watch:{
+    defaultValue: function (newVal, oldVal){
+      this.itemValueId = this.defaultValue;
+    }
   },
   data() {
     return {
-     
+      itemValueId: ''
     };
   },
   methods:{
     handelSelectChange(){
-      this.$emit('selectEvent', this.itemValue);
+      this.$emit('selectEvent', this.itemValueId);
     }
   }
 };

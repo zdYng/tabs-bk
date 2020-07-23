@@ -2,11 +2,14 @@
     <div class="login">
         <img class="bg-img" src="../assets/img/yunying.png">
         <div class="content">
+            <div class="logo">
+                <img class="content-img" src="../assets/img/qiyuan.png">
+            </div>
             <TextField
                 type='text'
                 name='user'
                 class="account"
-                imgURL= 'http://47.111.232.105:5000/img/zhanghao.png'
+                imgURL= 'http://127.0.0.1:5000/img/zhanghao.png'
                 placeholder='请输入您的账号'
                 :error='error.account'
                 v-model="user.username"
@@ -15,7 +18,7 @@
                 type='password'
                 name='password'
                 class="password"
-                imgURL= 'http://47.111.232.105:5000/img/mima.png'
+                imgURL= 'http://127.0.0.1:5000/img/mima.png'
                 placeholder='请输入您的密码'
                 :error='error.password'
                 v-model="user.password"
@@ -99,68 +102,78 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style lang="less" scoped>
 .login{
     position: absolute;
     width: 100%;
     height: 100%;
-}
-.bg-img{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-.content{
-    position: absolute;
-    top: 19%;
-    right: 12.5%;
-    width: 29.6%;
-    height: 61.8%;
-    background:rgba(255,255,255,1);
-    box-shadow:0px 0px 40px 0px rgba(0,44,156,0.1);
-    border-radius:20px;
-    z-index: 666;
-}
-.account{
-    position: absolute;
-    left: 8.7%;
-    top: 34.2%;
-}
->>>.account img{
-    width: 4.3%;
-    height: 28.6%;
-    position: absolute;
-    left: 6.4%;
-    top: 35.7%;
-}
-.password{
-    position: absolute;
-    left: 8.7%;
-    top: 54.2%;
-}
->>>.password img{
-    width: 5%;
-    height: 33%;
-    position: absolute;
-    left: 6.4%;
-    top: 32.8%;
-}
-.submit{
-    position: absolute;
-    left: 22.8%;
-    bottom: 50px;
-    width:54.4%;
-    height: 9.2%;
-}
-.submit button{
-    width:100%;
-    height:100%;
-    background:rgba(0,102,204,1);
-    border-radius:20px;
-    font-family:Microsoft YaHei;
-    color:rgba(255,255,255,1);
-    outline: none;
-    border: none;
-    font-size: 22px;
+    .bg-img{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    .content{
+        position: absolute;
+        top: 19%;
+        right: 12.5%;
+        width: 29.6%;
+        height: 61.8%;
+        background:rgba(255,255,255,1);
+        box-shadow:0px 0px 40px 0px rgba(0,44,156,0.1);
+        border-radius:20px;
+        z-index: 666;
+        .logo{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            .content-img{
+                width: 50px;
+                height: 50px;
+                margin-top: 60px;
+            }
+        }
+        /deep/ .account{
+            position: absolute;
+            left: 8.7%;
+            top: 34.2%;
+            img{
+                width: 4.3%;
+                height: 28.6%;
+                position: absolute;
+                left: 6.4%;
+                top: 35.7%;
+            }
+        }
+        /deep/ .password{
+            position: absolute;
+            left: 8.7%;
+            top: 54.2%;
+            img{
+                width: 5%;
+                height: 33%;
+                position: absolute;
+                left: 6.4%;
+                top: 32.8%;
+            }
+        }
+        .submit{
+            position: absolute;
+            left: 22.8%;
+            bottom: 50px;
+            width:54.4%;
+            height: 9.2%;
+            button{
+                width:100%;
+                height:100%;
+                background:rgba(0,102,204,1);
+                border-radius:20px;
+                font-family:Microsoft YaHei;
+                color:rgba(255,255,255,1);
+                outline: none;
+                border: none;
+                font-size: 20px;
+            }
+        }
+    }
 }
 </style>

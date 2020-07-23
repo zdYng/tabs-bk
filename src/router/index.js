@@ -117,7 +117,7 @@ Vue.use(VueRouter)
           },
           {
             path: '',
-            redirect: 'TaskBoard'
+            redirect: 'TaskMsgPanel'
           }
         ]
       },

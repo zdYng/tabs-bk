@@ -9,13 +9,13 @@
                <button @click="handleSearch" class="select-btn">查询</button>
            </div>
             <div class="btn-group">
-                <button class="change-btn">修改</button>
+                <button @click="alterBtn"  class="change-btn">修改</button>
                 <button @click.stop="toProScheduleMantain" class="set-btn">调整项目阶段</button>
                 <button @click.stop="toProInfoManagement" class="add-btn">新增项目</button>
             </div>
         </header>
         <section class="tab-section">
-            <ProjectTable :list="list" :itemOptions="itemOptions"/>
+            <ProjectTable @handleRowClick="getTabRowId" :list="list" :itemOptions="itemOptions"/>
         </section>
     </div>
 </template>
@@ -36,17 +36,15 @@ export default {
                 { id: 5, title: "项目创建时间", type: "text", key: "createTime", width:'179' },
                 { id: 6, title: "计划周期", type: "text", key: "planCycle", width:'200' },
                 { id: 7, title: "实际周期", type: "text", key: "actualCycle", width:'200' },
-                { id: 8, title: "项目进度", type: "text", key: "projectProgress", width:'200' },
-                { id: 9, title: "项目经理", type: "text", key: "projectBD", width:'100' },
+                { id: 8, title: "项目进度", type: "text", key: "projectProgress", width:'100' },
+                { id: 9, title: "项目经理", type: "text", key: "projectBD", width:'150' },
                 { id: 10, title: "客户名称", type: "text", key: "customer", width:'100' },
                 { id: 11, title: "所属BD", type: "text", key: "projectManager", width:'100' },
             ],
             // 点击查询按钮提交的参数
-            searchBtnSubmit:{
-                projectName: '',
-                projectCode: '',
-                stageId: ''
-            }
+            searchBtnSubmit:{},
+            // 点击修改按钮发送的信息
+            alterSubmitId: null
         }
     },
     mounted(){
@@ -54,7 +52,6 @@ export default {
             this.selectGroup = res.data.stage;
         });
         get(queryListAPI).then(res => {
-            console.log(res);
             this.list = res.data;
         })
     },
@@ -77,7 +74,6 @@ export default {
             get(queryListAPI, this.searchBtnSubmit).then(res => {
                 this.list = res.data;
             })
-            // this.$router.push({name: 'EmptyPage'});
         },
         //获取项目名称输入框传过来的实际值
         getProNameValue(value){
@@ -90,6 +86,14 @@ export default {
         // 获取项目阶段下拉框的实际id
         getProStageId(id){
             this.searchBtnSubmit.stageId = id;
+        },
+        // 点击修改按钮
+        alterBtn(){
+           
+        },
+        // 获取子租价列表点击某一行传过来的id值
+        getTabRowId(id){
+            console.log(id)
         }
 
     }
@@ -105,12 +109,13 @@ export default {
         justify-content: space-between;
         .input-group{
             display: flex;
+            align-items: center;
             .margin-left{
                 margin-left: .078125rem;
             }
             .select-btn{
                 width: .416667rem;
-                height: .182292rem;
+                height: 30px;
                 background-color: #fff;
                 border-radius: .052083rem;
                 border: solid 1px #0066cc;
@@ -123,7 +128,7 @@ export default {
         .btn-group{
             .change-btn{
                 width: .416667rem;
-                height: .182292rem;
+                height: 30px;
                 background-color: #fff;
                 border-radius: .052083rem;
                 border: solid 1px #0066cc;
@@ -134,7 +139,7 @@ export default {
             }
             .set-btn{
                 width: .625rem;
-                height: .182292rem;
+                height: 30px;
                 font-weight: 400;
                 background-color: #fff;
                 border-radius: .052083rem;
@@ -146,7 +151,7 @@ export default {
             }
             .add-btn{
                 width: .520833rem;
-                height: .182292rem;
+                height: 30px;
                 background-color: #0066cc;
                 border-radius: .104167rem;
                 font-size: .083333rem;

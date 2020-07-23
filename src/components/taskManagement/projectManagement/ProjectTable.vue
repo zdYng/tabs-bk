@@ -41,7 +41,7 @@ export default {
     methods:{
         // 当点击列表的某行执行的函数
        handleRowClick(row, column, event){
-           console.log(row);
+           this.$store.dispatch('setProjectMaintainTabid', row.id);
        }
     }
 }

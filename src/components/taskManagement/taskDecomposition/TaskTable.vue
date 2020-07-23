@@ -20,27 +20,16 @@
 <script>
 export default {
     name: 'TaskTable',
+    props:{
+        tabList:Array
+    },
     data(){
         return {
-            tabList: [
-                {
-                    number: 1,
-                    maintainTime: '维护时间',
-                    maintainPerson: '维护人',
-                    taskPercentage:'任务完成百分比',
-                },
-                {
-                    number: 2,
-                    maintainTime: '维护时间',
-                    maintainPerson: '维护人',
-                    taskPercentage:'任务完成百分比',
-                }
-            ],
             itemOptions:[
-                { id: 1, title:'序号',type: 'text', key: 'number', width:'50'},
-                { id: 2, title:'维护时间',type: 'text', key: 'maintainTime', width:'250'},
-                { id: 3, title:'维护人',type: 'text', key: 'maintainPerson', width:'100'},
-                { id: 4, title:'任务完成百分比',type: 'text', key: 'taskPercentage', width:'200'},
+                { id: 1, title:'序号',type: 'text', key: 'id', width:'50'},
+                { id: 2, title:'维护时间',type: 'text', key: 'createTime', width:'200'},
+                { id: 3, title:'维护人',type: 'text', key: 'principal', width:'100'},
+                { id: 4, title:'任务完成百分比',type: 'text', key: 'percentage', width:'150'},
             ]
 
         }

@@ -27,4 +27,7 @@ export const setDicMenuMessage = (state, data) => {
 export const setTaskRowId = (state, data) => {
   state.taskRowId = data;
 }
-
+//项目管理页面，当点击某行时获取当前行的id
+export const setProjectMaintainTabid = (state, data) => {
+  state.projectMaintainTabid = data;
+}

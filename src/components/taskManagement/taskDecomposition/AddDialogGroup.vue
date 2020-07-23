@@ -1,24 +1,23 @@
 <template>
 <!-- 弹窗按钮组件 -->
-    <div class="dialog-group">
-        <img @click="handleClick" src="http://127.0.0.1:5000/img/menu.png">
+    <div class="add-dialog-group">
+        <img @click="handleClick" src="http://127.0.0.1:5000/img/add.png">
         <span v-show="isShow" class="btn-group">
-            <span class="delete-btn btn-item">删除</span>
             <span class="btn-item">
-                <ShortCut btnText="快捷维护"/>
+                <AddDialog/>
             </span>
             <span class="btn-item">
-                <SaveModelDialog />
+                <AddDialog />
             </span>
             <span class="btn-item">
-                <ImportTemplate />
+                <AddDialog />
             </span>
         </span>
     </div>
 </template>
 <script>
 export default {
-    name: 'DialogBtnGroup',
+    name: 'AddDialogBtnGroup',
     data(){
         return{
             isShow: false
@@ -30,14 +29,12 @@ export default {
         }
     },
     components:{
-        ShortCut: () => import('./ShortCut'),
-        SaveModelDialog: () => import('./SaveTemplate'),
-        ImportTemplate: () => import('./ImportTemplate')
+        AddDialog:() => import('./AddDialog')
     }
 }
 </script>
 <style lang="less" scoped>
-.dialog-group{
+.add-dialog-group{
     display: flex;
     align-items: center;
     margin-left: .104167rem;

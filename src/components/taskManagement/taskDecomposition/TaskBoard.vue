@@ -6,33 +6,33 @@
                 <div>
                     <ul>
                         <li class="text-row">
-                            <span>极速联合:</span>
-                            <span>任务名称</span>
+                            <span>任务名称:</span>
+                            <span>{{taskMsg.taskName}}</span>
                         </li>
                         <li>
                             <span>负责人:</span>
-                            <span>BD</span>
+                            <span>{{taskMsg.principal}}</span>
                         </li>
                         <li>
                             <span>任务当前阶段:</span>
-                            <span>准备中</span>
+                            <span>{{taskMsg.stage}}</span>
                         </li>
                         <li>
                             <span>任务优先级:</span>
-                            <span>P0</span>
+                            <span>{{taskMsg.priority}}</span>
                         </li>
                         <li>
                             <span>完成百分比:</span>
-                            <span>10%</span>
+                            <span>{{taskMsg.timeSheet}}</span>
                         </li>
                         <li>
                             <span>标准工时:</span>
-                            <span>8h</span>
+                            <span>{{taskMsg.timeSheet}}</span>
                         </li>
                         <li class="li-plan-task">
                             <div>
-                                <span>计划任务周期:</span>
-                                <span>2020/06/01-2020/06/20</span>
+                                <span class="title">计划任务周期:</span>
+                                <span class="date-time">{{taskMsg.planCycle}}</span>
                             </div>
                             <span class="short-cut">
                                 <!-- 点击出现快捷维护弹窗 -->
@@ -44,13 +44,15 @@
                 <!-- <router-link class="add-maingtain-msg" :to="{name: 'TaskMsgPanel'}">新增维护信息</router-link> -->
             </div>
             <div class="secect-bar">
-                <SelectBox title="维护人"/>
-                <SelectBox title="维护时间"/>
-                <SingleButton btnText="查询"/>
+                <InputBox @inputChange="getPrincipalChange" title="维护人" />
+                <DatePicker @datePickerChange='getDateTimeChange' text="维护时间"/>
+                <div class="search-btn">
+                    <button @click="getTabData">查询</button>
+                </div>
                 <!-- <QuerySelect :itemList1="itemList1" buttonText="查询"/> -->
             </div>
             <div class="table-info">
-                <TaskTable />
+                <TaskTable :tabList="taskTabData" />
             </div>
             <div class="task-log">
                 <TaskLog />
@@ -59,40 +61,27 @@
     </div>
 </template>
 <script>
+import {get} from '@/utils/http'
+import {getTaskByIdAPI,queryTaskAPI} from '@/utils/apiList'
 export default {
     name:'TaskBoard',
     data(){
         return{
-            taskMsg: [
-                {
-                    label: '极速联合',
-                    value: '任务名称'
-                },
-                {
-                    label: '负责人',
-                    value: 'BD'
-                },
-                {
-                    label: '计划任务周期',
-                    value: '2020/06/01 - 2020/06/20'
-                },
-                {
-                    label: '任务当前您阶段',
-                    value: '准备中'
-                },
-                {
-                    label: '任务优先级',
-                    value: 'P0'
-                },
-                {
-                    label: '完成百分比',
-                    value: '10%'
-                },
-                {
-                    label: '标准工时',
-                    value: '8h'
-                }
-            ],
+            searchBtn:{
+                principal: '',
+                dateTime: ''
+            },
+            taskTabData:[], //任务看板列表信息
+            taskMsg: {
+                taskName: '',
+                principal: '',
+                stage: '',
+                priority:'',
+                timeSheet: '',
+                planEndTime: '',
+                planStartTime: '',
+                planCycle: ''
+            },
             itemList1: [
                 {
                     id: 1,
@@ -105,13 +94,75 @@ export default {
             ]
         }
     },
+    computed:{
+        rowId(){
+            return this.$store.state.taskRowId;
+        }
+    },
+    mounted(){
+        this.getTaskMsg();
+    },
+    watch:{
+        rowId: function(){
+            this.getTaskMsg();
+        },
+        immediate: true
+    },
+    methods:{
+        getTaskMsg(){
+            if(Object.keys(this.rowId).length>0){
+                // 获取任务基础信息数据
+                get(getTaskByIdAPI, {"id": Number(this.rowId.id), "flag": this.rowId.flag})
+                    .then(res => {
+                        if(res.code == '000'){
+                            console.log(res);
+                            this.taskMsg.taskName = res.data.taskName;
+                            this.taskMsg.principal = res.data.principal;
+                            this.taskMsg.stage = res.data.stage;
+                            this.taskMsg.priority = res.data.priority;
+                            this.taskMsg.timeSheet = res.data.timeSheet;
+                            this.taskMsg.planStartTime = res.data.planStartTime;
+                            this.taskMsg.planEndTime = res.data.planEndTime;
+                            this.taskMsg.planCycle = res.data.planCycle;
+                        }else{
+                            console.log('err');
+                        }
+                    });
+                // 获取任务看板的列表数据
+                get(queryTaskAPI,{"id": Number(this.rowId.id), "flag":this.rowId.flag})
+                    .then(res => {
+                        console.log(res);
+                        if(res.code == '000' && res.data.length > 0){
+                            this.taskTabData = res.data;
+                        }
+                    })
+            }
+        },
+        // 获取用户改变的维护人信息
+        getPrincipalChange(val){
+            this.searchBtn.principal = val;
+        },
+        // 获取用户改变的日期值
+        getDateTimeChange(date){
+            this.searchBtn.dateTime = date;
+        },
+        // 点击查询按钮，发送请求获取列表信息
+        getTabData(){
+            // console.log('sss');
+            get(queryTaskAPI, {"updateTime": this.searchBtn.dateTime, "principal": this.searchBtn.principal})
+                .then(res => {
+                    console.log(res);
+                    this.taskTabData = res.data;
+                })
+        }
+    },
     components:{
         // QuerySelect: () => import('../../common/QuerySelect'),
         TaskTable: () => import('./TaskTable'),
         TaskLog: () => import('./TaskLog'),
-        SelectBox: () => import('../../common/SelectBox'),
-        SingleButton: () =>import('../../common/SingleButton'),
-        ShortCut: () =>import('./ShortCut')
+        ShortCut: () =>import('./ShortCut'),
+        InputBox: () => import('../../common/InputBox'),
+        DatePicker: () => import('../../common/DatePicker')
     }
 }
 </script>
@@ -123,9 +174,7 @@ export default {
     }
     .task-msg{
         width: 80%;
-        // padding: .104167rem;
         background:rgba(247,251,255,1);
-        // box-sizing: border-box;
         display: flex;
         justify-content: space-between;
         div{
@@ -152,6 +201,12 @@ export default {
                     div{
                         display: flex;
                         justify-content: flex-start;
+                        // .title{
+                        //     width: 120px;
+                        // }
+                        // .date-time{
+                        //     width: 300px;
+                        // }
                     }
                     .short-cut{
                       
@@ -172,6 +227,25 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
+        .search-btn{
+            button{
+                width: .416667rem;
+                height: 30px;
+                background-color: #fff;
+                border-radius: .052083rem;
+                border: solid 1px #0066cc;
+                font-size: .083333rem;
+                color: #0066cc;
+                margin-left: .104167rem;
+                outline: none;
+            }
+        }
+        /deep/ .date-picker{
+            width: 180px;
+            .title{
+                width: 100px;
+            }
+        }
         /deep/ .single-btn{
             height: .260417rem;
             display: flex;

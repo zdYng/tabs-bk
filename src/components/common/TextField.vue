@@ -48,7 +48,7 @@ export default {
     outline: none;
 }
 .form-group input::-webkit-input-placeholder{
-    font-size: 18px;
+    font-size: 16px;
     font-family:Microsoft YaHei;
     font-weight:100;
     color:rgba(214,214,214,1);
