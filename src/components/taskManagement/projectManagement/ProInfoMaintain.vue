@@ -11,7 +11,7 @@
                 <el-row>
                     <el-col :span="12" class="el-col-class">
                         <div class="item-input">
-                            <InputBox v-model="value" :showIcon="true" title="项目名称"/>
+                            <InputBox @inputChange="getProNameValue"  :defalutValue="projectNameValue" v-model="value" :showIcon="true" title="项目名称"/>
                         </div>
                         <div class="item-input">
                             <SelectBox @selectEvent="getProTypeId" :options="proTypeSelect" :showIcon="true" title="项目类型"/>
@@ -40,7 +40,7 @@
                         <SelectBox @selectEvent="getProBDId" :options="proBDSelect" :showIcon="false" title="项目BD"/>
                         </div>
                         <div class="item-input">
-                            <SelectBox :options="customerSelect" :showIcon="false" title="客户名称"/>
+                            <SelectBox @selectEvent="getCustomName" :options="customerSelect" :showIcon="false" title="客户名称"/>
                         </div>
                     </el-col>
                 </el-row>
@@ -50,7 +50,7 @@
                             <div class="title">
                                 <span>计划周期</span>
                             </div>
-                            <DateSelect @pickDate="getPickDate"/>
+                            <DateSelect @pickDate="getPlanPickDate" :defaultDateTime="planDateTime"/>
                         </div>
                     </el-col>
                     <el-col :span="12" class="el-col-class">
@@ -58,7 +58,7 @@
                             <div class="title">
                                 <span>实际周期</span>
                             </div>
-                            <DateSelect/>
+                            <DateSelect @pickDate="getActualDate" :defaultDateTime="actualDateTime"/>
                         </div>
                     </el-col>
                 </el-row>
@@ -103,17 +103,17 @@
                 <el-row class="row-user-info">
                     <el-col :span="6" class="col-user-info">
                         <div class="item-input">
-                            <InputBox :showIcon="false" title="客户名称"/>
+                            <SelectBox @selectEvent="getProTypeId" :options="customerSelect" title="客户名称"/>
                         </div>
                     </el-col>
                     <el-col :span="6" class="col-user-info">
                         <div class="item-input">
-                            <InputBox :showIcon="false" title="客户等级"/>
+                            <SelectBox @selectEvent="getProTypeId" :options="customerGrade" title="客户等级"/>
                         </div>
                     </el-col>
                     <el-col :span="6" class="col-user-info">
                         <div class="item-input">
-                            <InputBox :showIcon="false" title="客户类型"/>
+                            <SelectBox @selectEvent="getProTypeId" :options="customerType" title="客户类型"/>
                         </div>
                     </el-col>
                 </el-row>
@@ -149,6 +149,9 @@ export default {
                 customerId: Number, //客户id
                 planStartTime: '', //计划开始时间
                 planEndTime: '', //、计划结束时间
+                customerGradeId: Number, // 客户等级id
+                customerTypeId: Number, // 客户类型id
+                customNameId: Number, // 客户名称id
             },
             name:'baseInfo',
             value: 'aa',
@@ -159,9 +162,13 @@ export default {
             proManagerSelect: [], //项目经理下拉选项
             proBDSelect:[], //项目BD下拉选项
             customerSelect: [],//客户名称下拉选项
+            customerGrade: [], //客户等级下拉选项
+            customerType: [], // 客户类型下拉选项
             isShowBaseInfo: true,
             isShowCustomInfo:true,
-            isShowUserInfo: true
+            isShowUserInfo: true,
+            planDateTime: ['2020-07-08', '2020-07-09'], //计划周期
+            actualDateTime: ['2020-07-08', '2020-07-09'], //实际周期
         }
     },
     mounted(){
@@ -171,6 +178,9 @@ export default {
             this.proStageSelect = res.data.stage;
             this.proManagerSelect = res.data.user;
             this.proBDSelect = res.data.user;
+            this.customerSelect = res.data.customer;
+            this.customerGrade = res.data.customerGrade;
+            this.customerType = res.data.customerType;
         })
     },
     components:{
@@ -194,25 +204,55 @@ export default {
         },
         // 每个下拉菜单，选择后获取对应的id值传给后端
         getProTypeId(id){
+            // 项目类型id
+            // console.log(id);
             this.selectId.projectTypeId = id;
         },
         getProStageId(id){
+            // 项目阶段id
+            // console.log(id);
             this.selectId.projectStageId = id;
         },
         getProManagerId(id){
+            // 项目经理id
+            // console.log(id)
             this.selectId.projectManagerId = id;
         },
         getProBDId(id){
+            // 项目BD的id
             this.selectId.projectBDId = id;
         },
-        getPickDate(data){
-            this.selectId.planStartTime = data[0];
-            this.selectId.planEndTime = data[1];
+        getCustomName(id){
+            // 客户名称id
+            this.selectId.customNameId = id;
+        },
+        getPlanPickDate(date){
+            // 计划周期
+            this.selectId.planStartTime = date.startTime;
+            this.selectId.planEndTime = date.endtime;
+        },
+        getActualDate(date){
+            this.selectId.actualStartTime = date.startTime;
+            this.selectId.actualEndTime = date.endtime;
+        },
+        getCustomerGrade(id){
+            // 客户等级id
+            console.log(id);
+            this.selectId.customerGradeId = id;
+        },
+        getCustomerType(id){
+            // 客户类型id
+            console.log(id);
+            this.selectId.customerTypeId = id;
         },
         submitData(){
             post(addProjectAPI, this.selectId).then(res => {
                 console.log(res);
             })
+        },
+        // 拿到项目名称输入框的数据
+        getProNameValue(data){
+            console.log(data);
         }
     }
 }

@@ -2,11 +2,13 @@
     <div class="task-log">
         <div class="log-header">
             <span class="title">任务完成内容</span>
-            <span class="answer">回复</span>
+            <span class="answer" @click="submitTalk">回复</span>
         </div>
         <div class="log-text">
-            <div class="logo-item"></div>
-            <el-input type="textarea" v-model="value" placeholder="请输入内容"></el-input>
+            <div class="logo-item">
+                <p class="talk" v-for="(item, index) in msgArr" :key="index">{{item}}</p>
+            </div>
+            <el-input type="textarea" v-model="talkValue" placeholder="请输入内容"></el-input>
         </div>
     </div>
 </template>
@@ -15,7 +17,16 @@ export default {
     name: 'TaskLog',
     data(){
         return {
-            value: ''
+            talkValue: '',
+            msgArr:[]
+        }
+    },
+    methods:{
+        submitTalk(){
+            if(this.talkValue){
+                this.msgArr.push(this.talkValue);
+            }
+            this.talkValue = '';
         }
     }
 }
@@ -51,6 +62,13 @@ export default {
         .logo-item{
             width: 100%;
             height: 100px;
+            overflow: hidden;
+            overflow-y: scroll;
+            .talk{
+                font-size: 14px;
+                color: #666;
+                padding: 5px 10px
+            }
         }
         /deep/ .el-textarea{
             .el-textarea__inner{

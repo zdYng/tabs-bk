@@ -26,3 +26,7 @@ export const quertTaskInfoAPI = '/ssm/ssm/task/queryTaskInfo/'
 export const getTaskByIdAPI = '/ssm/ssm/task/getTaskById'
 // 模块查询接口
 export const moduleQueryAPI = '/basic/module/seltree'
+// 任务分解页面的任务信息面板，获取任务下拉列表接口
+export const taskSelectAPI = '/ssm/ssm/task'
+// 任务分解页面的任务看板，获取列表信息接口
+export const queryTaskAPI = 'ssm/ssm/task/queryTask'

@@ -3,10 +3,10 @@
     <div class="task-msg">
         <el-row>
             <el-col :span="12">
-                <InputBox :itemValue='taskMsgData.taskName' title="任务名称" />
+                <InputBox :defalutValue='taskMsgData.taskName' title="任务名称" />
             </el-col>
             <el-col :span="12">
-                <SelectBox :itemValue="taskMsgData.principal" title="负责人" :options="maintainer"/>
+                <SelectBox :defaultValue="taskMsgData.principal" title="负责人" :options="maintainer"/>
             </el-col>
         </el-row>
         <!-- ---------------------日期选择----------------------------- -->
@@ -18,11 +18,11 @@
                             <span>计划任务周期</span>
                         </div>
                         <el-date-picker
-                        v-model="formDate"
-                        type="daterange"
-                        range-separator="至"
-                        start-placeholder="开始日期"
-                        end-placeholder="结束日期">
+                            v-model="formDate"
+                            type="daterange"
+                            range-separator="至"
+                            start-placeholder="开始日期"
+                            end-placeholder="结束日期">
                         </el-date-picker>
                     </div>
                 </el-col>
@@ -31,25 +31,25 @@
         <!-- ---------------------任务优先级----------------------------- -->
         <el-row>
             <el-col :span="12">
-                <SelectBox :itemValue="taskMsgData.priority"  title="任务优先级" :options="priority"/>
+                <SelectBox :defaultValue="taskMsgData.priority"  title="任务优先级" :options="priority"/>
             </el-col>
             <el-col :span="12">
-                <InputBox :itemValue="taskMsgData.workload" title="计划投入工作量" />
+                <InputBox :defalutValue='taskMsgData.workload' title="计划投入工作量" />
             </el-col>
         </el-row>
         <!-- ---------------------标准工时----------------------------- -->
         <el-row>
             <el-col :span="12">
-                <SelectBox :itemValue="taskMsgData.timeSheet" title="标准工时" :options="priority"/>
+                <SelectBox :defaultValue="taskMsgData.timeSheet" title="标准工时" :options="normalHours"/>
             </el-col>
             <el-col :span="12">
-                <SelectBox :itemValue="taskMsgData.stage" title="任务当前阶段" :options="priority"/>
+                <SelectBox :defaultValue="taskMsgData.stage" title="任务当前阶段" :options="taskStage"/>
             </el-col>
         </el-row>
         <!-- ---------------------任务完成百分比----------------------------- -->
         <el-row>
             <el-col :span="12">
-                <InputBox :itemValue="taskMsgData.percentage" title="任务完成百分比" />
+                <InputBox :defalutValue='taskMsgData.percentage' title="任务完成百分比" />
             </el-col>
         </el-row>
         <!-- ---------------------任务描述----------------------------- -->
@@ -76,7 +76,7 @@
 </template>
 <script>
 import {get} from '@/utils/http'
-import {getTaskByIdAPI} from '@/utils/apiList'
+import {getTaskByIdAPI, taskSelectAPI} from '@/utils/apiList'
 export default {
     name:'TaskMsgPanel',
     data(){
@@ -84,60 +84,46 @@ export default {
             formDate: '',
             value: '',
             taskMsgData:{
-                taskName: '',
-                principal: '',
-                priority: '',
-                workload: '',
-                timeSheet: '',
-                stage: '',
-                percentage: '',
-                description: ''
+                taskName: '', // 任务名称
+                principal: '', // 负责人
+                priority: '', // 任务优先级
+                workload: '', // 计划投入工作量
+                timeSheet: '', // 标准工时
+                stage: '', // 任务当前阶段
+                percentage: '', // 任务完成百分比
+                description: '' // 任务描述
             },
             // 负责人下拉选项
             maintainer: [
-                {
-                    label:'负责人一',
-                    value: '负责人的id'
-                },
-                {
-                    label:'负责人二',
-                    value: '负责人的id'
-                }
             ],
             // 任务优先级下拉选项
-            priority:[
-                {
-                    label:'优先级一',
-                    value: '优先级一的id'
-                },
-                {
-                    label:'优先级二',
-                    value: '优先级二的id'
-                }
-            ],
+            priority:[],
             // 标准工时下拉选项
-            normalHours:[
-                {
-                    label:'标准工时一',
-                    value:'标准工时一的id'
-                },
-                {
-                    label:'标准工时二',
-                    value:'标准工时二的id'
-                }
-            ]
+            normalHours:[],
+            taskStage: [],
         }
+    },
+    mounted(){
+        get(taskSelectAPI).then(res => {
+            console.log(res);
+            this.maintainer = res.data.principal;
+            this.priority = res.data.priority;
+            this.normalHours = res.data.timeSheet;
+            this.taskStage = res.data.stage;
+        });
     },
     components:{
         InputBox: () => import('../../common/InputBox'),
         SelectBox: () => import('../../common/SelectBox')
     },
     computed:{
+        // 列表的的行id
         rowId(){
             return this.$store.state.taskRowId;
         }
     },
     watch:{
+        // 监听点击列表之后id的变化
         rowId: function(){
             this.getTaskMsg();
         }
@@ -148,13 +134,25 @@ export default {
             this.formDate = [obj.planStartTime,obj.planEndTime];
         },
         getTaskMsg(){
+            // 判断从vuex里面的对象中数据是不是为空
             if(Object.keys(this.rowId).length>0){
-                get(getTaskByIdAPI, {"id": this.rowId.id, "flag": this.rowId.flag})
+                //发送请求，把id和falg传给后端，后端返回对应的任务信息数据
+                get(getTaskByIdAPI, {"id": Number(this.rowId.id), "flag": this.rowId.flag})
                     .then(res => {
-                        if(res.data.flag){
-                            this.taskMsgData = res.data;
+                        if(res.code == '000'){
+                            console.log(res);
+                            this.taskMsgData.taskName = res.data.taskName; // 任务名称
+                            this.taskMsgData.principal = res.data.principal;// 负责人
+                            this.taskMsgData.priority = res.data.priority; //任务优先级
+                            this.taskMsgData.workload = res.data.workload;//计划投入工作量
+                            this.taskMsgData.timeSheet = res.data.timeSheet; // 标准工时
+                            this.taskMsgData.stage = res.data.stage; // 任务当前阶段
+                            this.taskMsgData.percentage = res.data.percentage; //任务完成百分比
+                            this.taskMsgData.description = res.data.description; // 任务描述
                             // 把数据传给日历
                             this.getDetails(res.data);
+                        }else {
+                            console.log('err');
                         }
                     })
             }

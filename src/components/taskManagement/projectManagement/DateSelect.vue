@@ -2,7 +2,7 @@
     <div class="date-select">
         <el-date-picker
           @change="getPickDate"
-          v-model="planDate"
+          v-model="dateTime"
           type="daterange"
           range-separator="至"
           start-placeholder="开始日期"
@@ -13,15 +13,39 @@
 <script>
 export default {
     name:'DateSelect',
+    props:{
+        defaultDateTime: Array
+    },
     data(){
         return{
-            planDate: '',
+            taskForm:{
+                startTime: null,
+                endtime: null
+            }
+        }
+    },
+    mounted(){
+        this.taskForm.startTime = this.defaultDateTime[0];
+        this.taskForm.endtime = this.defaultDateTime[1];
+    },
+    computed:{
+        dateTime:{
+            get(){
+                if(this.taskForm.startTime && this.taskForm.endtime){
+                    return [this.taskForm.startTime, this.taskForm.endtime]
+                }else {
+                    return []
+                }
+            },
+            set(val){
+                this.taskForm.startTime = val[0];
+                this.taskForm.endtime = val[1];
+            }
         }
     },
     methods:{
         getPickDate(){
-            console.log(this.planDate);
-            this.$emit('pickDate', this.planDate);
+            this.$emit('pickDate', this.taskForm);
         }
     }
 }

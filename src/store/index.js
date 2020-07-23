@@ -14,7 +14,8 @@ const state = {
   nodeId: '',
   DicNodeId: '',
   dicMenuMessage:'',
-  taskRowId: {}
+  taskRowId: {},
+  projectMaintainTabid: null //项目管理页面的点击某一行获取的当前行的id值
 }
 
 export default new Vuex.Store({

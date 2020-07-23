@@ -1,4 +1,5 @@
 <template>
+<!-- 此组件暂时没有用，可以留着参考 -->
     <div class="home-left-panel">
         <el-tree
             class="menu-tree"
@@ -59,9 +60,8 @@ export default {
                 background:rgba(235,245,255,1) !important;
             }
         }
-        .el-tree-node__content{
+        /deep/ .el-tree-node__content{
             height: .3125rem;
-            font-size: .067708rem;
             color: #303133;
             box-sizing: border-box;
             padding-right: .104167rem;
@@ -71,14 +71,13 @@ export default {
                    width: 80%;
                    height: .3125rem;
                    line-height: .3125rem;
-                   font-size: .083333rem;
                 }
                 i{
                     width: 20%;
                     height: .3125rem;
                     line-height: .3125rem;
                     text-align: end;
-                    font-size: .104167rem;
+                    // font-size: .104167rem;
                 }
             }
             .el-tree-node__expand-icon{

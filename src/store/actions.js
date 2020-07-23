@@ -26,3 +26,7 @@ export const setDicMenuMessage = ({ commit }, data) => {
 export const setTaskRowId = ({commit}, data) => {
     commit('setTaskRowId', data);
   }
+//项目管理页面，当点击某行时获取当前行的id
+export const setProjectMaintainTabid = ({ commit }, data) => {
+    commit('setProjectMaintainTabid', data);
+  } 

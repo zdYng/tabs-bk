@@ -4,7 +4,12 @@
             <i v-if="showIcon" class="iconfont icon-bitian">&#xe603;</i>
             <span>{{title}}</span>
         </div>
-        <el-input v-model="itemValue" :disabled="disable" :placeholder="placeholder"></el-input>
+        <el-input 
+          v-model="itemValue" 
+          :disabled="disable" 
+          @change="inputValueChange"
+          :placeholder="placeholder">
+        </el-input>
     </div>
 </template>
 <script>
@@ -15,11 +20,21 @@ export default {
         showIcon: Boolean,
         disable: Boolean,
         placeholder: String,
-        itemValue: String
+        defalutValue: String
     },
     data(){
         return {
-           
+         itemValue: ''
+        }
+    },
+    watch:{
+        defalutValue: function(newVal, oldVal){
+            this.itemValue = this.defalutValue;
+        }
+    },
+    methods:{
+        inputValueChange(){
+            this.$emit('inputChange', this.itemValue);
         }
     }
 }

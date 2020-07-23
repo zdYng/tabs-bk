@@ -6,7 +6,6 @@
         <el-select 
           @change="handleSelectChange"
           v-model="itemId" 
-          clearable 
           filterable 
           :placeholder="placeholder">
             <el-option
@@ -52,8 +51,8 @@ export default {
         /deep/ .el-input{
             .el-input__inner{
                 width: 1.25rem;
-                height: .208333rem;
-                border-radius: .078125rem;
+                height: 35px;
+                border-radius: .052083rem;
             }
         }
     }

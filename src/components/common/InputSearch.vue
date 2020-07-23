@@ -45,8 +45,8 @@ export default {
         margin-left: .078125rem;
         .el-input__inner{
             width: 1.25rem;
-            height: .208333rem;
-            border-radius: .078125rem;
+            height: 35px;
+            border-radius: .052083rem;
         }
     }
 }

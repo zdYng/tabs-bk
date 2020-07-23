@@ -6,6 +6,7 @@
         <el-date-picker
           v-model="value"
           type="date"
+          @change="handleDatePickerChange"
           placeholder="选择日期">
         </el-date-picker>
     </div>
@@ -19,6 +20,11 @@ export default {
     data(){
         return{
             value:''
+        }
+    },
+    methods:{
+        handleDatePickerChange(){
+            this.$emit('datePickerChange', this.value);
         }
     }
 }

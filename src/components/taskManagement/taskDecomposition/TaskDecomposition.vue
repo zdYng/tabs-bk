@@ -33,11 +33,10 @@ export default {
         }
     },
     components:{ 
-        // TableTree: () => import('./TableTree'),
         FixTableTree: () => import('./FixTableTree'),
         CutBar: () => import('../../common/CutBar'),
         BtnGroup: () => import('../../common/BtnGroup'),
-        DialogBtnGroup: () => import('./DialogBtnGroup')
+        DialogBtnGroup: () => import('./DialogBtnGroup'),
     },
     mounted(){
         
@@ -64,10 +63,9 @@ export default {
     }
     .right{
         width: 50%;
+        margin-left: 10px;
         overflow: hidden;
         overflow-y: scroll;
-        scrollbar-width: none;
-        margin-left: 10px;
     }
     .right::-webkit-scrollbar{
         display: none;
