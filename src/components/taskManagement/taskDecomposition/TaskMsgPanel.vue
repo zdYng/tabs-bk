@@ -65,11 +65,11 @@
         </el-row>
         <!-----------------------按钮------------------------------->
         <el-row class="btn-group">
-            <el-col :span="8" :offset="2">
+            <el-col :span="6" :offset="4">
                 <button class="affirm">确&nbsp;定</button>
             </el-col>
-            <el-col :span="8" :offset="2">
-                <button class="delete">清&nbsp;空</button>
+            <el-col :span="6" :offset="1">
+                <button @click.stop="clearBtn" class="delete">清&nbsp;空</button>
             </el-col>
         </el-row>
     </div>
@@ -156,6 +156,13 @@ export default {
                         }
                     })
             }
+        },
+        // 点击清空按钮
+        clearBtn(){
+            for(let key in this.taskMsgData){
+                this.taskMsgData[key] = '';
+                this.formDate = [];
+            }
         }
     }
 }
@@ -164,7 +171,7 @@ export default {
 .task-msg{
     .el-row{
         display: flex;
-        height: .520833rem;
+        height: 90px;
         align-items: center;
         .el-col{
             display: flex;
@@ -173,16 +180,14 @@ export default {
     }
     .date-select{
        display: flex;
-    //    justify-content: center;
        .el-row{
-        //    width: 2.708333rem;
            .title{
                 font-size: .083333rem;
                 padding: 0 0 .078125rem 0;
            }
            /deep/ .el-input__inner{
-                width: 3.359375rem;
-                height: .260417rem;
+                width: 720px;
+                height: 40px;
                 border-radius: .078125rem;
                 .el-range-separator{
                     line-height: .21875rem;
@@ -197,29 +202,31 @@ export default {
             padding: 0 0 .078125rem 0;
         }
         /deep/ .el-textarea__inner{
-            width: 3.359375rem;
+            width: 720px;
             height: .416667rem;
             border-radius: .078125rem;
             resize: none;
         }
     }
     .btn-group{
-        height: .364583rem;
+        height: 120px;
         button{
             width: .520833rem;
             height: .208333rem;
-            border-radius: .104167rem;
-            border: 2px solid #0066cc;
+            border-radius: 10px;
             font-size: .083333rem;
             outline: none;
+            font-family: Microsoft YaHei;
         }
         .affirm{
             background-color: #0066cc;
             color: #fff;
+             border: none;
         }
         .delete{
             background-color: #fff;
             color: #0066cc;
+            border: 1px solid #0066cc;
         }
     }
 }

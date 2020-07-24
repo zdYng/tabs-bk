@@ -69,7 +69,7 @@ export default {
   /deep/ .el-input__inner {
     border-radius: 0.066667rem;
     width: 1.25rem;
-    height: 0.260417rem;
+    height: 40px;
   }
   /deep/ .el-input__inner::-webkit-input-placeholder {
     font-weight: 200;

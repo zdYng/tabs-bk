@@ -246,7 +246,7 @@ export default {
         }
       }
       .home-left-panel{
-        width: 300px;
+        width: 16%;
         min-width: 250px;
         height: 100%;
         background:rgba(235,245,255,1);
@@ -322,6 +322,7 @@ export default {
       /* main功能区域 */
       /deep/ .el-main {
         padding: 0;
+        width: 84%;
         height: 100%;
         .lable-bar {
           height: 7%;

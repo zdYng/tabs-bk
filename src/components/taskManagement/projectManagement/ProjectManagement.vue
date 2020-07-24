@@ -52,6 +52,9 @@ export default {
             this.selectGroup = res.data.stage;
         });
         get(queryListAPI).then(res => {
+            res.data.forEach(item => {
+                item.checked = false;
+            });
             this.list = res.data;
         })
     },

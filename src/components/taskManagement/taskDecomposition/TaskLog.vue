@@ -33,7 +33,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .task-log{
-    width: 80%;
+    width: 90%;
     border:1px solid rgba(221,221,221,1);
     // border-radius: .078125rem;
     margin-top: .104167rem;
@@ -72,7 +72,7 @@ export default {
         }
         /deep/ .el-textarea{
             .el-textarea__inner{
-                height: .520833rem;
+                height: 60px;
                 resize: none;
                 border-right: none;
                 border-left: none;

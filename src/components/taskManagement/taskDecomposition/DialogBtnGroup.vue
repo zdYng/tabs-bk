@@ -1,7 +1,7 @@
 <template>
 <!-- 弹窗按钮组件 -->
     <div class="dialog-group">
-        <img @click="handleClick" src="http://127.0.0.1:5000/img/menu.png">
+        <img @click="handleClick" src="http://47.111.232.105:5000/img/menu.png">
         <span v-show="isShow" class="btn-group">
             <span class="delete-btn btn-item">删除</span>
             <span class="btn-item">

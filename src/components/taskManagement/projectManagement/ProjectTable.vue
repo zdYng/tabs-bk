@@ -5,9 +5,18 @@
           class="tab-border-radius scroll-bar" 
           :data="list" 
           height="500px" 
-          highlight-current-row
           @row-click="handleRowClick"
           border style="width: 100%;">
+            <el-table-column
+              label="选择"
+              width="55"
+              align="center">
+              <template slot-scope="scope">
+                  <el-checkbox 
+                    v-model="scope.row.checked"
+                    @change.native="changeCurrentRow($event, scope.$index, scope.row)"></el-checkbox>
+              </template>
+            </el-table-column>
             <el-table-column
               type="index"
               width="50"
@@ -35,13 +44,30 @@ export default {
     },
     data(){
         return{
-            
+            multipleSelection: null,
+            currentRow: {}
         }
     },
     methods:{
         // 当点击列表的某行执行的函数
        handleRowClick(row, column, event){
-           this.$store.dispatch('setProjectMaintainTabid', row.id);
+           if(row.checked){
+                this.$store.dispatch('setProjectMaintainTabid', row.id);
+           }
+       },
+       changeCurrentRow(val, rowIndex, row){
+        //    console.log(rowIndex);
+        //    console.log(row);
+           const data = this.list;
+           for(let index in data){
+               if(index == rowIndex){
+                   data[index].checked = true;
+               }else{
+                   data[index].checked = false;
+               }
+           }
+           this.list = data;
+           this.currentRow = row;
        }
     }
 }
@@ -56,6 +82,13 @@ export default {
                 .has-gutter{
                     font-family:Microsoft YaHei;
                     color: #000;
+                }
+                thead{
+                    .el-table-column--selection{
+                        .cell{
+                            display: none;
+                        }
+                    }
                 }
             }
         }

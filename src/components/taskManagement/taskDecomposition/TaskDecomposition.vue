@@ -49,7 +49,7 @@ export default {
     height: 100%;
     display: flex;
     .left{
-        width: 50%;
+        width: 40%;
         .top{
             overflow: hidden;
             height: 7%;
@@ -62,7 +62,7 @@ export default {
         display: none;
     }
     .right{
-        width: 50%;
+        width: 60%;
         margin-left: 10px;
         overflow: hidden;
         overflow-y: scroll;

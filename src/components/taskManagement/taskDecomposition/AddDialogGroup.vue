@@ -1,7 +1,7 @@
 <template>
 <!-- 弹窗按钮组件 -->
     <div class="add-dialog-group">
-        <img @click="handleClick" src="http://127.0.0.1:5000/img/add.png">
+        <img @click="handleClick" src="http://47.111.232.105:5000/img/add.png">
         <span v-show="isShow" class="btn-group">
             <span class="btn-item">
                 <AddDialog/>

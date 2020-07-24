@@ -7,7 +7,7 @@
           v-model="value"
           type="date"
           @change="handleDatePickerChange"
-          placeholder="选择日期">
+          :placeholder="placeholder">
         </el-date-picker>
     </div>
 </template>
@@ -15,7 +15,8 @@
 export default {
     name:'DatePicker',
     props:{
-        text: String
+        text: String,
+        placeholder: String
     },
     data(){
         return{
@@ -37,8 +38,8 @@ export default {
     }
     /deep/ .el-input__inner{
         width: 1.25rem;
-        height: .260417rem;
-        border-radius: .078125rem;
+        height: 40px;
+        border-radius: 10px;
     }
 }
 </style>

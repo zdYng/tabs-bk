@@ -1,11 +1,11 @@
 <template>
     <div class="tips">
-        <img class="add-btn" @click="handleClick" src="http://127.0.0.1:5000/img/add.png" style="margin-left: .026042rem">
+        <img class="add-btn" @click="handleClick" src="http://47.111.232.105:5000/img/add.png" style="margin-left: .026042rem">
         <span class="content-btn">
             <span v-show="isShow" @click="handleAdd">新增菜单</span>
             <span v-show="isShow">新增子菜单</span>
         </span>
-        <img class="delete-btn" src="http://127.0.0.1:5000/img/delet.png" style="margin-left: .104167rem">
+        <img class="delete-btn" src="http://47.111.232.105:5000/img/delet.png" style="margin-left: .104167rem">
     </div>
 </template>
 <script>

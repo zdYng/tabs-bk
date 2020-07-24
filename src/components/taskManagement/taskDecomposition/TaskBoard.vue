@@ -6,32 +6,32 @@
                 <div>
                     <ul>
                         <li class="text-row">
-                            <span>任务名称:</span>
+                            <span class="label">任务名称:</span>
                             <span>{{taskMsg.taskName}}</span>
                         </li>
                         <li>
-                            <span>负责人:</span>
+                            <span class="label">负责人:</span>
                             <span>{{taskMsg.principal}}</span>
                         </li>
                         <li>
-                            <span>任务当前阶段:</span>
+                            <span class="label">任务当前阶段:</span>
                             <span>{{taskMsg.stage}}</span>
                         </li>
                         <li>
-                            <span>任务优先级:</span>
+                            <span class="label">任务优先级:</span>
                             <span>{{taskMsg.priority}}</span>
                         </li>
                         <li>
-                            <span>完成百分比:</span>
+                            <span class="label">完成百分比:</span>
                             <span>{{taskMsg.timeSheet}}</span>
                         </li>
                         <li>
-                            <span>标准工时:</span>
+                            <span class="label">标准工时:</span>
                             <span>{{taskMsg.timeSheet}}</span>
                         </li>
                         <li class="li-plan-task">
                             <div>
-                                <span class="title">计划任务周期:</span>
+                                <span class="label">计划任务周期:</span>
                                 <span class="date-time">{{taskMsg.planCycle}}</span>
                             </div>
                             <span class="short-cut">
@@ -44,8 +44,10 @@
                 <!-- <router-link class="add-maingtain-msg" :to="{name: 'TaskMsgPanel'}">新增维护信息</router-link> -->
             </div>
             <div class="secect-bar">
-                <InputBox @inputChange="getPrincipalChange" title="维护人" />
-                <DatePicker @datePickerChange='getDateTimeChange' text="维护时间"/>
+                <div class="query">
+                    <InputBox @inputChange="getPrincipalChange" placeholder="维护人" />
+                    <DatePicker @datePickerChange='getDateTimeChange' placeholder="维护时间"/>
+                </div>
                 <div class="search-btn">
                     <button @click="getTabData">查询</button>
                 </div>
@@ -133,7 +135,11 @@ export default {
                     .then(res => {
                         console.log(res);
                         if(res.code == '000' && res.data.length > 0){
+                            res.data.forEach(item => {
+                                item.checked = false;
+                            });
                             this.taskTabData = res.data;
+                            console.log(res.data);
                         }
                     })
             }
@@ -151,7 +157,6 @@ export default {
             // console.log('sss');
             get(queryTaskAPI, {"updateTime": this.searchBtn.dateTime, "principal": this.searchBtn.principal})
                 .then(res => {
-                    console.log(res);
                     this.taskTabData = res.data;
                 })
         }
@@ -173,7 +178,7 @@ export default {
     //    margin-left: .427083rem;
     }
     .task-msg{
-        width: 80%;
+        width: 90%;
         background:rgba(247,251,255,1);
         display: flex;
         justify-content: space-between;
@@ -186,13 +191,16 @@ export default {
                 display: flex;
                 flex-wrap: wrap;
                 li{
-                width: 50%;
+                width: 33%;
                 height: 40px;
                 font-size: 16px;
                 color: #333;
                 line-height: .260417rem;
-                    span:first-child{
+                    .label{
                         padding-right: .052083rem;
+                        color: #000;
+                        font-weight: 500;
+                        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                     }
                 }
                 .li-plan-task{
@@ -202,7 +210,7 @@ export default {
                         display: flex;
                         justify-content: flex-start;
                         // .title{
-                        //     width: 120px;
+                        //     color: #000;
                         // }
                         // .date-time{
                         //     width: 300px;
@@ -222,12 +230,26 @@ export default {
         }
     }
     .secect-bar{
-        width: 80%;
-        padding: .104167rem 0;
+        width: 90%;
+        padding: 10px 0 15px 0; 
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
+        /deep/ .query{
+            display: flex;
+            .input-box{
+                .el-input{
+                    .el-input__inner{
+                        width: 180px;
+                    }
+                }
+            }
+
+        }
         .search-btn{
+            height: 40px;
+            display: flex;
+            align-items: center;
             button{
                 width: .416667rem;
                 height: 30px;
@@ -241,19 +263,15 @@ export default {
             }
         }
         /deep/ .date-picker{
-            width: 180px;
-            .title{
-                width: 100px;
+            width: 220px;
+            margin-left: 50px;
+            .el-input__inner{
+                width: 180px;
             }
-        }
-        /deep/ .single-btn{
-            height: .260417rem;
-            display: flex;
-            align-items: center;
         }
     }
     .table-info{
-        width: 80%;
+        width: 90%;
     }
 }
 </style>

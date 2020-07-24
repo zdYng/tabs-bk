@@ -15,25 +15,22 @@
             width="200"
             align="center"
             prop="name">
-            <!-- <template slot-scope="scope">
-                <span @click="getItemId" :data-id="scope.row.id">{{scope.row.name}}</span>
-            </template> -->
           </el-table-column>
           <el-table-column
             label="负责人"
-            width="150"
+            width="80"
             align="center"
             prop="principal">
           </el-table-column>
           <el-table-column
             label="任务周期"
             align="center"
-            width="200"
+            width="180"
             prop="planCycle">
           </el-table-column>
           <el-table-column
             label="当前完成百分比"
-            width="150"
+            width="120"
             align="center"
             prop="percentage">
           </el-table-column>
