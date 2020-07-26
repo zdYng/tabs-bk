@@ -39,7 +39,7 @@ export default {
         width: .416667rem;
         height: .182292rem;
         background-color: #fff;
-        border-radius: .052083rem;
+        border-radius: 10px;
         border: solid 1px #0066cc;
         font-size: .083333rem;
         color: #0066cc;

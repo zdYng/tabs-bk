@@ -188,9 +188,9 @@ export default {
            /deep/ .el-input__inner{
                 width: 720px;
                 height: 40px;
-                border-radius: .078125rem;
+                border-radius: 10px;
                 .el-range-separator{
-                    line-height: .21875rem;
+                    line-height: 30px;
                 }
            }
        }
@@ -204,17 +204,17 @@ export default {
         /deep/ .el-textarea__inner{
             width: 720px;
             height: .416667rem;
-            border-radius: .078125rem;
+            border-radius: 10px;
             resize: none;
         }
     }
     .btn-group{
         height: 120px;
         button{
-            width: .520833rem;
+            width: 150px;
             height: .208333rem;
             border-radius: 10px;
-            font-size: .083333rem;
+            font-size: 14px;
             outline: none;
             font-family: Microsoft YaHei;
         }

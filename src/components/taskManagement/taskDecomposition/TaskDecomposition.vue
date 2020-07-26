@@ -3,7 +3,7 @@
     <div class="main">
         <section class="left">
             <div class="top">
-                <BtnGroup :btnGroup="btnGroup"/>
+                <AddDialogBtnGroup />
                 <DialogBtnGroup />
             </div>
             <FixTableTree />
@@ -29,14 +29,14 @@ export default {
                 { id: 1, value: '任务信息', path: 'TaskMsgPanel'},
                 { id: 2, value: '任务看板', path: 'TaskBoard'},
             ],
-            btnGroup:['新增分组', '新增任务', '新增子任务']
         }
     },
     components:{ 
         FixTableTree: () => import('./FixTableTree'),
         CutBar: () => import('../../common/CutBar'),
-        BtnGroup: () => import('../../common/BtnGroup'),
+        // BtnGroup: () => import('../../common/BtnGroup'),
         DialogBtnGroup: () => import('./DialogBtnGroup'),
+        AddDialogBtnGroup: () => import('./AddDialogBtnGroup')
     },
     mounted(){
         

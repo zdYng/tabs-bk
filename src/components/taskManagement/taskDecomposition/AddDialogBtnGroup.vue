@@ -1,16 +1,16 @@
 <template>
 <!-- 弹窗按钮组件 -->
     <div class="add-dialog-group">
-        <img @click="handleClick" src="http://47.111.232.105:5000/img/add.png">
+        <i @click="handleClick" class="el-icon" :class="[ isShow ? 'el-icon-remove-outline' : 'el-icon-circle-plus-outline']"></i>
         <span v-show="isShow" class="btn-group">
             <span class="btn-item">
-                <AddDialog/>
+                <AddDialog btnText="新增分组" title="新增分组" label="分组名称"/>
             </span>
             <span class="btn-item">
-                <AddDialog />
+                <AddDialog  btnText="新增任务" title="新增任务" label="任务名称"/>
             </span>
             <span class="btn-item">
-                <AddDialog />
+                <AddDialog btnText="新增子任务" title="新增子任务" label="子任务名称"/>
             </span>
         </span>
     </div>
@@ -20,7 +20,7 @@ export default {
     name: 'AddDialogBtnGroup',
     data(){
         return{
-            isShow: false
+            isShow: true
         }
     },
     methods:{
@@ -38,9 +38,10 @@ export default {
     display: flex;
     align-items: center;
     margin-left: .104167rem;
-    img{
-        width: .130208rem;
-        height: .130208rem;
+    .el-icon{
+        font-size: 24px;
+        color: #0066cc;
+        cursor: pointer;
     }
     .btn-group{
         display: flex;

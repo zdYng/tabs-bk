@@ -49,7 +49,7 @@ export default {
     /deep/ .el-input__inner{
         width: 1.25rem;
         height: .260417rem;
-        border-radius: .078125rem;
+        border-radius: 10px;
     }
 }
 </style>

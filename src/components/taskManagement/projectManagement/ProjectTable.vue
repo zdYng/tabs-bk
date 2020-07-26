@@ -54,10 +54,9 @@ export default {
            if(row.checked){
                 this.$store.dispatch('setProjectMaintainTabid', row.id);
            }
+           this.$emit('currentRowData', 'aaa');
        },
        changeCurrentRow(val, rowIndex, row){
-        //    console.log(rowIndex);
-        //    console.log(row);
            const data = this.list;
            for(let index in data){
                if(index == rowIndex){
@@ -68,6 +67,7 @@ export default {
            }
            this.list = data;
            this.currentRow = row;
+           console.log(this.currentRow);
        }
     }
 }
@@ -82,6 +82,7 @@ export default {
                 .has-gutter{
                     font-family:Microsoft YaHei;
                     color: #000;
+                    font-weight: 700;
                 }
                 thead{
                     .el-table-column--selection{

@@ -54,6 +54,7 @@ export default {
 .date-select{
     /deep/ .el-input__inner{
         width: 3.385417rem;
+        height: 40px;
         .el-range-separator{
             line-height: .21875rem;
         }

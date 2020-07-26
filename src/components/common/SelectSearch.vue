@@ -50,9 +50,9 @@ export default {
         margin-left: .078125rem;
         /deep/ .el-input{
             .el-input__inner{
-                width: 1.25rem;
+                width: 180px;
                 height: 35px;
-                border-radius: .052083rem;
+                border-radius: 10px;
             }
         }
     }

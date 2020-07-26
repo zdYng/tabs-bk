@@ -1,9 +1,11 @@
 <template>
 <!-- 弹窗按钮组件 -->
     <div class="dialog-group">
-        <img @click="handleClick" src="http://47.111.232.105:5000/img/menu.png">
+        <i @click="handleClick" class="el-icon" :class="[ isShow ? 'el-icon-remove-outline' : 'el-icon-circle-plus-outline']"></i>
         <span v-show="isShow" class="btn-group">
-            <span class="delete-btn btn-item">删除</span>
+            <span class="btn-item">
+                <ConfirmDeleteDialog btnText="删除"/>
+            </span>
             <span class="btn-item">
                 <ShortCut btnText="快捷维护"/>
             </span>
@@ -32,7 +34,8 @@ export default {
     components:{
         ShortCut: () => import('./ShortCut'),
         SaveModelDialog: () => import('./SaveTemplate'),
-        ImportTemplate: () => import('./ImportTemplate')
+        ImportTemplate: () => import('./ImportTemplate'),
+        ConfirmDeleteDialog: () => import('../../common/ConfirmDeleteDialog')
     }
 }
 </script>
@@ -41,6 +44,11 @@ export default {
     display: flex;
     align-items: center;
     margin-left: .104167rem;
+    .el-icon{
+        font-size: 24px;
+        color: #0066cc;
+        cursor: pointer;
+    }
     img{
         width: .130208rem;
         height: .130208rem;

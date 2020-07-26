@@ -67,7 +67,7 @@ export default {
 //     margin-left: 0.133333rem;
 //   }
   /deep/ .el-input__inner {
-    border-radius: 0.066667rem;
+    border-radius: 10px;
     width: 1.25rem;
     height: 40px;
   }

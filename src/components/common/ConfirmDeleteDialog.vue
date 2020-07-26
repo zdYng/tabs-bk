@@ -7,66 +7,23 @@
           center
           top="30vh"
           :title="title">
-          <el-form :model="form">
-              <el-form-item 
-              :label="label"
-              :label-width="formLableWidth">
-                <el-input v-model="form.name" autocomplete="off"></el-input>
-              </el-form-item>
-          </el-form>
+          <span>确认删除？</span>
           <div slot="footer" class="dialog-footer">
-              <button class="confirm-btn" type="primary" @click="handleClick">确&nbsp;定</button>
+              <button class="confirm-btn" type="primary" @click="dialogFormVisible = false">确&nbsp;定</button>
               <button class="cancel-btn" @click="dialogFormVisible = false">取&nbsp;消</button>
           </div>
         </el-dialog>
     </div>
 </template>
 <script>
-import { post } from '@/utils/http'
-import { addTaskAPI } from '@/utils/apiList'
 export default {
-    name: 'AddDialog',
+    name: 'ConfirmDeleteDialog',
     props:{
         btnText:String,
-        title: String,
-        label: String
-    },
-    computed:{
-        rowId(){
-            if(Object.keys(this.$store.state.taskRowId).length > 0){
-                return this.$store.state.taskRowId
-            }else{
-                return {
-                    id: '',
-                    flag: ''
-                }
-            }
-        }
     },
     data(){
         return {
-            dialogData: {
-                
-            },
             dialogFormVisible: false,
-            form: {
-                name: '',
-                flag: 0,
-            },
-            formLableWidth: '100px'
-        }
-    },
-    methods:{
-        handleClick(){
-            post(addTaskAPI, {
-                "taskName": '肖星星的项目',
-                "flag": 0,
-                "level": 0,
-                "projectId": 1
-            }).then(res => {
-                console.log(res);
-            });
-            this.dialogFormVisible = false;
         }
     }
 }
@@ -81,23 +38,16 @@ export default {
     .custom-dialog{
         /deep/ .el-dialog{
             width: 400px;
-            border-radius: 15px;
-            .el-dialog__header{
-                height: 60px;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background:rgba(184,218,252,1);
-                border-top-left-radius: 15px;
-                border-top-right-radius: 15px;
-            }
             .el-dialog__body{
-                height: 100px;
+                height: 50px;
                 display: flex;
                 align-items: center;
-                padding: 0;
+                padding-left: 30px;
                 box-sizing: border-box;
+                span{
+                    font-size: 16px;
+                    color: #333;
+                }
                 .el-form{
                     // padding-left: 30px;
                     height: 200px;
@@ -119,25 +69,27 @@ export default {
                 }
             }
             .dialog-footer{
+                display: flex;
+                justify-content: flex-end;
                 .confirm-btn{
-                    border-radius: 10px;
-                    width: 80px;
-                    height: 30px;
+                    width: 60px;
+                    height: 25px;
                     margin-right: 20px;
                     background-color: #0066cc;
                     border: none;
                     outline: none;
                     color: #fff;
+                    font-size: 12px;
                 }
                 .cancel-btn{
-                    border-radius: 10px;
-                    width: 80px;
-                    height: 30px;
+                    width: 60px;
+                    height: 25px;
                     margin-right: 20px;
                     background-color: #fff;
                     border: 1px solid #0066cc;
                     outline: none;
                     color: #0066cc;
+                    font-size: 12px;
                 }
             }
         }

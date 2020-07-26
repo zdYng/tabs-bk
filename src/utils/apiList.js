@@ -30,3 +30,5 @@ export const moduleQueryAPI = '/basic/module/seltree'
 export const taskSelectAPI = '/ssm/ssm/task'
 // 任务分解页面的任务看板，获取列表信息接口
 export const queryTaskAPI = 'ssm/ssm/task/queryTask'
+// 任务分解页面，点击新增分组接口
+export const addTaskAPI = 'ssm/ssm/task/addTask'

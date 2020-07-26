@@ -59,6 +59,7 @@ export default {
     .disappear{
             font-size: .083333rem;
             color: #0066cc;
+            cursor: pointer;
         } 
 }
 }

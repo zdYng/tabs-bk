@@ -41,9 +41,10 @@ export default {
 </script>
 <style lang="less" scoped>
 .input-box{
-    .title{
+    /deep/ .title{
         display: flex;
-        font-size: .083333rem;
+        font-size: 16px;
+        font-family: Microsoft YaHei;
         padding: 0 0 .078125rem 0;
         .icon-bitian{
             color: red;

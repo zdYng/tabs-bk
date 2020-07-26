@@ -15,7 +15,7 @@
             </div>
         </header>
         <section class="tab-section">
-            <ProjectTable @handleRowClick="getTabRowId" :list="list" :itemOptions="itemOptions"/>
+            <ProjectTable @currentRowData="getCurrentRowData" @handleRowClick="getTabRowId" :list="list" :itemOptions="itemOptions"/>
         </section>
     </div>
 </template>
@@ -44,7 +44,8 @@ export default {
             // 点击查询按钮提交的参数
             searchBtnSubmit:{},
             // 点击修改按钮发送的信息
-            alterSubmitId: null
+            alterSubmitId: null,
+            currentRowData: {}
         }
     },
     mounted(){
@@ -97,6 +98,11 @@ export default {
         // 获取子租价列表点击某一行传过来的id值
         getTabRowId(id){
             console.log(id)
+        },
+        // 获取到任务管理页面，点击列表某一个行传过来的行数据
+        getCurrentRowData(val){
+            console.log(val);
+            // this.currentRowData = val;
         }
 
     }
@@ -126,6 +132,7 @@ export default {
                 color: #0066cc;
                 margin-left: .104167rem;
                 outline: none;
+                cursor: pointer;
             }
         }
         .btn-group{
@@ -133,12 +140,13 @@ export default {
                 width: .416667rem;
                 height: 30px;
                 background-color: #fff;
-                border-radius: .052083rem;
+                border-radius: 10px;
                 border: solid 1px #0066cc;
                 font-size: .083333rem;
                 color: #0066cc;
                 margin-left: .104167rem;
                 outline: none;
+                cursor: pointer;
             }
             .set-btn{
                 width: .625rem;
@@ -151,17 +159,19 @@ export default {
                 color: #0066cc;
                 margin-left: .104167rem;
                 outline: none;
+                cursor: pointer;
             }
             .add-btn{
                 width: .520833rem;
                 height: 30px;
                 background-color: #0066cc;
-                border-radius: .104167rem;
+                border-radius: 10px;
                 font-size: .083333rem;
                 color: #fff;
                 border: none;
                 margin: 0 .104167rem 0 .104167rem;
                 outline: none;
+                cursor: pointer;
             }
         }
     }

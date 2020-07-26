@@ -167,8 +167,8 @@ export default {
             isShowBaseInfo: true,
             isShowCustomInfo:true,
             isShowUserInfo: true,
-            planDateTime: ['2020-07-08', '2020-07-09'], //计划周期
-            actualDateTime: ['2020-07-08', '2020-07-09'], //实际周期
+            planDateTime: [], //计划周期
+            actualDateTime: [], //实际周期
         }
     },
     mounted(){
@@ -320,10 +320,11 @@ export default {
 /deep/ .input-code{
     .el-input__inner{
         width: 3.385417rem;
+        height: 40px;
     }
 }
 /deep/ .el-textarea__inner{
-    width: 7.708333rem;
+    width: 7.572917rem;
     resize: none;
     border-radius: .078125rem;
 }
