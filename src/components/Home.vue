@@ -13,8 +13,14 @@
         </div>
       </el-header>
       <el-container>
+        <div class="left-panel">
+          <el-menu background-color="#ebf5ff">
+            <MenuTree
+              :data="dataList"/>
+          </el-menu>
+        </div>
         <!-- 一级菜单面板 -->
-        <div class="home-left-panel">
+        <!-- <div class="home-left-panel">
           <el-tree
               class="menu-tree"
               :data="dataList" 
@@ -29,7 +35,7 @@
                   <i class="el-icon-setting"></i>
               </span>
           </el-tree>
-        </div>
+        </div> -->
         <!-- <el-aside width="1.5625rem"> -->
           <!-- element-ui里面的折叠面板组件 -->
           <!-- <el-collapse>
@@ -89,15 +95,50 @@ export default {
       defaultProps: {
         children: 'children',
         label: 'name'
-      }
+      },
+      menuData:[
+        {
+          "index": '1',
+          "name": '用户管理',
+          "children": [
+            {
+              "index": '2',
+              "name": '用户列表',
+              "children":[
+                {
+                  "index": '3',
+                  "name": '用户列表查询',
+                  "children": [
+                    {
+                      "index": '4',
+                      "name": '最后一层数据'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": '5',
+          "name": '角色管理',
+          "children": [
+            {
+              "index": '6',
+              "name": '角色查询'
+            }
+          ]
+        }
+      ]
     };
   },
   components: {
-    
+    MenuTree: () => import('./common/MenuTree')
   },
   created() {
     get(homeAPI).then(res => {
       this.dataList = res;
+      console.log(this.dataList);
     });
   },
   methods: {
@@ -244,6 +285,11 @@ export default {
             }
           }
         }
+      }
+      .left-panel{
+        width: 16%;
+        height: 100%;
+        background-color: #ebf5ff;
       }
       .home-left-panel{
         width: 16%;

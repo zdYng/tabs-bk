@@ -134,12 +134,6 @@ Vue.use(VueRouter)
         component: () => import('../components/taskManagement/taskDecomposition/LogoMaintain.vue')
       },
       {
-        // 测试页面
-        path: 'Test',
-        name: 'Test',
-        component: () => import('../components/common/Test')
-      },
-      {
         // 空白页面
         path: 'EmptyPage',
         name: 'EmptyPage',
