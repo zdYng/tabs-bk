@@ -51,10 +51,15 @@ export default {
     methods:{
         // 当点击列表的某行执行的函数
        handleRowClick(row, column, event){
-           if(row.checked){
-                this.$store.dispatch('setProjectMaintainTabid', row.id);
-           }
-           this.$emit('currentRowData', 'aaa');
+        this.list.forEach(item => {
+            if(item.id == row.id){
+                item.checked = true;
+            }else{
+                item.checked = false;
+            }
+            this.currentRow = row;
+        });
+        this.$store.dispatch('setProjectMaintainRowData', row);
        },
        changeCurrentRow(val, rowIndex, row){
            const data = this.list;
@@ -67,7 +72,6 @@ export default {
            }
            this.list = data;
            this.currentRow = row;
-           console.log(this.currentRow);
        }
     }
 }

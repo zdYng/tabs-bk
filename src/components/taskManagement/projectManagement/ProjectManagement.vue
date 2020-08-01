@@ -10,23 +10,26 @@
            </div>
             <div class="btn-group">
                 <button @click="alterBtn"  class="change-btn">修改</button>
-                <button @click.stop="toProScheduleMantain" class="set-btn">调整项目阶段</button>
+                <ProInfoMaintainDialog />
                 <button @click.stop="toProInfoManagement" class="add-btn">新增项目</button>
             </div>
         </header>
         <section class="tab-section">
-            <ProjectTable @currentRowData="getCurrentRowData" @handleRowClick="getTabRowId" :list="list" :itemOptions="itemOptions"/>
+            <ProjectTable :list="list" :itemOptions="itemOptions"/>
         </section>
     </div>
 </template>
 <script>
-import { get } from "@/utils/http";
-import { projectSelectAPI, queryListAPI } from "@/utils/apiList";
+import { get, post } from "@/utils/http";
+import { projectSelectAPI, queryListAPI, editProject, selProjectAPI} from "@/utils/apiList";
 export default {
     name: 'ProjectManagement',
     data(){
         return{
-            selectGroup: [],
+            selectGroup: [],//项目阶段下拉框的下拉框数据
+            getSelectData:[],
+            proTypeSelect: [], //项目类型下拉数据
+            proStageSelect: [], //项目阶段下拉数据
             list: [],
             itemOptions:[
                 { id: 1, title: "项目名称", type: "text", key: "projectName", width:'150'},
@@ -48,21 +51,57 @@ export default {
             currentRowData: {}
         }
     },
+    computed:{
+        getRowData(){
+            return this.$store.state.projectMaintainRowData;
+        }
+    },
     mounted(){
+        //项目阶段下拉框的下拉框数据
         get(projectSelectAPI).then(res => {
+            console.log(res);
             this.selectGroup = res.data.stage;
+            this.getSelectData = res.data;
+        });
+        // 项目类型、项目阶段下拉数据
+        get(selProjectAPI).then(res => {
+            console.log(res);
+            res.data.stage.forEach(item => {
+                this.proStageSelect.push(
+                    Object.assign(
+                        {},
+                        {
+                            id: item.dictionary_number,
+                            name: item.dictionary_name
+                        }
+                    )
+                )
+            });
+            res.data.type.forEach(item => {
+                this.proTypeSelect.push(
+                    Object.assign(
+                        {},
+                        {
+                            id: item.dictionary_number,
+                            name: item.dictionary_name
+                        }
+                    )
+                )
+            });
+            // console.log(this.proTypeSelect);
         });
         get(queryListAPI).then(res => {
             res.data.forEach(item => {
                 item.checked = false;
             });
             this.list = res.data;
-        })
+        });
     },
     components:{
         ProjectTable: () => import('./ProjectTable'),
         InputSearch: () => import('../../common/InputSearch'),
-        SelectSearch: () => import('../../common/SelectSearch')
+        SelectSearch: () => import('../../common/SelectSearch'),
+        ProInfoMaintainDialog: () => import('./ProInfoMaintainDialog')
     },
     methods:{
         // 点击“新增项目”按钮，实现跳转项目信息维护页面
@@ -93,11 +132,44 @@ export default {
         },
         // 点击修改按钮
         alterBtn(){
-           
-        },
-        // 获取子租价列表点击某一行传过来的id值
-        getTabRowId(id){
-            console.log(id)
+            this.$router.push({name: 'ProInfoMaintain', query: {isChange: 1}});
+            // if(Object(this.getRowData).length > 0){
+            //     // 拿到项目阶段的下拉数据找到当前row的项目类型对应的id
+            //     let findeStageData = {}; // 项目阶段
+            //     findeStageData = this.proStageSelect.find(item => {
+            //         return item.name == this.getRowData.projectStage
+            //     });
+            //     // console.log(findeStageData);
+            //     let findeTypeData = {}; // 项目类型
+            //     findeTypeData = this.proTypeSelect.find(item => {
+            //         return item.name == this.getRowData.projectType
+            //     });
+            //     let findBDData = {}; //项目BD
+            //     findBDData = this.getSelectData.user.find(item => {
+            //         return item.name == this.getRowData.projectBD
+            //     });
+            //     let findeCustomData = {};//客户
+            //     findeCustomData = this.getSelectData.customer.find(item => {
+            //         return item.name == this.getRowData.customer;
+            //     });
+            //     post(editProject, {
+            //         "id":this.getRowData.id,//项目id
+            //         "projectName": this.getRowData.projectName,//项目名称
+            //         "projectCode": this.getRowData.projectCode,// 项目code
+            //         "projectBDId": findBDData.id + '-' + findBDData.name,
+            //         "projectStageId": findeStageData.id + '-' + findeStageData.name,
+            //         "projectManagerId": findBDData.id + '-' + findBDData.name,
+            //         "projectTypeId": findeTypeData.id + '-' + findeTypeData.name,
+            //         "customerId": findeCustomData.id + '-' + findeCustomData.name,
+            //         "planStartTime": this.getRowData.planCycle.split('/')[0],
+            //         "planEndTime": this.getRowData.planCycle.split('/')[1],
+            //         "actualStartTime": this.getRowData.actualCycle.split('/')[0],
+            //         "actualEndTime":  this.getRowData.actualCycle.split('/')[1],
+            //     }).then(res => {
+            //         console.log(res);
+            //     }).catch(err => console.log(err));
+            //     this.$router.push({name: 'ProInfoMaintain'});
+            // }
         },
         // 获取到任务管理页面，点击列表某一个行传过来的行数据
         getCurrentRowData(val){
@@ -136,6 +208,7 @@ export default {
             }
         }
         .btn-group{
+            display: flex;
             .change-btn{
                 width: .416667rem;
                 height: 30px;

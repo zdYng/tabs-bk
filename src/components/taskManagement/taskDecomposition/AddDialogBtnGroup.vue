@@ -1,16 +1,16 @@
 <template>
-<!-- 弹窗按钮组件 -->
+<!--新增分组、新增任务、新增子任务，弹窗按钮组件 -->
     <div class="add-dialog-group">
         <i @click="handleClick" class="el-icon" :class="[ isShow ? 'el-icon-remove-outline' : 'el-icon-circle-plus-outline']"></i>
         <span v-show="isShow" class="btn-group">
             <span class="btn-item">
-                <AddDialog btnText="新增分组" title="新增分组" label="分组名称"/>
+                <AddGroup btnText="新增分组" title="新增分组" label="分组名称"/>
             </span>
             <span class="btn-item">
-                <AddDialog  btnText="新增任务" title="新增任务" label="任务名称"/>
+                <AddTask btnText="新增任务"/>
             </span>
             <span class="btn-item">
-                <AddDialog btnText="新增子任务" title="新增子任务" label="子任务名称"/>
+                <AddChilrenTask btnText="新增子任务"/>
             </span>
         </span>
     </div>
@@ -29,7 +29,9 @@ export default {
         }
     },
     components:{
-        AddDialog:() => import('./AddDialog')
+        AddGroup:() => import('./dialog/AddGroup'),
+        AddTask: () => import('./dialog/AddTask'),
+        AddChilrenTask: () => import('./dialog/AddChildrenTask')
     }
 }
 </script>
@@ -58,6 +60,7 @@ export default {
             font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
         }
         .btn-item{
+            display: flex;
             color:rgba(102,102,102,1);
             padding: 0 .052083rem;
         }

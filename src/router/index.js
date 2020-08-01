@@ -32,10 +32,10 @@ Vue.use(VueRouter)
             path: 'MenuDetail',
             component: () => import('../components/menuMaintain/MenuDetail.vue')
           },
-          // {
-          //   path: '',
-          //   redirect: 'MenuDetail'
-          // }
+          {
+            path: '',
+            redirect: 'MenuDetail'
+          }
         ]
       },
       {

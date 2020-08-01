@@ -3,7 +3,7 @@
         <div class="menu-area">
             <el-row>
                 <el-col :span="8">
-                    <InputBox title="菜单名称" placeholder="请输入内容"/>
+                    <InputBox :itemValue="defaultMenuName" title="菜单名称" placeholder="请输入内容"/>
                 </el-col>
                 <el-col :span="8">
                     <SelectBox :options="menuType" title="菜单类型"/>
@@ -65,8 +65,10 @@ import { get } from '../../utils/http'
 import { menuAPI, dropAPI } from '../../utils/apiList'
 export default {
     name: 'MenuDetail',
+    inject:['rush'],
     data(){
         return {
+            defaultMenuName: '',
             value:'',
             menuData: [],
             menuType: [], // 菜单类型下拉选项
@@ -85,13 +87,20 @@ export default {
             // state: '',
         }
     },
-    props:{
-
-    },
     components:{
         InputBox: () => import('../common/InputBox'),
         SelectBox: () => import('../common/SelectBox'),
         SearchSelect: () => import('../common/SearchSelect')
+    },
+    computed:{
+        menuDetailData(){
+            return this.$store.state.MenuDetailData.data
+        }
+    },
+    watch:{
+        menuDetailData: function (newVal, oldVal){
+            this.defaultMenuName = newVal.name;
+        }
     },
     mounted(){
         get(menuAPI).then(res => {
@@ -150,11 +159,12 @@ export default {
             return retNode;
         }
     },
-    watch:{
-        $route(to, from){
-            let detailData = this.deepQuery(this.menuData,this.$store.state.nodeId);
-        }
-    }
+    
+    // watch:{
+    //     // $route(to, from){
+    //     //     let detailData = this.deepQuery(this.menuData,this.$store.state.nodeId);
+    //     // }
+    // }
 }
 </script>
 <style lang="less" scoped>

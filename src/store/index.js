@@ -14,8 +14,10 @@ const state = {
   nodeId: '',
   DicNodeId: '',
   dicMenuMessage:'',
-  taskRowId: {},
-  projectMaintainTabid: null //项目管理页面的点击某一行获取的当前行的id值
+  taskRowId: {}, //任务分解页面点击列表获取到列表的id和flag
+  projectMaintainRowData: {}, //项目管理页面，点击某一行获取的这行的数据 
+  memoryList: [], //Home页面点击菜单树生成的记忆条数据
+  MenuDetailData: {}, //菜单维护页面的菜单详情数据
 }
 
 export default new Vuex.Store({

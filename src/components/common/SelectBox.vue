@@ -38,8 +38,12 @@ export default {
     };
   },
   methods:{
-    handelSelectChange(){
-      this.$emit('selectEvent', this.itemValueId);
+    handelSelectChange(id){
+      let changData = {};
+      changData = this.options.find(item => {
+        return item.id == id;
+      });
+      this.$emit('selectEvent', changData);
     }
   }
 };

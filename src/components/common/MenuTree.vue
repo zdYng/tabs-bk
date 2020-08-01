@@ -6,13 +6,17 @@
             :index="item.id"
             v-if="item.children">
                 <template slot="title">
-                    <i class="el-icon-location"></i>
+                    <i :class="item.icon"></i>
                     <span>{{item.name}}</span>
                 </template>
                 <MenuTree :data="item.children"/>
         </el-submenu>
         <el-menu-item v-else :index="item.id">
-            <span slot="title">{{item.name}}</span>
+            <span @click="handleClick">
+                <router-link
+                    :to="{path: item.url}" 
+                    slot="title">{{item.name}}</router-link>
+            </span>
         </el-menu-item>
        </div>
     </div>
@@ -21,11 +25,47 @@
 export default {
     name: 'MenuTree',
     props:{
-        data: Array
+        data: Array,
     },
     data(){
         return {
-
+           barArr: []
+        }
+    },
+    mounted(){
+        // console.log(this.memoryArr);
+    },
+    methods:{
+        handleClick(e){
+            if(this.barArr.length > 0){
+                let flag = this.barArr.some(item => {
+                // console.log(item.path);
+                return item.path === e.target.getAttribute('href');
+                })
+                if(!flag){
+                    this.barArr.push(
+                        Object.assign(
+                            {},
+                            {
+                                "path": e.target.getAttribute('href'),
+                                "title": e.target.innerHTML
+                            }
+                        )
+                    )
+                }
+            }else {
+                    this.barArr.push(
+                    Object.assign(
+                        {},
+                        {
+                            "path": e.target.getAttribute('href'),
+                            "title": e.target.innerHTML
+                        }
+                    )
+                )
+            }
+            console.log(this.barArr);
+            this.$store.dispatch('setMemoryList', this.barArr);
         }
     }
 }
@@ -33,5 +73,53 @@ export default {
 <style lang="less" scoped>
 .menu-tree{
     width: 100%;
+    // background:rgba(235,245,255,1);
+    /deep/ .el-submenu {
+        .el-submenu__title{
+            font-size: 16px;
+            font-family:Microsoft YaHei;
+            background:rgba(235,245,255,1);
+            i{
+                color: #303133;
+            }
+            /deep/ .el-submenu__icon-arrow{
+                color: #000 !important;
+            }
+        }
+        .el-submenu__title:hover{
+            background-color: #a6d2ff !important;
+        }
+        .el-submenu__title.is-active{
+            background:rgba(166,210,255,1) !important;
+        }
+        /deep/ .el-menu--inline{
+            background:rgba(217,236,255,1);
+            .el-menu-item{
+                font-size: 14px;
+                font-family:Microsoft YaHei;
+                span{
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    a{
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        color: #303133;
+                    }
+                }
+            }
+            .el-menu-item:hover{
+                background-color: #a6d2ff !important;
+            }
+            // .el-menu-ite.is-active{
+            //     background-color: #a6d2ff !important;
+            // }
+        }
+        /deep/ .el-menu-item.is-active{
+            background-color: #a6d2ff;
+            color: #000;
+        }
+    }
 }
 </style>

@@ -14,9 +14,8 @@
       </el-header>
       <el-container>
         <div class="left-panel">
-          <el-menu background-color="#ebf5ff">
-            <MenuTree
-              :data="dataList"/>
+          <el-menu>
+            <MenuTree :data="dataList"/>
           </el-menu>
         </div>
         <!-- 一级菜单面板 -->
@@ -74,7 +73,7 @@
           </div>
           <div class="main-area">
             <!-- <keep-alive> -->
-              <router-view></router-view>
+              <router-view v-if="isRouterAlive"></router-view>
             <!-- </keep-alive> -->
           </div>
         </el-main>
@@ -87,8 +86,14 @@ import { get } from "../utils/http";
 import { homeAPI } from "../utils/apiList";
 export default {
   name: "Home",
+  provide(){
+    return {
+      reload: this.reload
+    }
+  },
   data() {
     return {
+      isRouterAlive: true,
       dataList: [],
       memoryList: [],// 记忆条数组
       urlList: [],
@@ -132,6 +137,16 @@ export default {
       ]
     };
   },
+  computed:{
+    barArr(){
+      return this.$store.state.memoryList
+    }
+  },
+  watch:{
+    barArr: function(newVal, oldVal){
+      this.memoryList = newVal;
+    }
+  },
   components: {
     MenuTree: () => import('./common/MenuTree')
   },
@@ -142,36 +157,36 @@ export default {
     });
   },
   methods: {
-    handleMemoryStrick(e) {
-      if(this.memoryList.length > 0){
-        let flag = this.memoryList.some(item => {
-          console.log(item.path);
-          return item.path === e.target.getAttribute('href');
-        })
-        if(!flag){
-          this.memoryList.push(
-            Object.assign(
-              {},
-              {
-                "path": e.target.getAttribute('href'),
-                "title": e.target.innerHTML
-              }
-            )
-          )
-        }
-      }else {
-        this.memoryList.push(
-          Object.assign(
-            {},
-            {
-              "path": e.target.getAttribute('href'),
-              "title": e.target.innerHTML
-            }
-          )
-        )
-      }
-      console.log(this.memoryList);
-    },
+    // handleMemoryStrick(e) {
+    //   if(this.memoryList.length > 0){
+    //     let flag = this.memoryList.some(item => {
+    //       console.log(item.path);
+    //       return item.path === e.target.getAttribute('href');
+    //     })
+    //     if(!flag){
+    //       this.memoryList.push(
+    //         Object.assign(
+    //           {},
+    //           {
+    //             "path": e.target.getAttribute('href'),
+    //             "title": e.target.innerHTML
+    //           }
+    //         )
+    //       )
+    //     }
+    //   }else {
+    //     this.memoryList.push(
+    //       Object.assign(
+    //         {},
+    //         {
+    //           "path": e.target.getAttribute('href'),
+    //           "title": e.target.innerHTML
+    //         }
+    //       )
+    //     )
+    //   }
+    //   console.log(this.memoryList);
+    // },
     handleMemoryDelete(index, path){
       this.memoryList.splice(index, 1);
       if(this.isActive(path)){
@@ -198,6 +213,13 @@ export default {
     // 左侧菜单面板点击触发
     handleNodeClick(){
 
+    },
+    // 局部刷新函数
+    reload(){
+      this.isRouterAlive = false;
+      this.$nextTick(function (){
+        this.isRouterAlive = true;
+      })
     }
   },
 }
@@ -289,82 +311,87 @@ export default {
       .left-panel{
         width: 16%;
         height: 100%;
-        background-color: #ebf5ff;
-      }
-      .home-left-panel{
-        width: 16%;
-        min-width: 250px;
-        height: 100%;
         background:rgba(235,245,255,1);
         overflow: hidden;
         overflow-y: scroll;
-        /deep/ .el-tree{
-          background:rgba(235,245,255,1);
-          .el-tree-node:focus{
-              .el-tree-node__content{
-                background:rgba(235,245,255,1);
-            }
-          }
-          .el-tree-node__content{
-            height: .3125rem;
-            font-size: 16px;
-            color: #303133;
-            box-sizing: border-box;
-            padding-right: .104167rem;
-            .menu-icon{
-                width: 200px;
-                a{
-                   width: 80%;
-                   height: .3125rem;
-                   line-height: .3125rem;
-                   font-size: 14px;
-                   color: #333;
-                }
-                i{
-                    width: 20%;
-                    height: .3125rem;
-                    line-height: .3125rem;
-                    text-align: end;
-                    font-size: .104167rem;
-                }
-            }
-            .el-tree-node__expand-icon{
-                font-size: .104167rem;
-                color: #000;
-                margin-left: .104167rem;
-            }
-            .el-tree-node__expand-icon.expanded{
-                -webkit-transform: rotate(0deg);
-                transform: rotate(0deg);
-                font-size: .104167rem;
-                color: #000;
-            }
-            .el-icon-caret-right:before{
-                content: "\e6e0";
-            }
-            .el-tree-node__expand-icon.expanded.el-icon-caret-right:before{
-                content: '\e6df';
-            }
-            .el-tree-node__expand-icon.is-leaf{
-                color: transparent;
-                cursor: default;
-            }
-            .menu-icon{
-                display: flex;
-                width: 100%;
-                justify-content: space-between;
-            }
-          }
-          .el-tree-node__content:hover{
-            cursor: pointer;
-            background:rgba(166,210,255,1);
-          }
-
-        }
       }
-      .home-left-panel::-webkit-scrollbar{
+      .left-panel::-webkit-scrollbar{
         display: none;
       }
+      // .home-left-panel{
+      //   width: 16%;
+      //   min-width: 250px;
+      //   height: 100%;
+      //   background:rgba(235,245,255,1);
+      //   overflow: hidden;
+      //   overflow-y: scroll;
+      //   /deep/ .el-tree{
+      //     background:rgba(235,245,255,1);
+      //     .el-tree-node:focus{
+      //         .el-tree-node__content{
+      //           background:rgba(235,245,255,1);
+      //       }
+      //     }
+      //     .el-tree-node__content{
+      //       height: .3125rem;
+      //       font-size: 16px;
+      //       color: #303133;
+      //       box-sizing: border-box;
+      //       padding-right: .104167rem;
+      //       .menu-icon{
+      //           width: 200px;
+      //           a{
+      //              width: 80%;
+      //              height: .3125rem;
+      //              line-height: .3125rem;
+      //              font-size: 14px;
+      //              color: #333;
+      //           }
+      //           i{
+      //               width: 20%;
+      //               height: .3125rem;
+      //               line-height: .3125rem;
+      //               text-align: end;
+      //               font-size: .104167rem;
+      //           }
+      //       }
+      //       .el-tree-node__expand-icon{
+      //           font-size: .104167rem;
+      //           color: #000;
+      //           margin-left: .104167rem;
+      //       }
+      //       .el-tree-node__expand-icon.expanded{
+      //           -webkit-transform: rotate(0deg);
+      //           transform: rotate(0deg);
+      //           font-size: .104167rem;
+      //           color: #000;
+      //       }
+      //       .el-icon-caret-right:before{
+      //           content: "\e6e0";
+      //       }
+      //       .el-tree-node__expand-icon.expanded.el-icon-caret-right:before{
+      //           content: '\e6df';
+      //       }
+      //       .el-tree-node__expand-icon.is-leaf{
+      //           color: transparent;
+      //           cursor: default;
+      //       }
+      //       .menu-icon{
+      //           display: flex;
+      //           width: 100%;
+      //           justify-content: space-between;
+      //       }
+      //     }
+      //     .el-tree-node__content:hover{
+      //       cursor: pointer;
+      //       background:rgba(166,210,255,1);
+      //     }
+
+      //   }
+      // }
+      // .home-left-panel::-webkit-scrollbar{
+      //   display: none;
+      // }
       /* main功能区域 */
       /deep/ .el-main {
         padding: 0;

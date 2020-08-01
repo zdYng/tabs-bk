@@ -3,6 +3,8 @@
         <el-tree
             class="menu-tree"
             :data="data"
+            node-key="id"
+            @node-click="handleNodeClick"
             :props="props"
             highlight-current
             :default-expand-all="false"
@@ -22,6 +24,11 @@ export default {
                 children: 'children',
                 label: 'name'
             }
+        }
+    },
+    methods:{
+        handleNodeClick(event, data, node){
+            this.$store.dispatch('setMenuDetailData', data);
         }
     }
 }

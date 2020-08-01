@@ -27,7 +27,15 @@ export const setDicMenuMessage = (state, data) => {
 export const setTaskRowId = (state, data) => {
   state.taskRowId = data;
 }
-//项目管理页面，当点击某行时获取当前行的id
-export const setProjectMaintainTabid = (state, data) => {
-  state.projectMaintainTabid = data;
+// //项目管理页面，当点击某行时获取当前行的数据
+export const setProjectMaintainRowData = (state, data) => {
+  state.projectMaintainRowData = data;
+}
+// Home页面获取到点击左侧菜单树生成的记忆条数据
+export const setMemoryList = (state, data) => {
+  state.memoryList = data;
+}
+//菜单维护页面的菜单详情数据
+export const setMenuDetailData = (state, data) => {
+  state.MenuDetailData = data;
 }

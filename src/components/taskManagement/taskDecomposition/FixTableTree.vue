@@ -9,11 +9,10 @@
           highlight-current-row
           @row-click="handleRowClick"
           :default-expand-all="false"
-          :tree-props="{children: 'taskInfo', hasChildren: 'parent'}">
+          :tree-props="{children: 'task', hasChildren: 'parent'}">
           <el-table-column
             label="任务名称"
             width="200"
-            align="center"
             prop="name">
           </el-table-column>
           <el-table-column
@@ -53,6 +52,7 @@ export default {
     },
     mounted(){
         get(queryTaskTreeAPI).then(res => {
+            console.log(res);
             this.projectData = res.project;
             this.taskInfoData = res.project;
             this.projectData.forEach(item => {
@@ -62,27 +62,27 @@ export default {
     },
     methods:{
         // 拿到点击列表每一项的数据，然后然后后面的数据
-        getItemId(e){
-            let id = e.target.getAttribute('data-id');
-            let findObj = deepQuery(this.tableData, Number(id));
-            get(quertTaskInfoAPI, {"id": id}).then(res => {
-                // console.log(res);
-            })
-        },
+        // getItemId(e){
+        //     let id = e.target.getAttribute('data-id');
+        //     let findObj = deepQuery(this.tableData, Number(id));
+        //     get(quertTaskInfoAPI, {"id": id}).then(res => {
+        //         // console.log(res);
+        //     })
+        // },
         // 树形数据懒加载
         load(tree, treeNode, resolve){
-            console.log(tree.id);
             get(queryTaskTreeAPI, { "id": tree.id, "flag": tree.level})
               .then(res => {
                   console.log(res);
-                  let taskInfo = res.taskInfo;
                   if(res.code == '000'){
-                      res.task.forEach((item, index) => {
+                      res.task.forEach(item => {
                         item.id = item.level + '_' + item.id;
+                        let taskInfo = item.taskInfo;
+                        console.log(taskInfo);
                         if(taskInfo.length > 0){
-                            item.percentage = taskInfo[index].percentage;
-                            item.planCycle = taskInfo[index].planCycle;
-                            item.principal = taskInfo[index].principal;
+                            item.percentage = taskInfo.percentage;
+                            item.planCycle = taskInfo.planCycle;
+                            item.principal = taskInfo.principal;
                         }else {
                             item.percentage = '';
                             item.planCycle = '';
@@ -95,10 +95,12 @@ export default {
         },
         // 表格当某一行被点击时会触发该事件
         handleRowClick(row, column, event){
+            console.log(row);
             let str = row.id;
             this.$store.dispatch('setTaskRowId', {
                 "id": str.substring(str.indexOf('_') + 1),
-                "flag": row.level
+                "flag": row.level,
+                "projectId": row.projectId
                 }
             )
         }
@@ -119,6 +121,7 @@ export default {
                 color: #000;
                 .is-leaf{
                     background:rgba(249,252,255,1);
+                    text-align: center;
                 }
             }
         }
@@ -126,6 +129,11 @@ export default {
             color:rgba(102,102,102,1); 
             td{
                 border-bottom: none;
+                .cell{
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
             }
         }
     }

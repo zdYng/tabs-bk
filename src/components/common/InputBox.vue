@@ -20,17 +20,24 @@ export default {
         showIcon: Boolean,
         disable: Boolean,
         placeholder: String,
-        defalutValue: String
+        defalutValue: String,
+        itemValue:{
+            type: String,
+            value: ''
+        }
     },
     data(){
         return {
-         itemValue: ''
+        //  itemValue: '',
         }
     },
+    mounted(){
+        // this.itemValue = this.defalutValue;
+    },
     watch:{
-        defalutValue: function(newVal, oldVal){
-            this.itemValue = this.defalutValue;
-        }
+        // defalutValue: function(newVal, oldVal){
+        //     this.itemValue = this.defalutValue;
+        // }
     },
     methods:{
         inputValueChange(){

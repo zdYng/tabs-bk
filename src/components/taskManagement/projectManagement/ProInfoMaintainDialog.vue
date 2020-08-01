@@ -1,21 +1,31 @@
 <template>
-<!-- 任务分解页面下的快捷维护弹窗 -->
-    <div class="short-cut">
-        <el-button type="text" @click="dialogFormVisible = true">{{btnText}}</el-button>
+<!-- 调整项目阶段弹窗 -->
+    <div class="ProInfoMaintainDialog">
+        <el-button class="btn-text" type="text" @click="dialogFormVisible = true">调整项目阶段</el-button>
         <el-dialog 
           class="custom-dialog"
           :visible.sync="dialogFormVisible"
           center
-          top="30vh"
+          top="20vh"
           :title="dialogData.title">
           <el-form :model="form">
-              <el-form-item 
-              label="任务完成百分比"
-              :label-width="formLableWidth">
-                <el-input v-model="form.name" autocomplete="off"></el-input>
+              <el-form-item>
+                <div class="pro-stage">
+                    <span>项目阶段</span>
+                    <el-select v-model="form.name" autocomplete="off"></el-select>
+                </div>
               </el-form-item>
-              <el-form-item label="备注" :label-width="formLableWidth">
-                  <el-input type="textarea" v-model="form.remark" autocomplete="off"></el-input>
+              <el-form-item>
+                  <div class="date">
+                      <DatePicker text="实际开始时间" placeholder="请选择日期"/>
+                      <DatePicker text="实际结束时间" placeholder="请选择日期"/>
+                  </div>
+              </el-form-item>
+              <el-form-item>
+                  <div class="text-area">
+                    <span>备注</span>
+                    <el-input type="textarea" v-model="form.remark" autocomplete="off"></el-input>
+                  </div>
               </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -27,14 +37,14 @@
 </template>
 <script>
 export default {
-    name: 'ShortCut',
+    name: 'ProInfoMaintainDialog',
     props:{
-        btnText:String
+        btnText: String
     },
     data(){
         return {
             dialogData: {
-                title:'快捷维护'
+                title:'项目进度维护'
             },
             dialogFormVisible: false,
             form: {
@@ -48,19 +58,28 @@ export default {
             },
             formLableWidth: '130px'
         }
+    },
+    components:{
+        DatePicker: () => import('../../common/DatePicker')
     }
 }
 </script>
 <style lang="less" scoped>
-.short-cut{
+.ProInfoMaintainDialog{
     /deep/ .el-button{
+        border: 1px solid #0066cc;
+        border-radius: 10px;
+        padding: 0 15px;
+        height: 30px;
+        margin-left: 20px;
         span{
-            font-size: 14px;
+            font-size: 16px;
+            color: #0066cc;
         }
     }
     .custom-dialog{
         /deep/ .el-dialog{
-            width: 550px;
+            width: 600px;
             border-radius: 15px;
             .el-dialog__header{
                 height: 80px;
@@ -73,25 +92,47 @@ export default {
                 border-top-right-radius: 15px;
             }
             .el-dialog__body{
-                height: 280px;
+                height: 400px;
                 display: flex;
                 align-items: center;
                 padding: 0;
                 box-sizing: border-box;
                 .el-form{
-                    padding-left: 30px;
-                    height: 200px;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-around;
-                    .el-form-item{
+                    width: 100%;
+                    height: 100%;
+                    box-sizing: border-box;
+                    padding: 30px 0;
+                    /deep/ .el-form-item{
                         margin-bottom: 0;
+                        .pro-stage{
+                            display: flex;
+                            flex-direction: column;
+                            margin-left: 50px;
+                        }
+                        .date{
+                            display: flex;
+                            margin-left: 50px;
+                            .date-picker{
+                                margin-right: 20px;
+                                .title{
+                                    font-size: 14px;
+                                    padding-bottom: 0;
+                                }
+                            }
+                        }
+                        .text-area{
+                            margin-left: 50px;
+                        }
+                        .el-form-item__content{
+                            display: flex;
+                        }
                         .el-form-item__label{
                             height: 50px;
                             line-height: 50px;
                             font-size: 16px;
                         }
                         .el-input__inner{
+                            width: 200px;
                             height: 50px;
                         }
                     }
@@ -116,7 +157,7 @@ export default {
             width: 300px;
         }
         /deep/ .el-textarea__inner{
-            width: 300px;
+            width: 440px;
             height: 100px;
             resize: none;
             border-radius: 10px;

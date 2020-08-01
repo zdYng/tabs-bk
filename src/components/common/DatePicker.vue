@@ -7,7 +7,8 @@
           v-model="value"
           type="date"
           @change="handleDatePickerChange"
-          :placeholder="placeholder">
+          :placeholder="placeholder"
+          value-format="yyyy-MM-dd">
         </el-date-picker>
     </div>
 </template>

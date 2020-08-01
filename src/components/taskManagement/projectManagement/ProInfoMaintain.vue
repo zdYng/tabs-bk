@@ -11,7 +11,7 @@
                 <el-row>
                     <el-col :span="12" class="el-col-class">
                         <div class="item-input">
-                            <InputBox @inputChange="getProNameValue"  :defalutValue="projectNameValue" v-model="value" :showIcon="true" title="项目名称"/>
+                            <InputBox :defalutValue="defaultData.defaultProName" @inputChange="getProNameValue" :showIcon="true" title="项目名称"/>
                         </div>
                         <div class="item-input">
                             <SelectBox @selectEvent="getProTypeId" :options="proTypeSelect" :showIcon="true" title="项目类型"/>
@@ -32,7 +32,7 @@
                             <div class="title">
                                 <span>项目Code</span>
                             </div>
-                            <el-input class="input-code" :disabled="true" v-model="category_name" placeholder="请输入内容"></el-input>
+                            <el-input class="input-code" :disabled="true"></el-input>
                         </div>
                     </el-col>
                     <el-col :span="12" class="el-col-class">
@@ -68,7 +68,7 @@
                             <div class="title">
                                 <span>需求描述</span>
                             </div>
-                            <el-input type="textarea" rows="3" class="input-code" v-model="category_name" placeholder="请输入内容"></el-input>
+                            <el-input type="textarea" rows="3" class="input-code" v-model="selectId.projectDesc" placeholder="请输入内容"></el-input>
                         </div>
                     </el-col>
                 </el-row>
@@ -135,23 +135,40 @@
 </template>
 <script>
 import { get, post } from "@/utils/http";
-import { projectSelectAPI, addProjectAPI } from "@/utils/apiList";
+import { projectSelectAPI, addProjectAPI, selProjectAPI, getProjectByIdAPI} from "@/utils/apiList";
 export default {
     name:'ProInfoMaintain',
+    inject:['reload'],
     data(){
         return{
+            // projectNameValue:'',
             selectId:{
                 projectName: '', // 项目名称
-                projectTypeId: Number,//项目类型id
-                projectStageId: Number, //项目阶段id
-                projectManagerId: Number,//项目经理id
-                projectBDId: Number, //项目BD id
-                customerId: Number, //客户id
+                projectTypeId: '',//项目类型id
+                projectDesc: '',//
+                projectStageId: '', //项目阶段id
+                projectManagerId: '',//项目经理id
+                projectBDId: '', //项目BD id
+                customerId: '', //客户id
                 planStartTime: '', //计划开始时间
                 planEndTime: '', //、计划结束时间
-                customerGradeId: Number, // 客户等级id
-                customerTypeId: Number, // 客户类型id
-                customNameId: Number, // 客户名称id
+                actualStartTime: '',//实际开始时间
+                actualEndTime: '',//实际结束时间
+                customerGradeId: '', // 客户等级id
+                customerTypeId: '', // 客户类型id
+                customNameId: '', // 客户名称id
+            },
+            defaultData:{
+                defaultProName: '',
+                defaultProType: '',
+                defaultProStage:'',
+                defaultProjectManager: '',
+                defaultProCODE: '',
+                defaultProBD: '',
+                defaultCustom: '',
+                defaultPlanCycle: '',
+                defaultActualCycle: '',
+                defaultRemark: ''
             },
             name:'baseInfo',
             value: 'aa',
@@ -171,17 +188,47 @@ export default {
             actualDateTime: [], //实际周期
         }
     },
+    computed:{
+        rowData(){
+            return this.$store.state.projectMaintainRowData
+        }
+    },
+    created(){
+        this.isFromChangeBtn();
+    },
     mounted(){
+        // 拿到项目类型、项目阶段下拉数据
+        get(selProjectAPI).then(res => {
+            res.data.stage.forEach(item => {
+                this.proTypeSelect.push(
+                    Object.assign(
+                        {},
+                        {
+                            id: item.dictionary_number,
+                            name: item.dictionary_name
+                        }
+                    )
+                )
+            });
+            res.data.type.forEach(item => {
+                this.proStageSelect.push(
+                    Object.assign(
+                        {},
+                        {
+                            id: item.dictionary_number,
+                            name: item.dictionary_name
+                        }
+                    )
+                )
+            });
+        })
         get(projectSelectAPI).then(res => {
-            console.log(res);
-            this.proTypeSelect = res.data.type;
-            this.proStageSelect = res.data.stage;
             this.proManagerSelect = res.data.user;
             this.proBDSelect = res.data.user;
             this.customerSelect = res.data.customer;
             this.customerGrade = res.data.customerGrade;
             this.customerType = res.data.customerType;
-        })
+        });
     },
     components:{
         SelectBox: () =>  import('../../common/SelectBox'),
@@ -203,56 +250,75 @@ export default {
             console.log(this.isShowUserInfo);
         },
         // 每个下拉菜单，选择后获取对应的id值传给后端
-        getProTypeId(id){
+        getProTypeId(data){
             // 项目类型id
             // console.log(id);
-            this.selectId.projectTypeId = id;
+            this.selectId.projectTypeId = data.id + '-' + data.name;
         },
-        getProStageId(id){
+        getProStageId(data){
             // 项目阶段id
             // console.log(id);
-            this.selectId.projectStageId = id;
+            this.selectId.projectStageId = data.id + '-' + data.name;
         },
-        getProManagerId(id){
+        getProManagerId(data){
             // 项目经理id
             // console.log(id)
-            this.selectId.projectManagerId = id;
+            this.selectId.projectManagerId = data.id + '-' + data.name;
         },
-        getProBDId(id){
+        getProBDId(data){
             // 项目BD的id
-            this.selectId.projectBDId = id;
+            this.selectId.projectBDId = data.id + '-' + data.name;
         },
-        getCustomName(id){
+        getCustomName(data){
             // 客户名称id
-            this.selectId.customNameId = id;
+            this.selectId.customNameId = data.id + '-' + data.name;
         },
         getPlanPickDate(date){
+            console.log(date);
             // 计划周期
-            this.selectId.planStartTime = date.startTime;
-            this.selectId.planEndTime = date.endtime;
+            this.selectId.planStartTime = date[0];
+            this.selectId.planEndTime = date[1];
         },
         getActualDate(date){
-            this.selectId.actualStartTime = date.startTime;
-            this.selectId.actualEndTime = date.endtime;
+            this.selectId.actualStartTime = date[0];
+            this.selectId.actualEndTime = date[1];
         },
-        getCustomerGrade(id){
+        getCustomerGrade(data){
             // 客户等级id
-            console.log(id);
-            this.selectId.customerGradeId = id;
+            this.selectId.customerGradeId = data.id + '-' + data.name;
         },
-        getCustomerType(id){
+        getCustomerType(data){
             // 客户类型id
-            console.log(id);
-            this.selectId.customerTypeId = id;
+            this.selectId.customerTypeId = data.id + '-' + data.name;
         },
+        // 点击保存按钮，提交数据
         submitData(){
+            // 判断要提交的数据有没有值是为空的，有就把这个属性删除
+           Object.keys(this.selectId).forEach(item => {
+               if(this.selectId[item] == ''){
+                   delete this.selectId[item];
+               }
+           });
             post(addProjectAPI, this.selectId).then(res => {
                 console.log(res);
-            })
+                this.$router.push({name: 'ProjectManagement'});
+                this.reload();
+            });
+
         },
         // 拿到项目名称输入框的数据
-        getProNameValue(data){
-            console.log(data);
+        getProNameValue(val){
+            this.selectId.projectName = val;
+        },
+        // 判断是否是点击修改按钮跳转到项目信息维护页面
+        isFromChangeBtn(){
+            if(this.$route.query.isChange){
+                console.log(this.rowData);
+                get(getProjectByIdAPI,{"id": this.rowData.id}).then(res => {
+                    console.log(res);
+                    this.defaultData.defaultProName = '星星';
+                })
+            } 
         }
     }
 }

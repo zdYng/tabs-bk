@@ -21,9 +21,15 @@ import { get } from '@/utils/http';
 import { queryTaskInfoAPI } from '@/utils/apiList'
 export default {
     name: 'TaskDecomposition',
+    // provide(){
+    //     return {
+    //         reload: this.reload
+    //     }
+    // },
     data(){
         return {
             value:'',
+            // isRouterAlive: true,
             tableList:[],//渲染列表树形列表数据
             CutBarList: [
                 { id: 1, value: '任务信息', path: 'TaskMsgPanel'},
@@ -38,8 +44,13 @@ export default {
         DialogBtnGroup: () => import('./DialogBtnGroup'),
         AddDialogBtnGroup: () => import('./AddDialogBtnGroup')
     },
-    mounted(){
-        
+    methods:{
+        // reload(){
+        //     this.isRouterAlive = false;
+        //     this.$nextTick(function(){
+        //         this.isRouterAlive = true;
+        //     })
+        // }
     }
 }
 </script>

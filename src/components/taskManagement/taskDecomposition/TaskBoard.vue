@@ -47,18 +47,20 @@
                 <div class="query">
                     <InputBox @inputChange="getPrincipalChange" placeholder="维护人" />
                     <DatePicker @datePickerChange='getDateTimeChange' placeholder="维护时间"/>
+                    <button class="search-btn" @click="getTabData">查询</button>
                 </div>
-                <div class="search-btn">
-                    <button @click="getTabData">查询</button>
+                
+                <div class="answer">
+                    <button>回复</button>
                 </div>
                 <!-- <QuerySelect :itemList1="itemList1" buttonText="查询"/> -->
             </div>
             <div class="table-info">
                 <TaskTable :tabList="taskTabData" />
             </div>
-            <div class="task-log">
+            <!-- <div class="task-log">
                 <TaskLog />
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -164,8 +166,8 @@ export default {
     components:{
         // QuerySelect: () => import('../../common/QuerySelect'),
         TaskTable: () => import('./TaskTable'),
-        TaskLog: () => import('./TaskLog'),
-        ShortCut: () =>import('./ShortCut'),
+        // TaskLog: () => import('./TaskLog'),
+        ShortCut: () =>import('./dialog/ShortCut'),
         InputBox: () => import('../../common/InputBox'),
         DatePicker: () => import('../../common/DatePicker')
     }
@@ -182,25 +184,28 @@ export default {
         background:rgba(247,251,255,1);
         display: flex;
         justify-content: space-between;
+        padding-bottom: 10px;
         div{
             width: 100%;
             display: flex;
             justify-content: center;
             ul{
-                width: 90%;
+                width: 100%;
                 display: flex;
                 flex-wrap: wrap;
+                box-sizing: border-box;
+                padding: 0 15px;
                 li{
                 width: 33%;
                 height: 40px;
-                font-size: 16px;
+                font-size: 14px;
                 color: #333;
                 line-height: .260417rem;
                     .label{
                         padding-right: .052083rem;
                         color: #000;
-                        font-weight: 500;
-                        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                        font-weight: 400;
+                        font-family: Microsoft YaHei;
                     }
                 }
                 .li-plan-task{
@@ -231,12 +236,29 @@ export default {
     }
     .secect-bar{
         width: 90%;
-        padding: 10px 0 15px 0; 
+        padding: 0 0 15px 0; 
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
         /deep/ .query{
             display: flex;
+            align-items: flex-end;
+            .search-btn{
+                width: .416667rem;
+                height: 30px;
+                background-color: #fff;
+                border-radius: .052083rem;
+                border: solid 1px #0066cc;
+                font-size: .083333rem;
+                color: #0066cc;
+                outline: none;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            .date-picker{
+                width: 200px;
+                margin-left: 25px;
+            }
             .input-box{
                 .el-input{
                     .el-input__inner{
@@ -246,19 +268,18 @@ export default {
             }
 
         }
-        .search-btn{
+        .answer{
             height: 40px;
             display: flex;
             align-items: center;
             button{
                 width: .416667rem;
                 height: 30px;
-                background-color: #fff;
-                border-radius: .052083rem;
+                background-color: #0066cc;
+                border-radius: 10px;
                 border: solid 1px #0066cc;
-                font-size: .083333rem;
-                color: #0066cc;
-                margin-left: .104167rem;
+                font-size: 14px;
+                color: #fff;
                 outline: none;
             }
         }

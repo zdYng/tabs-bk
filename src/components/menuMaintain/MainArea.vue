@@ -2,7 +2,7 @@
     <!-- 菜单维护 -->
     <div class="container">
         <MenuLeftPanel :data='menuData' />
-        <router-view></router-view>  
+        <router-view v-if="routerActive"></router-view>  
     </div>
 </template>
 <script>
@@ -10,6 +10,11 @@ import { get } from '../../utils/http'
 import { menuAPI } from '../../utils/apiList'
 export default {
     name: 'MainArea',
+    provide(){
+        return {
+            rush: this.rush,
+        }
+    },
     data(){
         return {
             menuData: [],
@@ -23,7 +28,8 @@ export default {
             iconSys: '',
             statuSys: '',
             numberSys: '',
-            remarkSys: ''
+            remarkSys: '',
+            routerActive: true
         }
     },
     components:{
@@ -35,6 +41,14 @@ export default {
             console.log(this.menuData);
         })
     },
+    methods:{
+        rush(){
+            this.routerActive = false;
+            this.$nextTick(function (){
+                this.routerActive = true;
+            })
+        }
+    }
 }
 </script>
 <style scoped>

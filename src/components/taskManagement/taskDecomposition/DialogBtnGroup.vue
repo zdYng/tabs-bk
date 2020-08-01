@@ -1,5 +1,5 @@
 <template>
-<!-- 弹窗按钮组件 -->
+<!-- 删除、快捷维护、保存模版、导入模版，弹窗按钮组件 -->
     <div class="dialog-group">
         <i @click="handleClick" class="el-icon" :class="[ isShow ? 'el-icon-remove-outline' : 'el-icon-circle-plus-outline']"></i>
         <span v-show="isShow" class="btn-group">
@@ -23,7 +23,7 @@ export default {
     name: 'DialogBtnGroup',
     data(){
         return{
-            isShow: false
+            isShow: true
         }
     },
     methods:{
@@ -32,10 +32,10 @@ export default {
         }
     },
     components:{
-        ShortCut: () => import('./ShortCut'),
-        SaveModelDialog: () => import('./SaveTemplate'),
-        ImportTemplate: () => import('./ImportTemplate'),
-        ConfirmDeleteDialog: () => import('../../common/ConfirmDeleteDialog')
+        ShortCut: () => import('./dialog/ShortCut'),
+        SaveModelDialog: () => import('./dialog/SaveTemplate'),
+        ImportTemplate: () => import('./dialog/ImportTemplate'),
+        ConfirmDeleteDialog: () => import('./dialog/ConfirmDeleteDialog')
     }
 }
 </script>

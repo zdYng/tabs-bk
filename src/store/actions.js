@@ -25,8 +25,16 @@ export const setDicMenuMessage = ({ commit }, data) => {
 // 任务分解页面，当点击某行时获取当前行的id
 export const setTaskRowId = ({commit}, data) => {
     commit('setTaskRowId', data);
+}
+// //项目管理页面，当点击某行时获取当前行的id
+export const setProjectMaintainRowData = ({ commit }, data) => {
+    commit('setProjectMaintainRowData', data);
+} 
+// Home页面获取到点击左侧菜单树生成的记忆条数据
+export const setMemoryList = ({ commit }, data) => {
+    commit('setMemoryList', data);
+}
+//菜单维护页面的菜单详情数据
+export const setMenuDetailData = ({commit}, data) => {
+    commit('setMenuDetailData', data);
   }
-//项目管理页面，当点击某行时获取当前行的id
-export const setProjectMaintainTabid = ({ commit }, data) => {
-    commit('setProjectMaintainTabid', data);
-  } 

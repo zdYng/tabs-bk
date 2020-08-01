@@ -6,7 +6,8 @@
           type="daterange"
           range-separator="至"
           start-placeholder="开始日期"
-          end-placeholder="结束日期">
+          end-placeholder="结束日期"
+          value-format="yyyy-MM-dd">
         </el-date-picker>
     </div>
 </template>
@@ -44,8 +45,8 @@ export default {
         }
     },
     methods:{
-        getPickDate(){
-            this.$emit('pickDate', this.taskForm);
+        getPickDate(date){
+            this.$emit('pickDate', date);
         }
     }
 }

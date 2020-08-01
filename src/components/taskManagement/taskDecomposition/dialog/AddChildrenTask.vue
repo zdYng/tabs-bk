@@ -1,13 +1,13 @@
 <template>
-    <div class="short-cut">
-        <el-button type="text" @click="dialogFormVisible = true">{{btnText}}</el-button>
-        <el-dialog 
-          class="custom-dialog"
+    <div class="add-task">
+        <el-button type="text" @click="addChildrenTaskClick">{{btnText}}</el-button>
+        <el-dialog
+          v-if="isShow"
+          class="tips"
           :visible.sync="dialogFormVisible"
           center
-          top="30vh"
-          :title="title">
-          <span>确认删除？</span>
+          top="30vh">
+          <span>请选中需要添加的子任务</span>
           <div slot="footer" class="dialog-footer">
               <button class="confirm-btn" type="primary" @click="dialogFormVisible = false">确&nbsp;定</button>
               <button class="cancel-btn" @click="dialogFormVisible = false">取&nbsp;消</button>
@@ -16,28 +16,72 @@
     </div>
 </template>
 <script>
+import { post } from '@/utils/http'
+import { addTaskAPI } from '@/utils/apiList'
 export default {
-    name: 'ConfirmDeleteDialog',
+    name: 'AddChilrenTask',
     props:{
-        btnText:String,
+        btnText: String
     },
+    computed:{
+        rowId(){
+            if(Object.keys(this.$store.state.taskRowId).length > 0){
+                return this.$store.state.taskRowId
+            }else{
+                return false
+            }
+        }
+    },
+    inject:['reload'],
     data(){
         return {
-            dialogFormVisible: false,
+            isShow: false,
+            dialogFormVisible: false
+        }
+    },
+    methods:{
+        addChildrenTaskClick(){
+            if(this.rowId){
+                this.isShow = false;
+                // 区分两种情况，一种是在项目下新增子任务
+                if(this.rowId.flag == 0){
+                    post(addTaskAPI, {
+                        projectId: this.rowId.id,
+                        level: this.rowId.flag + 1,
+                        taskName: '新增子任务',
+                        flag: 1
+                    }).then(res => {
+                        this.reload();
+                        console.log(res);
+                    }).catch(err => console.log(err));
+                }else{
+                    // 一种是在任务同层级新增子任务
+                    post(addTaskAPI, {
+                        projectId: this.rowId.projectId,//这个project是实际的项目id
+                        parentId: this.rowId.id,
+                        level: this.rowId.flag + 1,
+                        taskName: '新增子任务',
+                        flag: 1
+                    }).then(res => {
+                        this.reload();
+                        console.log(res);
+                    }).catch(err => console.log(err));
+                }
+            }else {
+                this.isShow = true;
+            }
+            this.dialogFormVisible = true;
+            return this.dialogFormVisible
         }
     }
 }
 </script>
 <style lang="less" scoped>
-.short-cut{
-    /deep/ .el-button{
-        span{
-            font-size: 14px;
-        }
-    }
-    .custom-dialog{
+.add-task{
+     .tips{
         /deep/ .el-dialog{
             width: 400px;
+            border-radius: 15px;
             .el-dialog__body{
                 height: 50px;
                 display: flex;

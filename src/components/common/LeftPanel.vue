@@ -50,7 +50,6 @@ export default {
                     let id = node.data.id;
                     let level = node.data.level;
                     let value = level + '_' + id;
-                    console.log(value);
                     get(queryTaskTreeAPI,{"id": value, "flag": level})
                         .then(res => {
                             if(Object.keys(res.task).length > 0){
