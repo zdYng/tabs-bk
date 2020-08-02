@@ -125,7 +125,7 @@ Vue.use(VueRouter)
         // 标准工时设置页面
         path: 'StandardManHourSet',
         name: 'StandardManHourSet',
-        component: () =>import('../components/taskManagement/taskDecomposition/StandardManHourSet.vue')
+        component: () =>import('../components/taskManagement/taskDecomposition/manHour/StandardManHourSet.vue')
       },
       {
         // 日志管理页面

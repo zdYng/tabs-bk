@@ -39,3 +39,7 @@ export const setMemoryList = (state, data) => {
 export const setMenuDetailData = (state, data) => {
   state.MenuDetailData = data;
 }
+//标准工时页面树形数据，点击后的当前节点的数据
+export const setMainHourNodeData = (state, data) => {
+  state.mainHourNodeData = data;
+}

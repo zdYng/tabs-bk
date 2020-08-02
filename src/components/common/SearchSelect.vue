@@ -6,10 +6,11 @@
             <span>{{title}}</span>
         </div>
         <el-select
-          v-model="value"
+          v-model="valueId"
           filterable
           clearable
-          placeholder="请选择">  
+          placeholder="请选择"
+          @change="selectValueChange">  
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -25,11 +26,21 @@ export default {
         title: String,
         options: Array,
         showIcon: Boolean,
-
+        defaultValue: String
+    },
+    watch:{
+        defaultValue: function(newVal, oldVal){
+            this.valueId = this.defaultValue;
+        }
     },
     data(){
         return {
-            value: ''
+            valueId: ''
+        }
+    },
+    methods:{
+        selectValueChange(){
+            this.$emit('selectChange', this.valueId);
         }
     }
 }

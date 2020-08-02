@@ -52,3 +52,7 @@ export const selectdropAPI = 'basic/datadictionary/selectdrop'
 export const queryLogAPI = 'ssm/ssm/task/queryLog'
 // 日志管理页面，新增备注接口
 export const addNotesAPI = 'ssm/ssm/task/addNotes'
+// 获取标准工时树形菜单接口
+export const listTree = 'ssm/ssm/task/listTree'
+// 标准工时页面，增加分组，增加任务，增加子任务接口
+export const addTimeSheet = 'ssm/ssm/task/addTimeSheet'

@@ -3,40 +3,40 @@
         <div class="menu-area">
             <el-row>
                 <el-col :span="8">
-                    <InputBox :itemValue="defaultMenuName" title="菜单名称" placeholder="请输入内容"/>
+                    <InputBox :defalutValue="menuName" title="菜单名称" placeholder="请输入内容"/>
                 </el-col>
                 <el-col :span="8">
-                    <SelectBox :options="menuType" title="菜单类型"/>
+                    <SelectBox :defalutValue="menuTypeId" :options="menuType" title="菜单类型"/>
                 </el-col>
                 <el-col :span="8">
-                    <InputBox title="菜单CODE" placeholder="请输入内容"/>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="8">
-                    <SearchSelect title="对应功能" :options="menuFunction"/>
-                </el-col>
-                <el-col :span="8">
-                    <SelectBox title="功能图标"/>
-                </el-col>
-                <el-col :span="8">
-                    <SelectBox :options="menuStatus" title="使用状态"/>
+                    <InputBox :defalutValue="menuCode" title="菜单CODE" placeholder="请输入内容"/>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col :span="8">
-                    <InputBox title="创建人" :disable="true" />
+                    <SearchSelect :defalutValue="menuFunctionId" title="对应功能" :options="menuFunction"/>
                 </el-col>
                 <el-col :span="8">
-                    <SelectBox title="序号"/>
+                    <SelectBox :defalutValue="functionIconId" title="功能图标"/>
                 </el-col>
                 <el-col :span="8">
-                    <SelectBox title="菜单转移"/>
+                    <SelectBox :defalutValue="statusId" :options="menuStatus" title="使用状态"/>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col :span="8">
-                    <InputBox title="创建时间" :disable="true" />
+                    <InputBox :defalutValue="createdBy"  title="创建人" :disable="true" />
+                </el-col>
+                <el-col :span="8">
+                    <SelectBox :defalutValue="serialNumberId" title="序号"/>
+                </el-col>
+                <el-col :span="8">
+                    <SelectBox :defalutValue="menuChangeId" title="菜单转移"/>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="8">
+                    <InputBox :defalutValue="createdTime" title="创建时间" :disable="true" />
                 </el-col>
                 <el-col :span="16">
                     <div class="remark">
@@ -44,10 +44,9 @@
                             <span>备注</span>
                         </div>
                         <el-input 
-                        type="textarea" 
-                        v-model="value" 
-                        placeholder="请输入内容"
-                        >
+                            type="textarea" 
+                            v-model="remark" 
+                            placeholder="请输入内容">
                         </el-input>
                     </div>
                 </el-col>
@@ -65,26 +64,24 @@ import { get } from '../../utils/http'
 import { menuAPI, dropAPI } from '../../utils/apiList'
 export default {
     name: 'MenuDetail',
-    inject:['rush'],
     data(){
         return {
-            defaultMenuName: '',
             value:'',
             menuData: [],
             menuType: [], // 菜单类型下拉选项
             menuFunction:[], //对应功能下拉选项
             menuStatus: [], // 使用状态下拉选项
-            // menuTypeSys: [],
-            // menuNameSys: '',
-            // toolFunctionSys: '',
-            // menuCodeSys: '',
-            // creatPersonSys: '',
-            // creatTimeSys: '',
-            // iconSys: 'aaa',
-            // statuSys: '',
-            // numberSys: '',
-            // remarkSys: '',
-            // state: '',
+            menuName: '', //菜单名称
+            menuTypeId: '', // 菜单类型id
+            menuCode: '', // 菜单code
+            menuFunctionId: '', //对应功能id
+            functionIconId: '', // 功能图标
+            statusId: '', // 使用状态id
+            createdBy: '', // 创建人
+            serialNumberId: '', //序号id
+            menuChangeId: '', //菜单转移
+            createdTime: '', // 创建时间
+            remark:'' //备注
         }
     },
     components:{
@@ -99,7 +96,12 @@ export default {
     },
     watch:{
         menuDetailData: function (newVal, oldVal){
-            this.defaultMenuName = newVal.name;
+            console.log(newVal);
+            this.menuName = newVal.name;
+            this.menuCode = newVal.code;
+            this.createdBy = newVal.created_by;
+            this.createdTime = newVal.created_time;
+            this.remark = newVal.remark;
         }
     },
     mounted(){
@@ -159,12 +161,6 @@ export default {
             return retNode;
         }
     },
-    
-    // watch:{
-    //     // $route(to, from){
-    //     //     let detailData = this.deepQuery(this.menuData,this.$store.state.nodeId);
-    //     // }
-    // }
 }
 </script>
 <style lang="less" scoped>
@@ -185,14 +181,14 @@ export default {
                 .remark{
                     .title{
                         display: flex;
-                        font-size: .083333rem;
+                        font-size: 16px;
                         padding: 0 0 .078125rem 0;
                     }
                     /deep/ .el-textarea__inner{
                         width: 3.489583rem;
                         height: .260417rem;
                         resize: none;
-                        border-radius: .078125rem;
+                        border-radius: 10px;
                     }
                 }
                 .submit{

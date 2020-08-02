@@ -29,7 +29,7 @@ export default {
   },
   watch:{
     defaultValue: function (newVal, oldVal){
-      this.itemValueId = this.defaultValue;
+      this.itemValueId = newVal;
     }
   },
   data() {

@@ -37,4 +37,8 @@ export const setMemoryList = ({ commit }, data) => {
 //菜单维护页面的菜单详情数据
 export const setMenuDetailData = ({commit}, data) => {
     commit('setMenuDetailData', data);
-  }
+}
+  //标准工时页面树形数据，点击后的当前节点的数据
+export const setMainHourNodeData = ({commit}, data) => {
+    commit('setMainHourNodeData', data);
+}

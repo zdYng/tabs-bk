@@ -9,8 +9,8 @@
                <button @click="handleSearch" class="select-btn">查询</button>
            </div>
             <div class="btn-group">
-                <button @click="alterBtn"  class="change-btn">修改</button>
-                <ProInfoMaintainDialog />
+                <button @click="alterBtn"  class="change-btn" title="选中项目后再修改">修改</button>
+                <ProInfoMaintainDialog :proStageOptions="selectGroup"/>
                 <button @click.stop="toProInfoManagement" class="add-btn">新增项目</button>
             </div>
         </header>
@@ -48,15 +48,19 @@ export default {
             searchBtnSubmit:{},
             // 点击修改按钮发送的信息
             alterSubmitId: null,
-            currentRowData: {}
+            currentRowData: {},
         }
     },
     computed:{
         getRowData(){
-            return this.$store.state.projectMaintainRowData;
+            if(Object.keys(this.$store.state.projectMaintainRowData).length > 0){
+                return this.$store.state.projectMaintainRowData
+            }else{
+                return false
+            }
         }
     },
-    mounted(){
+    created(){
         //项目阶段下拉框的下拉框数据
         get(projectSelectAPI).then(res => {
             console.log(res);
@@ -132,44 +136,9 @@ export default {
         },
         // 点击修改按钮
         alterBtn(){
-            this.$router.push({name: 'ProInfoMaintain', query: {isChange: 1}});
-            // if(Object(this.getRowData).length > 0){
-            //     // 拿到项目阶段的下拉数据找到当前row的项目类型对应的id
-            //     let findeStageData = {}; // 项目阶段
-            //     findeStageData = this.proStageSelect.find(item => {
-            //         return item.name == this.getRowData.projectStage
-            //     });
-            //     // console.log(findeStageData);
-            //     let findeTypeData = {}; // 项目类型
-            //     findeTypeData = this.proTypeSelect.find(item => {
-            //         return item.name == this.getRowData.projectType
-            //     });
-            //     let findBDData = {}; //项目BD
-            //     findBDData = this.getSelectData.user.find(item => {
-            //         return item.name == this.getRowData.projectBD
-            //     });
-            //     let findeCustomData = {};//客户
-            //     findeCustomData = this.getSelectData.customer.find(item => {
-            //         return item.name == this.getRowData.customer;
-            //     });
-            //     post(editProject, {
-            //         "id":this.getRowData.id,//项目id
-            //         "projectName": this.getRowData.projectName,//项目名称
-            //         "projectCode": this.getRowData.projectCode,// 项目code
-            //         "projectBDId": findBDData.id + '-' + findBDData.name,
-            //         "projectStageId": findeStageData.id + '-' + findeStageData.name,
-            //         "projectManagerId": findBDData.id + '-' + findBDData.name,
-            //         "projectTypeId": findeTypeData.id + '-' + findeTypeData.name,
-            //         "customerId": findeCustomData.id + '-' + findeCustomData.name,
-            //         "planStartTime": this.getRowData.planCycle.split('/')[0],
-            //         "planEndTime": this.getRowData.planCycle.split('/')[1],
-            //         "actualStartTime": this.getRowData.actualCycle.split('/')[0],
-            //         "actualEndTime":  this.getRowData.actualCycle.split('/')[1],
-            //     }).then(res => {
-            //         console.log(res);
-            //     }).catch(err => console.log(err));
-            //     this.$router.push({name: 'ProInfoMaintain'});
-            // }
+            if(this.getRowData){
+                this.$router.push({name: 'ProInfoMaintain', query: {isChange: 1}});
+            }
         },
         // 获取到任务管理页面，点击列表某一个行传过来的行数据
         getCurrentRowData(val){

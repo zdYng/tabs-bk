@@ -11,18 +11,18 @@
                 <el-row>
                     <el-col :span="12" class="el-col-class">
                         <div class="item-input">
-                            <InputBox :defalutValue="defaultData.defaultProName" @inputChange="getProNameValue" :showIcon="true" title="项目名称"/>
+                            <InputBox :defalutValue="selectId.projectName" @inputChange="getProNameValue" :showIcon="true" title="项目名称"/>
                         </div>
                         <div class="item-input">
-                            <SelectBox @selectEvent="getProTypeId" :options="proTypeSelect" :showIcon="true" title="项目类型"/>
+                            <SelectBox :defaultValue="selectId.projectTypeId" @selectEvent="getProTypeId" :options="proTypeSelect" :showIcon="true" title="项目类型"/>
                         </div>
                     </el-col>
                     <el-col :span="12" class="el-col-class">
                         <div class="item-input">
-                            <SelectBox @selectEvent="getProStageId" :options="proStageSelect" :showIcon="true" title="项目阶段"/>
+                            <SelectBox :defaultValue="selectId.projectStageId" @selectEvent="getProStageId" :options="proStageSelect" :showIcon="true" title="项目阶段"/>
                         </div>
                         <div class="item-input">
-                            <SelectBox @selectEvent="getProManagerId" :options="proManagerSelect" :showIcon="false" title="项目经理"/>
+                            <SelectBox :defaultValue="selectId.projectManagerId" @selectEvent="getProManagerId" :options="proManagerSelect" :showIcon="false" title="项目经理"/>
                         </div>
                     </el-col>
                 </el-row>
@@ -32,15 +32,15 @@
                             <div class="title">
                                 <span>项目Code</span>
                             </div>
-                            <el-input class="input-code" :disabled="true"></el-input>
+                            <el-input v-model="selectId.projectCode" class="input-code" :disabled="true"></el-input>
                         </div>
                     </el-col>
                     <el-col :span="12" class="el-col-class">
                         <div class="item-input">
-                        <SelectBox @selectEvent="getProBDId" :options="proBDSelect" :showIcon="false" title="项目BD"/>
+                        <SelectBox :defaultValue="selectId.projectBDId" @selectEvent="getProBDId" :options="proBDSelect" :showIcon="false" title="项目BD"/>
                         </div>
                         <div class="item-input">
-                            <SelectBox @selectEvent="getCustomName" :options="customerSelect" :showIcon="false" title="客户名称"/>
+                            <SelectBox :defaultValue="selectId.customNameId" @selectEvent="getCustomName" :options="customerSelect" :showIcon="false" title="客户名称"/>
                         </div>
                     </el-col>
                 </el-row>
@@ -50,7 +50,7 @@
                             <div class="title">
                                 <span>计划周期</span>
                             </div>
-                            <DateSelect @pickDate="getPlanPickDate" :defaultDateTime="planDateTime"/>
+                            <DateSelect @pickDate="getPlanPickDate" :defaultDateTime="selectId.planDateTime"/>
                         </div>
                     </el-col>
                     <el-col :span="12" class="el-col-class">
@@ -58,7 +58,7 @@
                             <div class="title">
                                 <span>实际周期</span>
                             </div>
-                            <DateSelect @pickDate="getActualDate" :defaultDateTime="actualDateTime"/>
+                            <DateSelect @pickDate="getActualDate" :defaultDateTime="selectId.actualDateTime"/>
                         </div>
                     </el-col>
                 </el-row>
@@ -68,7 +68,7 @@
                             <div class="title">
                                 <span>需求描述</span>
                             </div>
-                            <el-input type="textarea" rows="3" class="input-code" v-model="selectId.projectDesc" placeholder="请输入内容"></el-input>
+                            <el-input v-model="selectId.projectDesc" type="textarea" rows="3" class="input-code" placeholder="请输入内容"></el-input>
                         </div>
                     </el-col>
                 </el-row>
@@ -145,35 +145,39 @@ export default {
             selectId:{
                 projectName: '', // 项目名称
                 projectTypeId: '',//项目类型id
-                projectDesc: '',//
+                projectDesc: '',// 需求描述
                 projectStageId: '', //项目阶段id
                 projectManagerId: '',//项目经理id
+                projectCode: '', // 项目code
                 projectBDId: '', //项目BD id
                 customerId: '', //客户id
                 planStartTime: '', //计划开始时间
                 planEndTime: '', //、计划结束时间
+                planDateTime: [], //计划周期
+                actualDateTime: [], //实际周期
                 actualStartTime: '',//实际开始时间
                 actualEndTime: '',//实际结束时间
                 customerGradeId: '', // 客户等级id
                 customerTypeId: '', // 客户类型id
                 customNameId: '', // 客户名称id
             },
-            defaultData:{
-                defaultProName: '',
-                defaultProType: '',
-                defaultProStage:'',
-                defaultProjectManager: '',
-                defaultProCODE: '',
-                defaultProBD: '',
-                defaultCustom: '',
-                defaultPlanCycle: '',
-                defaultActualCycle: '',
-                defaultRemark: ''
-            },
+            // defaultData:{
+            //     defaultProName: '',//项目名称
+            //     defaultProType: '', //项目类型
+            //     defaultProStage:'', // 项目阶段
+            //     defaultProjectManager: '', // 项目经理
+            //     defaultProCODE: '', // 项目code
+            //     defaultProBD: '', //项目BD
+            //     defaultCustom: '', //客户名称
+            //     defaultPlanCycle: '', // 计划周期
+            //     defaultActualCycle: '', // 实际周期
+            //     defaultRemark: '' ,// 需求描述,
+            //     defaultPlanDateTime: []
+            // },
             name:'baseInfo',
             value: 'aa',
             category_name: '',
-            projectCod: Number, // 项目code  
+            // projectCod: Number, // 项目code  
             proTypeSelect: [], // 项目类型下拉选项
             proStageSelect:[], //项目阶段下拉选项
             proManagerSelect: [], //项目经理下拉选项
@@ -184,8 +188,6 @@ export default {
             isShowBaseInfo: true,
             isShowCustomInfo:true,
             isShowUserInfo: true,
-            planDateTime: [], //计划周期
-            actualDateTime: [], //实际周期
         }
     },
     computed:{
@@ -200,7 +202,7 @@ export default {
         // 拿到项目类型、项目阶段下拉数据
         get(selProjectAPI).then(res => {
             res.data.stage.forEach(item => {
-                this.proTypeSelect.push(
+                this.proStageSelect.push(
                     Object.assign(
                         {},
                         {
@@ -211,7 +213,7 @@ export default {
                 )
             });
             res.data.type.forEach(item => {
-                this.proStageSelect.push(
+                this.proTypeSelect.push(
                     Object.assign(
                         {},
                         {
@@ -223,6 +225,7 @@ export default {
             });
         })
         get(projectSelectAPI).then(res => {
+            console.log(res);
             this.proManagerSelect = res.data.user;
             this.proBDSelect = res.data.user;
             this.customerSelect = res.data.customer;
@@ -239,30 +242,24 @@ export default {
     methods:{
         getBaseInfoData(data){
             this.isShowBaseInfo = data;
-            console.log(this.isShowBaseInfo);
         },
         getCustomData(data){
             this.isShowCustomInfo = data;
-            console.log(this.isShowCustomInfo);
         },
         getUserMsgData(data){
             this.isShowUserInfo = data;
-            console.log(this.isShowUserInfo);
         },
         // 每个下拉菜单，选择后获取对应的id值传给后端
         getProTypeId(data){
             // 项目类型id
-            // console.log(id);
             this.selectId.projectTypeId = data.id + '-' + data.name;
         },
         getProStageId(data){
             // 项目阶段id
-            // console.log(id);
             this.selectId.projectStageId = data.id + '-' + data.name;
         },
         getProManagerId(data){
             // 项目经理id
-            // console.log(id)
             this.selectId.projectManagerId = data.id + '-' + data.name;
         },
         getProBDId(data){
@@ -313,10 +310,20 @@ export default {
         // 判断是否是点击修改按钮跳转到项目信息维护页面
         isFromChangeBtn(){
             if(this.$route.query.isChange){
-                console.log(this.rowData);
                 get(getProjectByIdAPI,{"id": this.rowData.id}).then(res => {
                     console.log(res);
-                    this.defaultData.defaultProName = '星星';
+                    if(res.code == '000'){
+                        this.selectId.projectName = res.data.projectName;
+                        this.selectId.projectTypeId = res.data.projectTypeId;
+                        this.selectId.projectStageId = res.data.projectStageId;
+                        this.selectId.projectManagerId = res.data.projectManagerId;
+                        this.selectId.projectCode = res.data.projectCode;
+                        this.selectId.projectBDId = res.data.projectBDId;
+                        this.selectId.customNameId= res.data.customerId;
+                        this.selectId.projectDesc = res.data.projectDesc;
+                    }else{
+                        console.log('请求错误');
+                    }
                 })
             } 
         }

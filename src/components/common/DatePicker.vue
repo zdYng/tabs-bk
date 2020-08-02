@@ -17,7 +17,7 @@ export default {
     name:'DatePicker',
     props:{
         text: String,
-        placeholder: String
+        placeholder: String,
     },
     data(){
         return{
