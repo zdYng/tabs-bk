@@ -18,7 +18,7 @@
                 type='password'
                 name='password'
                 class="password"
-                imgURL= 'http://47.111.232.105/img/mima.png'
+                imgURL= 'http://47.111.232.105:5000/img/mima.png'
                 placeholder='请输入您的密码'
                 :error='error.password'
                 v-model="user.password"
