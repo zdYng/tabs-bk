@@ -235,9 +235,13 @@ export default {
           /deep/ .date-picker{
             margin-left: 20px;
             width: 200px;
-            .el-input__inner{
+            .el-input{
               width: 180px;
+              .el-input__inner{
+                width: 180px;
+              }
             }
+            
           }
           .search-btn{
               width: .416667rem;
