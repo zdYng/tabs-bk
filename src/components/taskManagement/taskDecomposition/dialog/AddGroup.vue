@@ -89,9 +89,7 @@ export default {
                         flag: 0
                     }).then(res => {
                         this.reload();
-                        console.log(res);
                     }).catch(err => {
-                        console.log(err)
                     });
                 }
             }else{

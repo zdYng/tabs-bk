@@ -3,45 +3,70 @@
     <div class="main-hour">
         <div class="left">
             <AddGroup />
-            <MainHourTree :treeData="treeData" />
+            <MainHourTree  :treeData="treeData"/>
         </div>
         <div class="right">
             <el-row>
                 <el-col :span="10">
-                    <InputBox title="工时名称"/>
+                    <InputBox @inputChange="getMainHourName" :defalutValue="mainHourName" title="工时名称"/>
                 </el-col>
                 <el-col :span="10">
-                    <InputBox title="工时"/>
+                    <InputBox :defalutValue="mainHour" @inputChange="getMainHour" title="工时"/>
                 </el-col>
             </el-row>
             <el-row></el-row>
             <el-row class="row-save-btn">
-                <button class="saveBtn">保&nbsp;存</button>
+                <button @click="saveBtnClick" class="saveBtn">保&nbsp;存</button>
             </el-row>
         </div>
     </div>
 </template>
 <script>
-import {get} from '@/utils/http'
-import {queryTaskTreeAPI, listTree} from '@/utils/apiList'
+import {get, post} from '@/utils/http'
+import {queryTaskTreeAPI, listTree, editTimeSheetAPI} from '@/utils/apiList'
 export default {
     name: 'StandardManHourSet',
+    inject: ['reload'],
     data(){
         return{
             treeData:[],
-            menuList:[],
+            mainHourName: '',//工时名称
+            setMainHourName: '',//修改工时名称
+            mainHour: '' ,//修改工时
+            setMainHour: '',
             itmeList:[
                 {
                     id: 1,
                     label: 'aaa'
                 }
-            ]
+            ],
+            props:{
+                label: 'name',
+                children: 'parent'
+            }
+        }
+    },
+    computed:{
+        mainHourNodeData(){
+            return this.$store.state.mainHourNodeData
+        }
+    },
+    watch:{
+        mainHourNodeData: function(newVal, oldVal){
+            this.mainHourName = newVal.laborName;
+            this.mainHour = newVal.laborHour ? newVal.laborHour : '';
+            // if(newVal.laborHour){
+            //     this.mainHour = newVal.laborHour;
+            // }else{
+            //     this.mainHour = '';
+            // }
         }
     },
     created(){
+        console.log('标准工时整个页面刷新');
         get(listTree).then(res =>{
-            this.treeData = res.data;
-            console.log(this.treeData);
+                this.treeData = res.data;
+                console.log(this.treeData);
         }).catch(err => console.log(err));
         // get(queryTaskTreeAPI).then(res => {  
         //     let arr = res.project;
@@ -67,6 +92,37 @@ export default {
         MainHourTree: () => import('./MainHourTree'),
         AddGroup: () => import('./AddGroup')
     },
+    methods:{
+        loadNode(node, resolve){
+            if(node.level === 0){
+                console.log(this.treeData);
+                return resolve(this.treeData);
+            }
+        },
+        handleNodeClick(data, node, component){
+            // data是节点自身的数据，noe是节点NODE包括一些事件，component节点组件本身
+            this.$store.dispatch('setMainHourNodeData', data);
+        },
+        saveBtnClick(){
+            post(editTimeSheetAPI, {
+                "id": this.mainHourNodeData.id,
+                "laborName": this.mainHourName,
+                "laborHour": this.mainHour
+            }).then(res => {
+                console.log(res);
+                this.reload();
+            })
+        },
+        // 获取工时名称
+        getMainHourName(val){
+            // this.mainHourName = val;
+            this.mainHourName = val;
+        },
+        // 获取工时
+        getMainHour(val){
+            this.mainHour = val;
+        }
+    }
 }
 </script>
 <style lang="less" scoped>
@@ -78,20 +134,6 @@ export default {
         width: 19%;
         height: 100%;
         box-shadow:0px 0px 15px 0px rgba(0, 0, 0, 0.05);
-        .menu-tree{
-            height: 100%;
-            /deep/ .el-tree-node__content{
-                height: .260417rem;
-                font-size: .067708rem;
-                color: #303133;
-                position: relative;
-                .menu-icon{
-                    display: flex;
-                    width: 100%;
-                    justify-content: space-between;
-                }
-            }
-        }
     }
     .right{
         width: 81%;

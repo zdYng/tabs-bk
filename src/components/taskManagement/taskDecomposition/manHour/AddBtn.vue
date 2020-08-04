@@ -16,8 +16,8 @@
     </div>
 </template>
 <script>
-import { post } from '@/utils/http'
-import { addTimeSheet } from '@/utils/apiList'
+import { post, get } from '@/utils/http'
+import { addTimeSheet, listTree } from '@/utils/apiList'
 export default {
     name: 'AddBtn',
     props:{
@@ -36,27 +36,29 @@ export default {
     data(){
         return {
             isShow: false,
-            dialogFormVisible: false
+            dialogFormVisible: false,
         }
     },
     methods:{
         addTaskClick(){
             if(this.mainHourData){
                 this.isShow = false;
-                // 区分两种情况，一种是在项目下新增任务
-                // post(addTimeSheet, {
-                //     "level": this.mainHourData,
-                //     "laborName": '新增分组',
-                //     "falg": 0
-                // }).then(res => {
-                //     console.log(res);
-                // }).catch(err => console.log(err));
+                console.log(this.mainHourData);
+                //  区分两种情况，一种是在项目下新增任务
+                post(addTimeSheet, {
+                    "parentId": this.mainHourData.id,
+                    "level": this.mainHourData.level + 1,
+                    "laborName": '新增分组',
+                    "flag": 0
+                }).then(res => {
+                    this.reload();
+                }).catch(err => console.log(err));
             }else {
                 this.isShow = true;
             }
             this.dialogFormVisible = true;
             return this.dialogFormVisible
-        }
+        },
     }
 }
 </script>

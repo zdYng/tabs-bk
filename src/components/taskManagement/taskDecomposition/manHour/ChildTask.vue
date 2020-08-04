@@ -7,7 +7,7 @@
           :visible.sync="dialogFormVisible"
           center
           top="30vh">
-          <span>请选中需要添加的任务</span>
+          <span>请选中需要添加的子任务</span>
           <div slot="footer" class="dialog-footer">
               <button class="confirm-btn" type="primary" @click="dialogFormVisible = false">确&nbsp;定</button>
               <button class="cancel-btn" @click="dialogFormVisible = false">取&nbsp;消</button>
@@ -16,17 +16,17 @@
     </div>
 </template>
 <script>
-import { post } from '@/utils/http'
-import { addTaskAPI } from '@/utils/apiList'
+import { post, get } from '@/utils/http'
+import { addTimeSheet, listTree } from '@/utils/apiList'
 export default {
-    name: 'ChildTask',
+    name: 'TaskBtn',
     props:{
         btnText: String
     },
     computed:{
-        rowId(){
-            if(Object.keys(this.$store.state.taskRowId).length > 0){
-                return this.$store.state.taskRowId
+        mainHourData(){
+            if(Object.keys(this.$store.state.mainHourNodeData).length > 0){
+                return this.$store.state.mainHourNodeData
             }else{
                 return false
             }
@@ -41,32 +41,18 @@ export default {
     },
     methods:{
         addTaskClick(){
-            if(this.rowId){
+            if(this.mainHourData){
+                console.log(this.mainHourData);
                 this.isShow = false;
-                // 区分两种情况，一种是在项目下新增任务
-                if(this.rowId.flag == 0){
-                    post(addTaskAPI, {
-                        projectId: this.rowId.id,
-                        level: this.rowId.flag + 1,
-                        taskName: '新增任务',
-                        flag: 1
-                    }).then(res => {
-                        this.reload();
-                        console.log(res);
-                    }).catch(err => console.log(err));
-                }else{
-                    // 一种是在任务同层级新增任务
-                    post(addTaskAPI, {
-                        projectId: this.rowId.projectId,//这个project是实际的项目id
-                        parentId: this.rowId.id,
-                        level: this.rowId.flag,
-                        taskName: '新增任务',
-                        flag: 1
-                    }).then(res => {
-                        this.reload();
-                        console.log(res);
-                    }).catch(err => console.log(err));
-                }
+                post(addTimeSheet, {
+                    "parentId": this.mainHourData.id,
+                    "level": this.mainHourData.level + 1,
+                    "laborName": '新增子任务',
+                    "flag": 1
+                }).then(res => {
+                    console.log(res);
+                    this.reload();
+                }).catch(err => console.log(err));    
             }else {
                 this.isShow = true;
             }

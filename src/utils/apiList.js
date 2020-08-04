@@ -56,3 +56,7 @@ export const addNotesAPI = 'ssm/ssm/task/addNotes'
 export const listTree = 'ssm/ssm/task/listTree'
 // 标准工时页面，增加分组，增加任务，增加子任务接口
 export const addTimeSheet = 'ssm/ssm/task/addTimeSheet'
+// 标准工时页面，查看标准工时
+export const getSheetByIdAPI = 'ssm/ssm/task/getSheetById'
+// 标准工时页面，修改标准工时
+export const editTimeSheetAPI = 'ssm/ssm/task/editTimeSheet'
