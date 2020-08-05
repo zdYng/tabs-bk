@@ -77,10 +77,13 @@ export default {
     /deep/ .el-submenu {
         .el-submenu__title{
             font-size: 16px;
+            color: #000;
             font-family:Microsoft YaHei;
             background:rgba(235,245,255,1);
             i{
                 color: #303133;
+                font-size: 16px;
+                padding-right: 10px;
             }
             /deep/ .el-submenu__icon-arrow{
                 color: #000 !important;

@@ -63,7 +63,13 @@ export default {
 </script>
 <style lang="less" scoped>
 .add-task{
-     .tips{
+    /deep/ .el-button{
+        span{
+            font-size: 15px;
+            color: #333;
+        }
+    }
+    .tips{
         /deep/ .el-dialog{
             width: 400px;
             border-radius: 15px;

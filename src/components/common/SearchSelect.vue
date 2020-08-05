@@ -58,8 +58,8 @@ export default {
         }
     }
     /deep/ .el-input__inner{
-        width: 1.25rem;
-        height: .260417rem;
+        width: 240px;
+        height: 40px;
         border-radius: 10px;
     }
 }

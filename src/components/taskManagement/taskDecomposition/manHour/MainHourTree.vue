@@ -4,6 +4,7 @@
         :props="props"
         :load="loadNode"
         lazy
+        highlight-current
         :data="tData"
         @node-click="handleNodeClick"
         :default-expand-all="false"
@@ -71,7 +72,7 @@ export default {
     overflow: hidden;
     overflow-y: scroll;
     /deep/ .el-tree-node__content{
-    height: 30px;
+    height: 40px;
     font-size: 12px;
     color: #303133;
     position: relative;

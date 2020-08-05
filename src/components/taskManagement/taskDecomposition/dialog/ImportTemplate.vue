@@ -72,11 +72,11 @@ export default {
         .el-dialog{
             width: 500px;
             height: 300px;
-            border-radius: .078125rem;
+            border-radius: 10px;
             .el-dialog__header{
                 background:rgba(184,218,252,1);
-                border-top-left-radius: .078125rem;
-                border-top-right-radius: .078125rem;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
             }
             /deep/ .el-dialog__body{
                 height: 150px;

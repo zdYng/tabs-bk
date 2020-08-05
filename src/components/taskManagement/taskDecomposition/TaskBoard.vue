@@ -58,9 +58,6 @@
             <div class="table-info">
                 <TaskTable :tabList="taskTabData" />
             </div>
-            <!-- <div class="task-log">
-                <TaskLog />
-            </div> -->
         </div>
     </div>
 </template>
@@ -258,11 +255,17 @@ export default {
             .date-picker{
                 width: 200px;
                 margin-left: 25px;
+                .el-input__inner::placeholder{
+                    font-weight: 200;
+                }
             }
             .input-box{
                 .el-input{
                     .el-input__inner{
                         width: 180px;
+                    }
+                    .el-input__inner::placeholder{
+                        font-weight: 200;
                     }
                 }
             }

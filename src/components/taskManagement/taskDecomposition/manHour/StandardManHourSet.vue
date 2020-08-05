@@ -7,10 +7,10 @@
         </div>
         <div class="right">
             <el-row>
-                <el-col :span="10">
+                <el-col :span="8">
                     <InputBox @inputChange="getMainHourName" :defalutValue="mainHourName" title="工时名称"/>
                 </el-col>
-                <el-col :span="10">
+                <el-col :span="8">
                     <InputBox :defalutValue="mainHour" @inputChange="getMainHour" title="工时"/>
                 </el-col>
             </el-row>
@@ -68,24 +68,6 @@ export default {
                 this.treeData = res.data;
                 console.log(this.treeData);
         }).catch(err => console.log(err));
-        // get(queryTaskTreeAPI).then(res => {  
-        //     let arr = res.project;
-        //     arr.forEach(item => {
-        //         this.menuList.push(
-        //             Object.assign(
-        //                 {},
-        //                 {
-        //                     "id": Number(item.id),
-        //                     "label": item.name,
-        //                     "level": item.level,
-        //                     "parentId": item.parentId,
-        //                     "projectId": item.projectId,
-        //                     "children": item.parent
-        //                 }
-        //             )
-        //         )
-        //     });
-        // })
     },
     components:{
         InputBox: () => import('../../../common/InputBox'),
@@ -150,13 +132,12 @@ export default {
             display: flex;
             justify-content: center;
             .saveBtn{
-                width:200px;
-                height:55px;
+                width:250px;
+                height:50px;
                 background:rgba(0,102,204,1);
-                border-radius:20px;
-                font-size:22px;
+                border-radius:15px;
+                font-size:20px;
                 font-family:Microsoft YaHei;
-                font-weight:bold;
                 color:rgba(255,255,255,1);
                 border: none;
                 outline: none;

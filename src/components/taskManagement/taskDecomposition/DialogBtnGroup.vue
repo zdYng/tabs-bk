@@ -43,7 +43,7 @@ export default {
 .dialog-group{
     display: flex;
     align-items: center;
-    margin-left: .104167rem;
+    margin-left: 10px;
     .el-icon{
         font-size: 24px;
         color: #0066cc;
@@ -59,6 +59,7 @@ export default {
         box-shadow:0px 0px 10px 0px rgba(0,102,204,0.05);
         border-radius: 20px;
         overflow: hidden;
+        margin-left: 10px;
         .delete-btn{
             width: 40px;
             display: inline-block;

@@ -94,7 +94,7 @@ export default {
     .custom-dialog{
         /deep/ .el-dialog{
             width: 400px;
-            border-radius: 15px;
+            border-radius: 10px;
             .el-dialog__header{
                 height: 60px;
                 padding: 0;
@@ -163,7 +163,7 @@ export default {
     .tips{
         /deep/ .el-dialog{
             width: 400px;
-            border-radius: 15px;
+            border-radius: 10px;
             .el-dialog__body{
                 height: 50px;
                 display: flex;

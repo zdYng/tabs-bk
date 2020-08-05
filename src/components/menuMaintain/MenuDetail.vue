@@ -167,8 +167,6 @@ export default {
 .right{
     width: 80%;
     height: 100%;
-    overflow: hidden;
-    overflow-y: scroll;
     .menu-area{
         height: 100%;
         .el-row{
@@ -186,7 +184,7 @@ export default {
                     }
                     /deep/ .el-textarea__inner{
                         width: 3.489583rem;
-                        height: .260417rem;
+                        height: 40px;
                         resize: none;
                         border-radius: 10px;
                     }

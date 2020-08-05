@@ -107,16 +107,17 @@ export default {
     /deep/ .custom-dialog{
         .el-dialog{
             width: 550px;
-            border-radius: 15px;
+            border-radius: 10px;
+            border: none;
             .el-dialog__header{
                 padding: 0;
-                height: 80px;
+                height: 60px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 background:rgba(184,218,252,1);
-                border-top-left-radius: 15px;
-                border-top-right-radius: 15px;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
             }
             /deep/ .el-dialog__body{
                 padding: 0;
@@ -158,7 +159,7 @@ export default {
     .tips{
         /deep/ .el-dialog{
             width: 400px;
-            border-radius: 15px;
+            border-radius: 10px;
             .el-dialog__body{
                 height: 50px;
                 display: flex;
