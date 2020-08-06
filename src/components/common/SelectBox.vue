@@ -82,6 +82,10 @@ export default {
     border-radius: 10px;
     width: 1.25rem;
     height: 40px;
+    border: 1px solid #e5e5e5;
+  }
+  /deep/ .el-input__inner:focus{
+    border: 1px solid #e5e5e5;
   }
   /deep/ .el-input__inner::-webkit-input-placeholder {
     font-weight: 200;

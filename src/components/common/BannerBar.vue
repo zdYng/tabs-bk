@@ -43,7 +43,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 .3125rem;
+    padding: 0 80px 0 80px;
     .top-text{
         font-size: .114583rem;
         display: flex;

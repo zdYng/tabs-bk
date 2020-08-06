@@ -55,7 +55,7 @@ export default {
         console.log(row);
         this.list.forEach(item => {
             if(item.id == row.id){
-                item.checked = true;
+                item.checked = !item.checked;
             }else{
                 item.checked = false;
             }
@@ -67,7 +67,7 @@ export default {
            const data = this.list;
            for(let index in data){
                if(index == rowIndex){
-                   data[index].checked = true;
+                   data[index].checked = !data[index].checked;
                }else{
                    data[index].checked = false;
                }

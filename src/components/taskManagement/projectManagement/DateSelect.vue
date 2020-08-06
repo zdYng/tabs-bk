@@ -64,9 +64,13 @@ export default {
     /deep/ .el-input__inner{
         width: 3.385417rem;
         height: 40px;
+        border: 1px solid #e5e5d5;
         .el-range-separator{
             line-height: .21875rem;
         }
+    }
+    /deep/ .el-input__inner:focus{
+        border: 1px solid #e5e5d5;
     }
 }
 </style>

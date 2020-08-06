@@ -100,6 +100,8 @@ export default {
             });
             this.list = res.data;
         });
+        // 每次进来判断列表数据是否有checke属性，并且全部变为false
+        console.log(this.list);
     },
     components:{
         ProjectTable: () => import('./ProjectTable'),
@@ -136,8 +138,15 @@ export default {
         },
         // 点击修改按钮
         alterBtn(){
-            if(this.getRowData){
-                this.$router.push({name: 'ProInfoMaintain', query: {isChange: 1}});
+            //判断是否点击了列表，并且是否选中
+            if(this.getRowData && this.getRowData.checked){
+                // 遍历渲染列表数据，是否有没有选项是否选中
+                let isHaveCheckedRow = this.list.find(item => {
+                    return item.checked == true
+                });
+                if(isHaveCheckedRow){
+                    this.$router.push({name: 'ProInfoMaintain', query: {isChange: 1}});
+                }
             }
         },
         // 获取到任务管理页面，点击列表某一个行传过来的行数据

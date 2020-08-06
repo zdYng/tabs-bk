@@ -63,7 +63,7 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="24" class="el-col-class">
+                    <el-col :span="24" class="el-col-class col-remark">
                         <div style="height: 120px" class="item-input">
                             <div class="title">
                                 <span>需求描述</span>
@@ -377,11 +377,14 @@ export default {
         display: flex;
         justify-content: space-around;
     }
+    .col-remark{
+      height: 130px;  
+    }
     /deep/ .item-input{
-        height: .520833rem;
+        height: 110px;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
+        justify-content: center;
         .title{
             font-size: .083333rem;
             padding: 0 0 .078125rem 0;
@@ -448,5 +451,9 @@ export default {
     width: 7.572917rem;
     resize: none;
     border-radius: 10px;
+    border: 1px solid #e5e5e5;
+}
+/deep/ .el-textarea__inner:focus{
+    border: 1px solid #e5e5e5;
 }
 </style>
