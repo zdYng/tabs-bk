@@ -17,15 +17,7 @@
                         <div class="title">
                             <span>计划任务周期</span>
                         </div>
-                        <el-date-picker
-                            v-model="formDate"
-                            type="daterange"
-                            range-separator="至"
-                            start-placeholder="开始日期"
-                            end-placeholder="结束日期"
-                            @change="handleDateChange"
-                            value-format="yyyy-MM-dd">
-                        </el-date-picker>
+                        <DateSelect @pickDate="getPlanCycleChange" :defaultDateTime="formDate"/>
                     </div>
                 </el-col>
             </el-row>
@@ -132,13 +124,14 @@ export default {
     },
     components:{
         InputBox: () => import('../../common/InputBox'),
-        SelectBox: () => import('../../common/SelectBox')
+        SelectBox: () => import('../../common/SelectBox'),
+        DateSelect: () => import('../projectManagement/DateSelect')
     },
     computed:{
         // 列表的的行id
         rowId(){
             return this.$store.state.taskRowId;
-        }
+        },
     },
     watch:{
         // 监听点击列表之后id的变化
@@ -148,9 +141,9 @@ export default {
     },
     methods:{
         // 给日历组件回填数据
-        getDetails(obj){
-            this.formDate = [obj.planStartTime,obj.planEndTime];
-        },
+        // getDetails(obj){
+        //     this.formDate = [obj.planStartTime,obj.planEndTime];
+        // },
         getTaskMsg(){
             // 判断从vuex里面的对象中数据是不是为空
             if(Object.keys(this.rowId).length>0){
@@ -161,15 +154,39 @@ export default {
                             console.log(res);
                             this.taskMsgData.id = res.data.id; // 任务id
                             this.taskMsgData.taskName = res.data.taskName; // 任务名称
-                            this.taskMsgData.principalId = Number(res.data.principal);// 负责人
-                            this.taskMsgData.priorityId = Number(res.data.priority); //任务优先级
+                            // 判断后端返回的数据是否有这个字段
+                            if(res.data.principal){
+                                this.taskMsgData.principalId = Number(res.data.principal);// 负责人
+                            }else{
+                                this.taskMsgData.principalId = 0;
+                            }
+                            // 判断后端返回的数据是否有这个字段
+                            if(res.data.priority){
+                                this.taskMsgData.priorityId = Number(res.data.priority); //任务优先级
+                            }else{
+                                this.taskMsgData.priorityId = 0;
+                            }
                             this.taskMsgData.workload = res.data.workload;//计划投入工作量
-                            this.taskMsgData.timeSheetId = Number(res.data.timeSheet);
-                            this.taskMsgData.stageId = Number(res.data.stage); // 任务当前阶段
+                            // 判断后端返回的数据是否有这个字段
+                            if(res.data.timeSheet){
+                                this.taskMsgData.timeSheetId = Number(res.data.timeSheet);
+                            }else{
+                                this.taskMsgData.timeSheetId = 0;
+                            }
+                            // 判断后端返回的数据是否有这个字段
+                            if(res.data.stage){
+                                this.taskMsgData.stageId = Number(res.data.stage); // 任务当前阶段
+                            }else{
+                                this.taskMsgData.stageId = 0
+                            }
                             this.taskMsgData.percentage = res.data.percentage; //任务完成百分比
                             this.taskMsgData.description = res.data.description; // 任务描述
                             // 把数据传给日历
-                            this.getDetails(res.data);
+                            if(res.data.planCycle){
+                                this.formDate = [res.data.planCycle.split('/')[0], res.data.planCycle.split('/')[1]];
+                            }else{
+                                this.formDate = [];
+                            }
                         }else {
                             console.log('err');
                         }
@@ -179,7 +196,7 @@ export default {
         //改变日历组件触发的函数
         handleDateChange(date){
             console.log(date);
-            this.formDate = date;
+            // this.formDate = date;
         },
         // 点击清空按钮
         clearBtn(){
@@ -234,6 +251,10 @@ export default {
         // 任务完成百分比改变
         getPercentageChange(val){
             this.taskMsgData.percentage = val;
+        },
+        // 计划任务周期改变
+        getPlanCycleChange(date){
+            this.formDate = date;
         }
     }
 }

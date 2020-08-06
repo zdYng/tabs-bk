@@ -19,6 +19,7 @@ export default {
     },
     watch:{
         defaultDateTime: function(newVal, oldVal){
+            console.log(newVal);
             this.defaultDateTime = newVal;
             this.taskForm.startTime = this.defaultDateTime[0];
             this.taskForm.endtime = this.defaultDateTime[1];
