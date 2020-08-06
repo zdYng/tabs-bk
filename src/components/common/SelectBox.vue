@@ -63,6 +63,13 @@ export default {
       padding-right: 0.026042rem;
     }
   }
+  /deep/ .el-select{
+    .el-input__suffix-inner{
+      i{
+        color: #333;
+      }
+    }
+  }
 //   /deep/ .el-input__inner {
 //     width: 1.25rem;
 //     height: 0.260417rem;

@@ -377,7 +377,7 @@ export default {
         display: flex;
         justify-content: space-around;
     }
-    .item-input{
+    /deep/ .item-input{
         height: .520833rem;
         display: flex;
         flex-direction: column;
@@ -386,6 +386,17 @@ export default {
             font-size: .083333rem;
             padding: 0 0 .078125rem 0;
             display: flex;
+        }
+        .date-select{
+            .el-range-separator{
+                line-height: 32px;
+            }
+        }
+        .input-code {
+            .el-input__inner{
+                border: none;
+                color: rgb(96, 98, 102);
+            }
         }
     }
     .row-custom{
@@ -425,7 +436,7 @@ export default {
     width: 1.25rem;
     height: .260417rem;
     border:1px solid rgba(221,221,221,1);
-    border-radius: .078125rem;
+    border-radius: 10px;
 }
 /deep/ .input-code{
     .el-input__inner{
@@ -436,6 +447,6 @@ export default {
 /deep/ .el-textarea__inner{
     width: 7.572917rem;
     resize: none;
-    border-radius: .078125rem;
+    border-radius: 10px;
 }
 </style>
