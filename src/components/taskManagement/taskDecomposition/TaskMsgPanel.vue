@@ -152,30 +152,32 @@ export default {
                     .then(res => {
                         if(res.code == '000'){
                             console.log(res);
-                            this.taskMsgData.id = res.data.id; // 任务id
+                            if(res.data.id){
+                                this.taskMsgData.id = res.data.id; // 任务id
+                            }
                             this.taskMsgData.taskName = res.data.taskName; // 任务名称
                             // 判断后端返回的数据是否有这个字段
-                            if(res.data.principal){
-                                this.taskMsgData.principalId = Number(res.data.principal);// 负责人
+                            if(res.data.principalId){
+                                this.taskMsgData.principalId = Number(res.data.principalId);// 负责人
                             }else{
                                 this.taskMsgData.principalId = 0;
                             }
                             // 判断后端返回的数据是否有这个字段
-                            if(res.data.priority){
-                                this.taskMsgData.priorityId = Number(res.data.priority); //任务优先级
+                            if(res.data.priorityId){
+                                this.taskMsgData.priorityId = Number(res.data.priorityId); //任务优先级
                             }else{
-                                this.taskMsgData.priorityId = 0;
+                                // this.taskMsgData.priorityId = 0;
                             }
                             this.taskMsgData.workload = res.data.workload;//计划投入工作量
                             // 判断后端返回的数据是否有这个字段
-                            if(res.data.timeSheet){
-                                this.taskMsgData.timeSheetId = Number(res.data.timeSheet);
+                            if(res.data.timeSheetId){
+                                this.taskMsgData.timeSheetId = Number(res.data.timeSheetId);//标准工时
                             }else{
-                                this.taskMsgData.timeSheetId = 0;
+                                // this.taskMsgData.timeSheetId = 0;
                             }
                             // 判断后端返回的数据是否有这个字段
-                            if(res.data.stage){
-                                this.taskMsgData.stageId = Number(res.data.stage); // 任务当前阶段
+                            if(res.data.stageId){
+                                this.taskMsgData.stageId = Number(res.data.stageId); // 任务当前阶段
                             }else{
                                 this.taskMsgData.stageId = 0
                             }

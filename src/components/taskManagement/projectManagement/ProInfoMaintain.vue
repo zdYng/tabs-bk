@@ -318,12 +318,37 @@ export default {
                         console.log(res);
                         this.selectId.id = res.data.id;
                         this.selectId.projectName = res.data.projectName;
-                        this.selectId.projectTypeId = Number(res.data.projectTypeId);
-                        this.selectId.projectStageId = Number(res.data.projectStageId);
-                        this.selectId.projectManagerId = Number(res.data.projectManagerId);//项目经理id
+                        // 判断后端返回的是否有这个属性
+                        if(res.data.projectTypeId){
+                            this.selectId.projectTypeId = Number(res.data.projectTypeId);
+                        }else{
+                            this.selectId.projectTypeId = 0;
+                        }
+                        // 判断后端返回的是否有这个属性
+                        if(res.data.projectStageId){
+                            this.selectId.projectStageId = Number(res.data.projectStageId);
+                        }else{
+                            this.selectId.projectStageId = 0;
+                        }
+                        // 判断后端返回的是否有这个属性
+                        if(res.data.projectManagerId){
+                            this.selectId.projectManagerId = Number(res.data.projectManagerId);//项目经理id
+                        }else{
+                            this.selectId.projectManagerId = 0;
+                        }
                         this.selectId.projectCode = res.data.projectCode;
-                        this.selectId.projectBDId = Number(res.data.projectBDId);
-                        this.selectId.customerId= Number(res.data.customerId);
+                         // 判断后端返回的是否有这个属性
+                        if(res.data.projectBDId){
+                            this.selectId.projectBDId = Number(res.data.projectBDId);
+                        }else{
+                            this.selectId.projectBDId = 0;
+                        }
+                         // 判断后端返回的是否有这个属性
+                        if(res.data.customerId){
+                            this.selectId.customerId = Number(res.data.customerId);
+                        }else{
+                            this.selectId.customerId = 0;
+                        }
                         this.selectId.projectDesc = res.data.projectDesc;
                         this.selectId.planStartTime = res.data.planCycle.split('/')[0];
                         this.selectId.planEndTime = res.data.planCycle.split('/')[1];

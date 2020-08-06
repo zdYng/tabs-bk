@@ -113,7 +113,6 @@ export default {
     },
     methods:{
         getTaskMsg(){
-            console.log('gettaskmsg');
             if(Object.keys(this.rowId).length>0){
                 // 获取任务基础信息数据
                 get(getTaskByIdAPI, {"id": Number(this.rowId.id), "flag": this.rowId.flag})
