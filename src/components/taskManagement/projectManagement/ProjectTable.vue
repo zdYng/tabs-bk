@@ -4,7 +4,8 @@
         <el-table 
           class="tab-border-radius scroll-bar" 
           :data="list" 
-          height="500px" 
+          height="500px"
+          highlight-current-row
           @row-click="handleRowClick"
           border style="width: 100%;">
             <el-table-column
@@ -51,6 +52,7 @@ export default {
     methods:{
         // 当点击列表的某行执行的函数
        handleRowClick(row, column, event){
+        console.log(row);
         this.list.forEach(item => {
             if(item.id == row.id){
                 item.checked = true;

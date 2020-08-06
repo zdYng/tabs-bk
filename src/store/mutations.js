@@ -43,3 +43,7 @@ export const setMenuDetailData = (state, data) => {
 export const setMainHourNodeData = (state, data) => {
   state.mainHourNodeData = data;
 }
+// 任务分解页面，任务看板列表点击当前行的数据
+export const setTaskBoardTable = (state, data) => {
+  state.taskBoardTable = data;
+}

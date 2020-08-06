@@ -25,10 +25,11 @@ export default {
     options: Array,
     title: String,
     showIcon: Boolean,
-    defaultValue: String
+    defaultValue: Number
   },
   watch:{
     defaultValue: function (newVal, oldVal){
+      console.log(newVal);
       this.itemValueId = newVal;
     }
   },

@@ -60,3 +60,7 @@ export const addTimeSheet = 'ssm/ssm/task/addTimeSheet'
 export const getSheetByIdAPI = 'ssm/ssm/task/getSheetById'
 // 标准工时页面，修改标准工时
 export const editTimeSheetAPI = 'ssm/ssm/task/editTimeSheet'
+// 任务分解分解页面，任务看板，点击回复接口
+export const replyAPI = 'ssm/ssm/task/reply'
+// 任务分解页面，修改任务接口
+export const updateTaskById = 'ssm/ssm/task/updateTaskById'

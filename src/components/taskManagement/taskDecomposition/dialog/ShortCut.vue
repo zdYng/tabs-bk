@@ -104,8 +104,8 @@ export default {
                 justify-content: center;
                 align-items: center;
                 background:rgba(184,218,252,1);
-                border-top-left-radius: 15px;
-                border-top-right-radius: 15px;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
             }
             .el-dialog__body{
                 height: 280px;

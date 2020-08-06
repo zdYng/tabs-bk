@@ -42,3 +42,7 @@ export const setMenuDetailData = ({commit}, data) => {
 export const setMainHourNodeData = ({commit}, data) => {
     commit('setMainHourNodeData', data);
 }
+// 任务分解页面，任务看板列表点击当前行的数据
+export const setTaskBoardTable = ({commit}, data) => {
+    commit('setTaskBoardTable', data);
+  }

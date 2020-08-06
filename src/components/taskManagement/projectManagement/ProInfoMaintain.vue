@@ -19,7 +19,7 @@
                     </el-col>
                     <el-col :span="12" class="el-col-class">
                         <div class="item-input">
-                            <SelectBox :defaultValue="selectId.projectStageId" @selectEvent="getProStageId" :options="proStageSelect" :showIcon="true" title="项目阶段"/>
+                        <SelectBox :defaultValue="selectId.projectStageId" @selectEvent="getProStageId" :options="proStageSelect" :showIcon="true" title="项目阶段"/>
                         </div>
                         <div class="item-input">
                             <SelectBox :defaultValue="selectId.projectManagerId" @selectEvent="getProManagerId" :options="proManagerSelect" :showIcon="false" title="项目经理"/>
@@ -40,7 +40,7 @@
                         <SelectBox :defaultValue="selectId.projectBDId" @selectEvent="getProBDId" :options="proBDSelect" :showIcon="false" title="项目BD"/>
                         </div>
                         <div class="item-input">
-                            <SelectBox :defaultValue="selectId.customNameId" @selectEvent="getCustomName" :options="customerSelect" :showIcon="false" title="客户名称"/>
+                            <SelectBox :defaultValue="selectId.customerId" @selectEvent="getCustomName" :options="customerSelect" :showIcon="false" title="客户名称"/>
                         </div>
                     </el-col>
                 </el-row>
@@ -50,7 +50,7 @@
                             <div class="title">
                                 <span>计划周期</span>
                             </div>
-                            <DateSelect @pickDate="getPlanPickDate" :defaultDateTime="selectId.planDateTime"/>
+                            <DateSelect @pickDate="getPlanPickDate" :defaultDateTime="planDateTime"/>
                         </div>
                     </el-col>
                     <el-col :span="12" class="el-col-class">
@@ -58,7 +58,7 @@
                             <div class="title">
                                 <span>实际周期</span>
                             </div>
-                            <DateSelect @pickDate="getActualDate" :defaultDateTime="selectId.actualDateTime"/>
+                            <DateSelect @pickDate="getActualDate" :defaultDateTime="actualDateTime"/>
                         </div>
                     </el-col>
                 </el-row>
@@ -135,45 +135,31 @@
 </template>
 <script>
 import { get, post } from "@/utils/http";
-import { projectSelectAPI, addProjectAPI, selProjectAPI, getProjectByIdAPI} from "@/utils/apiList";
+import { projectSelectAPI, addProjectAPI, selProjectAPI, getProjectByIdAPI, editProject} from "@/utils/apiList";
 export default {
     name:'ProInfoMaintain',
     inject:['reload'],
     data(){
         return{
-            // projectNameValue:'',
             selectId:{
+                id: '',
                 projectName: '', // 项目名称
-                projectTypeId: '',//项目类型id
+                projectTypeId: 0,//项目类型id
                 projectDesc: '',// 需求描述
-                projectStageId: '', //项目阶段id
-                projectManagerId: '',//项目经理id
+                projectStageId: 0, //项目阶段id
+                projectManagerId: 0,//项目经理id
                 projectCode: '', // 项目code
-                projectBDId: '', //项目BD id
-                customerId: '', //客户id
+                projectBDId: 0, //项目BD id
+                customerId: 0, //客户id
                 planStartTime: '', //计划开始时间
                 planEndTime: '', //、计划结束时间
-                planDateTime: [], //计划周期
-                actualDateTime: [], //实际周期
                 actualStartTime: '',//实际开始时间
                 actualEndTime: '',//实际结束时间
-                customerGradeId: '', // 客户等级id
-                customerTypeId: '', // 客户类型id
-                customNameId: '', // 客户名称id
+                // customerGradeId: 0, // 客户等级id
+                // customerTypeId: 0, // 客户类型id
             },
-            // defaultData:{
-            //     defaultProName: '',//项目名称
-            //     defaultProType: '', //项目类型
-            //     defaultProStage:'', // 项目阶段
-            //     defaultProjectManager: '', // 项目经理
-            //     defaultProCODE: '', // 项目code
-            //     defaultProBD: '', //项目BD
-            //     defaultCustom: '', //客户名称
-            //     defaultPlanCycle: '', // 计划周期
-            //     defaultActualCycle: '', // 实际周期
-            //     defaultRemark: '' ,// 需求描述,
-            //     defaultPlanDateTime: []
-            // },
+            planDateTime: [], //计划周期
+            actualDateTime: [], //实际周期
             name:'baseInfo',
             value: 'aa',
             category_name: '',
@@ -206,18 +192,19 @@ export default {
                     Object.assign(
                         {},
                         {
-                            id: item.dictionary_number,
+                            id: Number(item.dictionary_number),
                             name: item.dictionary_name
                         }
                     )
                 )
             });
+            console.log(this.proStageSelect);
             res.data.type.forEach(item => {
                 this.proTypeSelect.push(
                     Object.assign(
                         {},
                         {
-                            id: item.dictionary_number,
+                            id: Number(item.dictionary_number),
                             name: item.dictionary_name
                         }
                     )
@@ -252,23 +239,28 @@ export default {
         // 每个下拉菜单，选择后获取对应的id值传给后端
         getProTypeId(data){
             // 项目类型id
-            this.selectId.projectTypeId = data.id + '-' + data.name;
+            // this.selectId.projectTypeId = data.id + '-' + data.name;
+            this.selectId.projectTypeId = Number(data.id);
         },
         getProStageId(data){
             // 项目阶段id
-            this.selectId.projectStageId = data.id + '-' + data.name;
+            // this.selectId.projectStageId = data.id + '-' + data.name;
+            this.selectId.projectStageId = Number(data.id);
         },
         getProManagerId(data){
             // 项目经理id
-            this.selectId.projectManagerId = data.id + '-' + data.name;
+            // this.selectId.projectManagerId = data.id + '-' + data.name;
+            this.selectId.projectManagerId = Number(data.id);
         },
         getProBDId(data){
             // 项目BD的id
-            this.selectId.projectBDId = data.id + '-' + data.name;
+            // this.selectId.projectBDId = data.id + '-' + data.name;
+            this.selectId.projectBDId = Number(data.id);
         },
         getCustomName(data){
             // 客户名称id
-            this.selectId.customNameId = data.id + '-' + data.name;
+            // this.selectId.customNameId = data.id + '-' + data.name;
+            this.selectId.customNameId = Number(data.id);
         },
         getPlanPickDate(date){
             console.log(date);
@@ -292,15 +284,25 @@ export default {
         submitData(){
             // 判断要提交的数据有没有值是为空的，有就把这个属性删除
            Object.keys(this.selectId).forEach(item => {
-               if(this.selectId[item] == ''){
+               if(this.selectId[item] == '' || this.selectId[item] == 0){
                    delete this.selectId[item];
                }
            });
-            post(addProjectAPI, this.selectId).then(res => {
-                console.log(res);
-                this.$router.push({name: 'ProjectManagement'});
-                this.reload();
-            });
+           if(this.selectId.id){
+               console.log(this.selectId.id);
+                post(editProject, this.selectId).then(res => {
+                    console.log(res);
+                    this.$router.push({name: 'ProjectManagement'});
+                    this.reload();
+                });
+            }else{
+                console.log(this.selectId.id);
+                console.log(this.selectId);
+                post(addProjectAPI, this.selectId).then(res => {
+                    this.$router.push({name: 'ProjectManagement'});
+                    this.reload();
+                })
+            }
 
         },
         // 拿到项目名称输入框的数据
@@ -313,19 +315,29 @@ export default {
                 get(getProjectByIdAPI,{"id": this.rowData.id}).then(res => {
                     console.log(res);
                     if(res.code == '000'){
+                        console.log(res);
+                        this.selectId.id = res.data.id;
                         this.selectId.projectName = res.data.projectName;
-                        this.selectId.projectTypeId = res.data.projectTypeId;
-                        this.selectId.projectStageId = res.data.projectStageId;
-                        this.selectId.projectManagerId = res.data.projectManagerId;
+                        this.selectId.projectTypeId = Number(res.data.projectTypeId);
+                        this.selectId.projectStageId = Number(res.data.projectStageId);
+                        this.selectId.projectManagerId = Number(res.data.projectManagerId);//项目经理id
                         this.selectId.projectCode = res.data.projectCode;
-                        this.selectId.projectBDId = res.data.projectBDId;
-                        this.selectId.customNameId= res.data.customerId;
+                        this.selectId.projectBDId = Number(res.data.projectBDId);
+                        this.selectId.customerId= Number(res.data.customerId);
                         this.selectId.projectDesc = res.data.projectDesc;
+                        this.selectId.planStartTime = res.data.planCycle.split('/')[0];
+                        this.selectId.planEndTime = res.data.planCycle.split('/')[1];
+                        this.planDateTime = res.data.planCycle.split('/');
+                        this.actualDateTime = res.data.actualCycle.split('/');
+                        this.selectId.actualStartTime = this.actualDateTime[0];
+                        this.selectId.actualEndTime = this.actualDateTime[1];
                     }else{
                         console.log('请求错误');
                     }
                 })
-            } 
+            }else{
+                console.log('通过新增项目按钮进来的!');
+            }
         }
     }
 }

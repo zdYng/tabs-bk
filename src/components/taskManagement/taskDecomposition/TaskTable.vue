@@ -7,6 +7,7 @@
               height="350"
               border
               current-row-key
+              :highlight-current-row="true"
               @row-click="handleRowClick">
               <el-table-column
                 label="选择"
@@ -15,7 +16,7 @@
                 <template slot-scope="scope">
                     <el-checkbox
                       v-model="scope.row.checked"
-                      @change.native="changeCurrentRow(event, scope.$index, scope.row)"></el-checkbox>
+                      @change.native="changeCurrentRow($event, scope.$index, scope.row)"></el-checkbox>
                 </template>
               </el-table-column>
               <el-table-column 
@@ -69,17 +70,23 @@ export default {
     data(){
         return {
             multipleSelection: {},
-            currentRow:{}
+            currentRow:{},
         }
     },
     mounted(){
 
     },
     methods:{
-        handleRowClick(row, column, event){
-            if(row.checked){
-                // 判断是否选中，然后接下来写功能
-            }
+        handleRowClick(row, column){
+            this.tabList.forEach(item => {
+                if(item.id == row.id){
+                    item.checked = true;
+                }else{
+                    item.checked = false;
+                }
+                this.currentRow = row;
+            });
+            this.$store.dispatch('setTaskBoardTable', row);
         },
         changeCurrentRow(val, rowIndex, row){
             const data = this.tabList;

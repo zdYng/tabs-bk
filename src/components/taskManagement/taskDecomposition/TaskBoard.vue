@@ -23,7 +23,7 @@
                         </li>
                         <li>
                             <span class="label">完成百分比:</span>
-                            <span>{{taskMsg.timeSheet}}</span>
+                            <span>{{taskMsg.percentage}}</span>
                         </li>
                         <li>
                             <span class="label">标准工时:</span>
@@ -51,7 +51,7 @@
                 </div>
                 
                 <div class="answer">
-                    <button>回复</button>
+                    <Answer />
                 </div>
                 <!-- <QuerySelect :itemList1="itemList1" buttonText="查询"/> -->
             </div>
@@ -81,7 +81,8 @@ export default {
                 timeSheet: '',
                 planEndTime: '',
                 planStartTime: '',
-                planCycle: ''
+                planCycle: '',
+                percentage: ''
             },
             itemList1: [
                 {
@@ -100,7 +101,8 @@ export default {
             return this.$store.state.taskRowId;
         }
     },
-    mounted(){
+    created(){
+        console.log('created')
         this.getTaskMsg();
     },
     watch:{
@@ -111,6 +113,7 @@ export default {
     },
     methods:{
         getTaskMsg(){
+            console.log('gettaskmsg');
             if(Object.keys(this.rowId).length>0){
                 // 获取任务基础信息数据
                 get(getTaskByIdAPI, {"id": Number(this.rowId.id), "flag": this.rowId.flag})
@@ -125,6 +128,7 @@ export default {
                             this.taskMsg.planStartTime = res.data.planStartTime;
                             this.taskMsg.planEndTime = res.data.planEndTime;
                             this.taskMsg.planCycle = res.data.planCycle;
+                            this.taskMsg.percentage = res.data.percentage;
                         }else{
                             console.log('err');
                         }
@@ -132,13 +136,11 @@ export default {
                 // 获取任务看板的列表数据
                 get(queryTaskAPI,{"id": Number(this.rowId.id), "flag":this.rowId.flag})
                     .then(res => {
-                        console.log(res);
                         if(res.code == '000' && res.data.length > 0){
                             res.data.forEach(item => {
                                 item.checked = false;
                             });
                             this.taskTabData = res.data;
-                            console.log(res.data);
                         }
                     })
             }
@@ -166,7 +168,8 @@ export default {
         // TaskLog: () => import('./TaskLog'),
         ShortCut: () =>import('./dialog/ShortCut'),
         InputBox: () => import('../../common/InputBox'),
-        DatePicker: () => import('../../common/DatePicker')
+        DatePicker: () => import('../../common/DatePicker'),
+        Answer: () => import('./dialog/Answer')
     }
 }
 </script>

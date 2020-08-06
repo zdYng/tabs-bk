@@ -17,6 +17,13 @@ export default {
     props:{
         defaultDateTime: Array
     },
+    watch:{
+        defaultDateTime: function(newVal, oldVal){
+            this.defaultDateTime = newVal;
+            this.taskForm.startTime = this.defaultDateTime[0];
+            this.taskForm.endtime = this.defaultDateTime[1];
+        }
+    },
     data(){
         return{
             taskForm:{
@@ -26,8 +33,8 @@ export default {
         }
     },
     mounted(){
-        this.taskForm.startTime = this.defaultDateTime[0];
-        this.taskForm.endtime = this.defaultDateTime[1];
+        // this.taskForm.startTime = this.defaultDateTime[0];
+        // this.taskForm.endtime = this.defaultDateTime[1];
     },
     computed:{
         dateTime:{

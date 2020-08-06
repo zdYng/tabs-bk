@@ -3,10 +3,10 @@
     <div class="task-msg">
         <el-row>
             <el-col :span="12">
-                <InputBox :defalutValue='taskMsgData.taskName' title="任务名称" />
+                <InputBox @inputChange="getTaskNameChange" :defalutValue='taskMsgData.taskName' title="任务名称" />
             </el-col>
             <el-col :span="12">
-                <SelectBox :defaultValue="taskMsgData.principal" title="负责人" :options="maintainer"/>
+                <SelectBox @selectEvent="getPrincipalChange" :defaultValue="taskMsgData.principalId" title="负责人" :options="maintainer"/>
             </el-col>
         </el-row>
         <!-- ---------------------日期选择----------------------------- -->
@@ -22,7 +22,9 @@
                             type="daterange"
                             range-separator="至"
                             start-placeholder="开始日期"
-                            end-placeholder="结束日期">
+                            end-placeholder="结束日期"
+                            @change="handleDateChange"
+                            value-format="yyyy-MM-dd">
                         </el-date-picker>
                     </div>
                 </el-col>
@@ -31,25 +33,25 @@
         <!-- ---------------------任务优先级----------------------------- -->
         <el-row>
             <el-col :span="12">
-                <SelectBox :defaultValue="taskMsgData.priority"  title="任务优先级" :options="priority"/>
+                <SelectBox @selectEvent="getPriorityChange" :defaultValue="taskMsgData.priorityId"  title="任务优先级" :options="priority"/>
             </el-col>
             <el-col :span="12">
-                <InputBox :defalutValue='taskMsgData.workload' title="计划投入工作量" />
+                <InputBox @inputChange="getWorkloadChange" :defalutValue='taskMsgData.workload' title="计划投入工作量" />
             </el-col>
         </el-row>
         <!-- ---------------------标准工时----------------------------- -->
         <el-row>
             <el-col :span="12">
-                <SelectBox :defaultValue="taskMsgData.timeSheet" title="标准工时" :options="normalHours"/>
+                <SelectBox @selectEvent="getTimeSheetChange" :defaultValue="taskMsgData.timeSheetId" title="标准工时" :options="normalHours"/>
             </el-col>
             <el-col :span="12">
-                <SelectBox :defaultValue="taskMsgData.stage" title="任务当前阶段" :options="taskStage"/>
+                <SelectBox @selectEvent="getStageChange" :defaultValue="taskMsgData.stageId" title="任务当前阶段" :options="taskStage"/>
             </el-col>
         </el-row>
         <!-- ---------------------任务完成百分比----------------------------- -->
         <el-row>
             <el-col :span="12">
-                <InputBox :defalutValue='taskMsgData.percentage' title="任务完成百分比" />
+                <InputBox @inputChange="getPercentageChange" :defalutValue='taskMsgData.percentage' title="任务完成百分比" />
             </el-col>
         </el-row>
         <!-- ---------------------任务描述----------------------------- -->
@@ -66,7 +68,7 @@
         <!-----------------------按钮------------------------------->
         <el-row class="btn-group">
             <el-col :span="6" :offset="4">
-                <button class="affirm">确&nbsp;定</button>
+                <button @click="confirmBtn" class="affirm">确&nbsp;定</button>
             </el-col>
             <el-col :span="6" :offset="1">
                 <button @click.stop="clearBtn" class="delete">清&nbsp;空</button>
@@ -75,21 +77,23 @@
     </div>
 </template>
 <script>
-import {get} from '@/utils/http'
-import {getTaskByIdAPI, taskSelectAPI} from '@/utils/apiList'
+import {get, post} from '@/utils/http'
+import {getTaskByIdAPI, taskSelectAPI, updateTaskById} from '@/utils/apiList'
 export default {
     name:'TaskMsgPanel',
+    inject: ['reload'],
     data(){
         return{
-            formDate: '',
+            formDate: [],//日历组件数据
             value: '',
             taskMsgData:{
+                id: '',
                 taskName: '', // 任务名称
-                principal: '', // 负责人
-                priority: '', // 任务优先级
+                principalId: 0, // 负责人
+                priorityId: 0, // 任务优先级
                 workload: '', // 计划投入工作量
-                timeSheet: '', // 标准工时
-                stage: '', // 任务当前阶段
+                timeSheetId: 0, // 标准工时
+                stageId: 0, // 任务当前阶段
                 percentage: '', // 任务完成百分比
                 description: '' // 任务描述
             },
@@ -103,12 +107,26 @@ export default {
             taskStage: [],
         }
     },
-    mounted(){
+    created(){
         get(taskSelectAPI).then(res => {
             console.log(res);
             this.maintainer = res.data.principal;
             this.priority = res.data.priority;
-            this.normalHours = res.data.timeSheet;
+            res.data.timeSheet.forEach(item => {
+                this.normalHours.push(
+                    Object.assign(
+                        {},
+                        {
+                            "id": item.id,
+                            "flag": item.flag,
+                            "name": item.laborHour,
+                            "level": item.level,
+                            "parentId": item.parentId
+                        }
+                    )
+                )
+            });
+            console.log(this.normalHours);
             this.taskStage = res.data.stage;
         });
     },
@@ -141,12 +159,13 @@ export default {
                     .then(res => {
                         if(res.code == '000'){
                             console.log(res);
+                            this.taskMsgData.id = res.data.id; // 任务id
                             this.taskMsgData.taskName = res.data.taskName; // 任务名称
-                            this.taskMsgData.principal = res.data.principal;// 负责人
-                            this.taskMsgData.priority = res.data.priority; //任务优先级
+                            this.taskMsgData.principalId = Number(res.data.principal);// 负责人
+                            this.taskMsgData.priorityId = Number(res.data.priority); //任务优先级
                             this.taskMsgData.workload = res.data.workload;//计划投入工作量
-                            this.taskMsgData.timeSheet = res.data.timeSheet; // 标准工时
-                            this.taskMsgData.stage = res.data.stage; // 任务当前阶段
+                            this.taskMsgData.timeSheetId = Number(res.data.timeSheet);
+                            this.taskMsgData.stageId = Number(res.data.stage); // 任务当前阶段
                             this.taskMsgData.percentage = res.data.percentage; //任务完成百分比
                             this.taskMsgData.description = res.data.description; // 任务描述
                             // 把数据传给日历
@@ -157,12 +176,64 @@ export default {
                     })
             }
         },
+        //改变日历组件触发的函数
+        handleDateChange(date){
+            console.log(date);
+            this.formDate = date;
+        },
         // 点击清空按钮
         clearBtn(){
             for(let key in this.taskMsgData){
                 this.taskMsgData[key] = '';
                 this.formDate = [];
             }
+        },
+        //点击确定按钮
+        confirmBtn(){
+            post(updateTaskById, {
+                "id": this.taskMsgData.id,
+                "taskName": this.taskMsgData.taskName,
+                "timeSheet": this.taskMsgData.timeSheetId,
+                "workload": this.taskMsgData.workload,
+                "principal": this.taskMsgData.principalId,
+                "priority": this.taskMsgData.priorityId,
+                "percentage": this.taskMsgData.percentage,
+                "planStartTime": this.formDate[0],
+                "planEndTime": this.formDate[1],
+                "stage": this.taskMsgData.stageId,
+                "description": this.taskMsgData.description
+            }).then(res => {
+                console.log(res);
+            }).catch(err => console.log(err));
+            this.reload();
+        },
+        // 负责人下拉框改变获取到的对应id
+        getPrincipalChange(value){
+            this.taskMsgData.principalId = value.id;
+        },
+        // 任务优先级下拉改变对应的id
+        getPriorityChange(value){
+            this.taskMsgData.priorityId = value.id;
+        },
+        // 标准工时下拉改变id
+        getTimeSheetChange(value){
+            this.taskMsgData.timeSheetId = value.id;
+        },
+        // 任务当前阶段下拉改变id
+        getStageChange(value){
+            this.taskMsgData.stageId = value.id;
+        },
+        // 任务名称改变
+        getTaskNameChange(val){
+            this.taskMsgData.taskName = val;
+        },
+        // 计划投入工作量改变
+        getWorkloadChange(val){
+            this.taskMsgData.workload = val;
+        },
+        // 任务完成百分比改变
+        getPercentageChange(val){
+            this.taskMsgData.percentage = val;
         }
     }
 }
