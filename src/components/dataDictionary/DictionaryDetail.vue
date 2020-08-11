@@ -4,20 +4,17 @@
             <el-row>
                     <el-col :span="8">
                         <div class="item">
-                            <div class="title">字典分类名称:</div>
-                            <el-input v-model="category_name" placeholder="请输入内容"></el-input>
+                            <InputBox :defalutValue="dicClassName" title="字典分类名称"/>
                         </div>
                     </el-col>
                     <el-col :span="8">
                         <div class="item">
-                            <div class="title">字典分类CODE:</div>
-                            <el-input v-model="category_code" :disabled="true" placeholder="请输入内容"></el-input>
+                            <InputBox :defalutValue="dicClassCode" title="字典分类CODE" :disable="true"/>
                         </div>
                     </el-col>
                     <el-col :span="8">
                         <div class="item">
-                            <div class="title">字典分类转移:</div>
-                            <el-input v-model="menuName" placeholder="请输入内容"></el-input>
+                            <InputBox :defalutValue="dicClassTransfer" title="字典分类转移"/>
                         </div>
                     </el-col>
             </el-row>
@@ -26,22 +23,18 @@
                         <el-row class="el-row-2-row">
                                 <el-col :span="24">
                                     <div class="item">
-                                        <div class="title">创建人:</div>
-                                        <el-input v-model="created_by" :disabled="true" placeholder="请输入内容"></el-input>
+                                        <InputBox :defalutValue="createPerson" title="创建人" :disable="true"/>
                                     </div>
                                 </el-col>
                                 <el-col :span="24">
-                                    <div class="item">
-                                        <div class="title">创建时间:</div>
-                                        <el-input v-model="created_time" :disabled="true" placeholder="请输入内容"></el-input>
-                                    </div>
+                                     <InputBox :defalutValue="createTime" title="创建时间" :disable="true"/>
                                 </el-col>
                         </el-row>
                     </el-col>
                     <el-col :span="16">
                         <!-- 备注框 -->
                             <div class="item remask">
-                                <div class="title">备注:</div>
+                                <div class="title">备注</div>
                                 <el-input type="textarea" v-model="remark" placeholder="请输入内容"></el-input>
                             </div>
                     </el-col>
@@ -61,63 +54,57 @@ export default {
     name: 'DictionaryDetail',
     data(){
         return {
-            dicClassMsg: [],
-            value: '',
-            menuName: '',
-            category_code: '',
-            category_name: '',
-            created_by: '',
-            created_time: '',
-            father_id: '',
-            id: '',
-            leaf: '',
-            remark: '',
-            nodeId: this.$store.state.DicNodeId,
+            dicClassName: '', //字典分类名称
+            dicClassCode: '', //字典分类code
+            dicClassTransfer: '',//字典分类转移
+            createPerson: '', //创建人
+            createTime: '',//创建时间
+            remark: '',//备注
+        }
+    },
+    computed:{
+        dictionaryTreeData(){
+            return this.$store.state.dictionaryTreeData;
+        }
+    },
+    watch:{
+        dictionaryTreeData: function(newVal, oldVal){
+            console.log(newVal);
+            this.dicClassName = newVal.category_name;
+            this.dicClassCode = newVal.category_code;
+            this.createPerson = newVal.created_by;
+            this.createTime = newVal.created_time;
+            this.remark = newVal.remark;
         }
     },
     created(){
-        get(dictionaryAPI).then(res => {
-            this.dicClassMsg = res;
-            let dicMessage = this.deepQuery(this.dicClassMsg.tree, this.nodeId);
-            this.category_code = dicMessage.category_code;
-            this.category_name = dicMessage.category_name;
-            this.created_by = dicMessage.created_by;
-            this.created_time = dicMessage.created_time;
-            this.leaf = dicMessage.leaf;
-            this.id = dicMessage.id;
-            this.remark = dicMessage.remark;
-        })
-        .catch(err => console.log(err))
-    },
-    methods:{
-        // 根据id获取对象信息
-        deepQuery(arr, id){
-            let isGet = false;
-            let retNode = null;
-            function deepSearch(arr, id){
-                for(let i = 0; i < arr.length; i++){
-                    if(arr[i].children && arr[i].children.length > 0){
-                        deepSearch(arr[i].children, id);
-                    }
-                    if(id === arr[i].id || isGet){
-                        isGet || (retNode = arr[i]);
-                        isGet = true;
-                        break;
-                    }
-                }
-            }
-            deepSearch(arr, id);
-            return retNode;
+        console.log('created');
+        console.log(this.dictionaryTreeData);
+        if(Object.keys(this.dictionaryTreeData).length > 0){
+            console.log('sss');
+            this.dicClassName = this.dictionaryTreeData.category_name;
+            console.log(this.dicClassName);
+            this.dicClassCode = this.dictionaryTreeData.category_code;
+            this.createPerson = this.dictionaryTreeData.created_by;
+            this.createTime = this.dictionaryTreeData.created_time;
+            this.remark = this.dictionaryTreeData.remark;
         }
+    },
+    components:{
+        InputBox: () => import('../common/InputBox')
     },
 }
 </script>
 <style scoped>
     .right{
+        height: 100%;
         display: flex;
         flex-grow: 1;
         justify-content: center;
         padding-top: .15625rem;
+        overflow: hidden;
+        overflow-y: scroll;
+        box-sizing: border-box;
     }
     .dictionary{
         width: 6.25rem;

@@ -1,82 +1,139 @@
 <template>
-    <div class="left-panel">
-        <AddMenu />
+    <div class="left-tree">
         <el-tree
-            class="menu-tree"
-            :data="data" 
-            :props="defaultProps" 
-            @node-click="handleNodeClick"
-            :expand-on-click-node="false">
-            <span class="menu-icon" slot-scope="{node, data}">
-                <span @click.stop="handle(data.id, data.leaf)">{{node.label}}</span>
-            </span>
-            </el-tree>
+          class="tree"
+          :props="defaultProps"
+          :data="treeData"
+          node-key="id"
+          @node-click="handleNodeClick"
+          highlight-current
+          :default-expand-all="false"
+          :expand-on-click-node="false">
+          <span class="content" slot-scope="{ node, data}">
+              <span :id="data.id">{{node.label}}</span>
+              <i class="el-icon-more" @mousedown="handleMousedown"></i>
+          </span>
+        </el-tree>
+        <div 
+          v-show="isShowTooltips" 
+          ref="tooltips" class="tooltips" 
+          @mouseleave="handleMouseleave"
+          @mouseenter="handleMouseEnter">
+            <span class="add">新增字典分类</span>
+            <span class="add">新增数据字典</span>
+            <span class='delete'>删除</span>
+        </div>
     </div>
 </template>
 <script>
 export default {
     name: 'DicLeftPanel',
-    props: ['data'],
+    props:{
+        treeData: Array
+    },
     data(){
         return {
-            // menuData: this.$store.state.menuData,
-            toName: '',
-            showIcon: false,
-            defaultProps: {
-                children: 'children',
-                label: 'category_name'
-            }
+            defaultProps:{
+                label: 'category_name',
+                children: 'children'
+            },
+            clientX: '',
+            ClientY: '',
+            isShowTooltips: false,
+            setTimeout: null
         }
     },
-    components: {
-        AddMenu: () => import('../common/AddMenu')
-    },
-    mounted(){
-      
-    },
-    methods: {
-        handleNodeClick(data){
-            //  console.log(data);
+    methods:{
+        // 点击树形数据的node节点时触发的函数
+        handleNodeClick(data, node){
+            this.$store.dispatch('setDictionaryTreeData', data);
         },
-        handle(id, leaf){
-            this.$store.dispatch('setDicNodeId', id);
-            if(leaf === 0) {
-                this.$router.push({name: 'DictionaryDetail'});
-
-            } else if(leaf === 1){
-                this.$router.push({name: 'DataDictionary', params:{id: id}})
-            }
+        // 监听鼠标点击后触发tooltips的显示
+        handleMousedown(e){
+            this.clientX = e.clientX;
+            this.clientY = e.clientY;
+            this.getTooltips();
+            this.isShowTooltips = true;
+            this.setTimeout = setTimeout(() => {
+                this.isShowTooltips = false;
+            }, 1000);
         },
+        // 监听鼠标进入tooltips
+        handleMouseleave(){
+            this.isShowTooltips = false;
+        },
+        handleMouseEnter(){
+            this.isShowTooltips = true;
+            // 清除定时器
+            clearTimeout(this.setTimeout);
+        },
+        // 设置tooltips盒子的位置为鼠标的相对位置
+        getTooltips(){
+            console.log(this.$refs.tooltips);
+            this.$refs.tooltips.style.position = 'absolute';
+            this.$refs.tooltips.style.left = (this.clientX - 110) + 'px';
+            this.$refs.tooltips.style.top = this.clientY + 'px';
+        }
     }
 }
 </script>
-<style scoped>
-    .left-panel{
-        width: 1.5625rem;
-        height: 3.75rem;
-        box-shadow:0px 0px 15px 0px rgba(0, 0, 0, 0.05);
-        /* padding: .09375rem .104167rem 0 0; */
-        /* overflow: auto; */
+<style lang="less" scoped>
+.left-tree{
+    width: 300px;
+    height: 100%;
+    box-shadow:0px 0px 15px 0px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    /deep/ .el-tree-node__content{
+        height: 40px;
+        .content{
+            width: 275px;
+            height: 40px;
+            line-height: 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            padding: 0 10px 0 5px;
+            box-sizing: border-box;
+            i{
+                width: 20px;
+                height: 20px;
+                font-size: 16px;
+                line-height: 40px;
+            }
+        }
     }
-    .menu-tree{
-       height: 100%;
+    .tooltips{
+        width: 100px;
+        height: 90px;
+        font-size: 12px;
+        background-color: #fff;
+        box-shadow:0px 0px 20px 0px rgba(0, 0, 0, 0.03);
+        font-family:Microsoft YaHei;
+        .add{
+            display: block;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color:rgba(101,101,101,1);
+        }
+        .delete{
+            display: block;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 12px;
+            color:rgba(101,101,101,1);
+        }
+        .add:hover,.delete:hover{
+            background:rgba(233,243,253,1);
+            color: #0066cc;
+        }
     }
-    >>> .el-tree-node__content{
-        height: .260417rem;
-        font-size: .067708rem;
-        color: #303133;
-        position: relative;
-    }
-    >>> .menu-icon{
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-    }
-     >>> .menu-icon span{
-        display: block;
-        width: 1.333333rem;
-     }
-    >>> .el-icon-more{
-        font-size: .072917rem;
-    }
+}
+.left-tree::-webkit-scrollbar{
+    display: none;
+}
 </style>

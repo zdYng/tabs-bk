@@ -8,7 +8,7 @@
         </div>
         <div class="right">
           <img class="buju" src="../assets/img/buju.png" />
-          <span>欢迎您，星星</span>
+          <span>欢迎您，{{user.userName}}</span>
           <img class="avatar" src="../assets/img/touxiang.png" />
         </div>
       </el-header>
@@ -18,46 +18,6 @@
             <MenuTree :data="dataList"/>
           </el-menu>
         </div>
-        <!-- 一级菜单面板 -->
-        <!-- <div class="home-left-panel">
-          <el-tree
-              class="menu-tree"
-              :data="dataList" 
-              :props="defaultProps" 
-              @node-click="handleNodeClick"
-              :expand-on-click-node="false" 
-              >
-              <span @click="handleMemoryStrick"  class="menu-icon" slot-scope="{node, data}">
-                  <router-link :id="data.id" :to="{path: data.url}">
-                      {{node.label}}
-                  </router-link>
-                  <i class="el-icon-setting"></i>
-              </span>
-          </el-tree>
-        </div> -->
-        <!-- <el-aside width="1.5625rem"> -->
-          <!-- element-ui里面的折叠面板组件 -->
-          <!-- <el-collapse>
-            <el-collapse-item class="tab-item" v-for="item in dataList" :key="item.id">
-              <template slot="title">
-                <i class="icon-header el-icon-setting"></i>
-                {{item.name}}
-              </template>
-              <div
-                class="hover"
-                v-for="item in item.children"
-                :key="item.id"
-                @click="handleMemoryStrick"
-              >
-                <router-link
-                  :to="{path: item.url}"
-                >
-                  {{item.name}}
-                </router-link>
-              </div>
-            </el-collapse-item>
-          </el-collapse> -->
-        <!-- </el-aside> -->
         <el-main>
           <!-- 记忆条 -->
           <div class="lable-bar">
@@ -88,19 +48,19 @@ export default {
   name: "Home",
   provide(){
     return {
-      reload: this.reload
+      reload: this.reload,
     }
   },
   data() {
     return {
+      // 当前用户信息
+      user:{
+        userName: ''
+      },
       isRouterAlive: true,
       dataList: [],
       memoryList: [],// 记忆条数组
       urlList: [],
-      defaultProps: {
-        children: 'children',
-        label: 'name'
-      },
       menuData:[
         {
           "index": '1',
@@ -144,6 +104,7 @@ export default {
   },
   watch:{
     barArr: function(newVal, oldVal){
+      console.log(newVal);
       this.memoryList = newVal;
     }
   },
@@ -151,9 +112,10 @@ export default {
     MenuTree: () => import('./common/MenuTree')
   },
   created() {
+    console.log(this.$route.path);
+    this.user.userName = this.$store.state.user.username;
     get(homeAPI).then(res => {
       this.dataList = res;
-      console.log(this.dataList);
     });
   },
   methods: {
@@ -162,7 +124,7 @@ export default {
       if(this.isActive(path)){
         if(this.memoryList.length > 0){
           const latest = this.memoryList.slice(-1);
-          this.$router.push({path: latest[0].path.substr(1)});
+          this.$router.push({path: latest[0].path});
         }else {
           this.$router.push({path: '/Home'})
         }
@@ -171,18 +133,13 @@ export default {
       }
     },
     toPages(path){
-      let substrPath = path.substr(1);
-      console.log(substrPath);
-      this.$router.push({"path": substrPath});
+      // let substrPath = path.substr(1);
+      this.$router.push({"path": path});
     },
     isActive(path){
       let thisRoutePath = this.$route.path;
-      let isInclude = path.indexOf(thisRoutePath);
-      return isInclude > 0;
-    },
-    // 左侧菜单面板点击触发
-    handleNodeClick(){
-
+      let isInclude = thisRoutePath.indexOf(path);
+      return isInclude == 0;
     },
     // 局部刷新函数
     reload(){

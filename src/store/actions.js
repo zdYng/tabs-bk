@@ -45,4 +45,8 @@ export const setMainHourNodeData = ({commit}, data) => {
 // 任务分解页面，任务看板列表点击当前行的数据
 export const setTaskBoardTable = ({commit}, data) => {
     commit('setTaskBoardTable', data);
-  }
+}
+//数据字典页面，单击节点时获取的数据
+export const setDictionaryTreeData = ({commit}, data) => {
+    commit('setDictionaryTreeData', data);
+}

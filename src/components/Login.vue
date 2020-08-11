@@ -12,7 +12,7 @@
                 imgURL= 'http://47.111.232.105:5000/img/zhanghao.png'
                 placeholder='请输入您的账号'
                 :error='error.account'
-                v-model="user.username"
+                v-model="user.userCode"
             />
             <TextField
                 type='password'
@@ -33,13 +33,13 @@
 import TextField from './common/TextField'
 import { post } from '../utils/http'
 import { loginAPI } from '../utils/apiList'
-import jwtDecode from 'jwt-decode'
+import {setCookie} from '@/utils/cookie'
 export default {
     name:'Login',
     data(){
         return{
             user:{
-                username:'',
+                userCode:'',
                 password:''
             },
             error:{
@@ -48,15 +48,19 @@ export default {
             }
         }
     },
+    created(){
+        // 监听登录按enter键进行登录
+        window.addEventListener('keydown', this.handleKeyDown, true);
+    },
     methods:{
         submitHandel(){
             // 每次点击之后清空error的值
             this.error.account = '';
             this.error.password = '';
             // 点击后判断输入框的值是否为空
-            if(this.user.username === ''){
+            if(this.user.userCode === ''){
                 this.error.account = '账号不能为空';
-            }else if(this.user.username.indexOf(' ') !== -1){
+            }else if(this.user.userCode.indexOf(' ') !== -1){
                 this.error.account = '您输入的格式不对';
             }
             if(this.user.password === ''){
@@ -64,27 +68,32 @@ export default {
             }else if(this.user.password.indexOf(' ') !== -1){
                 this.error.password = '您输入的格式不对';
             }else if(this.user.password.length < 6) {
-                this.error.password = '密码不能少于8位'
+                this.error.password = '密码不能少于6位'
             }
             if (!this.error.account && !this.error.password){
-                post(loginAPI, { username: 'testUser001', password: 'aabbcc123'})
+                post(loginAPI, {userCode: this.user.userCode, password: this.user.password})
                     .then(res => {
                         console.log(res);
-                        // // 存储token
-                        // localStorage.setItem('token', res.token);
-                        // 把tokenid存储到cookie里面，让后端读取
-                        document.cookie = "token=" + res.tokenid;
+                        if(res.code === 200){
+                            // // 存储token
+                            localStorage.setItem('token', res.tokenid);
+                            localStorage.setItem('userData', JSON.stringify(res.data));
 
-                        //分发action，更改store里面的state
-                        this.$store.dispatch('setIsAuthorization', !this.isEmpty(res.token));
-                        this.$store.dispatch('setUser', {username: 'testUser001', password: 'aabbcc123'});
+                            // 把tokenid存储到cookie里面，让后端读取
+                            document.cookie = "token=" + res.tokenid;
+                            // setCookie.set('token', res.tokenid, 1);
 
-                        // 页面跳转
-                        this.$router.push({
-                            path: '/Home'
-                        })
-                    })
-                    .catch(err => {
+                            //分发action，更改store里面的是否授权
+                            this.$store.dispatch('setIsAuthorization', !this.isEmpty(res.tokenid));
+                            //分发action，更改store里面的用户信息
+                            this.$store.dispatch('setUser', res.data);
+                            // 页面跳转
+                            this.$router.push({path: '/Home'})
+                        }else{
+                            this.error.password = res.message;
+                        }
+                        
+                    }).catch(err => {
                         console.log(err);
                     });
             }
@@ -95,6 +104,18 @@ export default {
                 (typeof value === 'object' && Object.keys(value).length === 0) ||
                 (typeof value === 'string' && value.trim().length === 0)
             );
+        },
+        // 监听登录按enter键进行登录
+        handleKeyDown(e){
+            let key = null;
+            if(window.event === undefined){
+                key = e.keyCode;
+            }else{
+                key = window.event.keyCode;
+            }
+            if(key === 13){
+                this.submitHandel();
+            }
         }
     },
     components:{

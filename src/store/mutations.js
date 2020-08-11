@@ -47,3 +47,7 @@ export const setMainHourNodeData = (state, data) => {
 export const setTaskBoardTable = (state, data) => {
   state.taskBoardTable = data;
 }
+//数据字典页面，单击节点时获取的数据
+export const setDictionaryTreeData = (state, data) => {
+  state.dictionaryTreeData = data;
+}

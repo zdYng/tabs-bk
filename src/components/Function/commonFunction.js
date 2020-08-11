@@ -16,4 +16,4 @@ export const deepQuery = function (arr, id){
     }
     deepSearch(arr, id);
     return retNode;
-}
+};

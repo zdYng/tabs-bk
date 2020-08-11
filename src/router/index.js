@@ -12,9 +12,13 @@ Vue.use(VueRouter)
   const routes = [
   {
     // 登录页面
-    path: '/',
+    path: '/Login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/',
+    redirect: 'Login'
   },
   { 
     // Home页面
@@ -170,6 +174,15 @@ const router = new VueRouter({
   mode: 'hash',
   base: process.env.BASE_URL,
   routes
+});
+// 全局守卫
+router.beforeEach((to, from, next) => {
+  let isLogin = localStorage.token ? true : false;
+  if(to.path == '/Login' || to.path == '/'){
+    next();
+  }else{
+    isLogin ? next() : next("/Login");
+  }
 })
 
 export default router

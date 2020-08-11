@@ -2,22 +2,24 @@
     <!-- Home页面的左侧树形结构菜单 -->
      <div class="menu-tree">
        <div v-for="item in data" :key="item.id">
-        <el-submenu
-            :index="item.id"
-            v-if="item.children">
-                <template slot="title">
-                    <i :class="item.icon"></i>
-                    <span>{{item.name}}</span>
-                </template>
-                <MenuTree :data="item.children"/>
-        </el-submenu>
-        <el-menu-item v-else :index="item.id">
-            <span @click="handleClick">
-                <router-link
-                    :to="{path: item.url}" 
-                    slot="title">{{item.name}}</router-link>
-            </span>
-        </el-menu-item>
+            <el-submenu
+                :index="item.id"
+                v-if="item.children">
+                    <template slot="title">
+                        <i :class="item.icon"></i>
+                        <span>{{item.name}}</span>
+                    </template>
+                    <MenuTree :data="item.children"/>
+            </el-submenu>
+            <el-menu-item v-else :index="item.id">
+                <span @click="handleClick">
+                    <router-link
+                        :to="{path: item.url}" 
+                        slot="title">
+                        {{item.name}}
+                    </router-link>
+                </span>
+            </el-menu-item>
        </div>
     </div>
 </template>
@@ -35,37 +37,40 @@ export default {
     mounted(){
         // console.log(this.memoryArr);
     },
+    computed:{
+        memoryList(){
+            return this.$store.state.memoryList;
+        }
+    },
     methods:{
         handleClick(e){
-            if(this.barArr.length > 0){
-                let flag = this.barArr.some(item => {
-                // console.log(item.path);
-                return item.path === e.target.getAttribute('href');
+            if(this.memoryList.length > 0){
+                let flag = this.memoryList.some(item => {
+                    return item.path === e.target.getAttribute('href').substr(1);
                 })
                 if(!flag){
-                    this.barArr.push(
+                    this.memoryList.push(
                         Object.assign(
                             {},
                             {
-                                "path": e.target.getAttribute('href'),
+                                "path": e.target.getAttribute('href').substr(1),
                                 "title": e.target.innerHTML
                             }
                         )
                     )
                 }
             }else {
-                    this.barArr.push(
+                    this.memoryList.push(
                     Object.assign(
                         {},
                         {
-                            "path": e.target.getAttribute('href'),
+                            "path": e.target.getAttribute('href').substr(1),
                             "title": e.target.innerHTML
                         }
                     )
                 )
             }
-            console.log(this.barArr);
-            this.$store.dispatch('setMemoryList', this.barArr);
+            this.$store.dispatch('setMemoryList', this.memoryList);
         }
     }
 }

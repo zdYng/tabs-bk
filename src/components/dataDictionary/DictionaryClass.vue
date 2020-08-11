@@ -1,8 +1,9 @@
 <template>
     <!-- 字典分类 -->
     <div class="container">
-        <DicLeftPanel :data="data.tree" />
-        <router-view></router-view>
+        <DicLeftPanel :treeData="treeData"/>
+        <!-- <router-view></router-view> -->
+        <DataDictionary />
     </div>
 </template>
 <script>
@@ -14,15 +15,17 @@ export default {
         return {
             value: '',
             menuName: '',
-            data: []
+            treeData: []
         }
     },
     components: {
         DicLeftPanel: () => import('./DicLeftPanel'),
+        DataDictionary: () => import('./DataDictionary')
     },
     created(){
         get(dictionaryAPI).then(res => {
-            this.data = res;
+            this.treeData = res.tree;
+            console.log(res);
         })
         .catch(err => {
             console.log(err);
@@ -44,6 +47,7 @@ export default {
 </script>
 <style scoped>
     .container{
+        height: 100%;
         display: flex;
         flex-grow: 1;
         justify-content: flex-start;
