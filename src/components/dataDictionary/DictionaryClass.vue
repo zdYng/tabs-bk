@@ -8,7 +8,7 @@
 </template>
 <script>
 import { get } from '../../utils/http'
-import { dictionaryAPI,  termDicAPI, dicget } from '../../utils/apiList'
+import { getTreeAPI,  termDicAPI, dicget } from '../../utils/apiList'
 export default {
     name: 'DictionaryClass',
     data(){
@@ -23,9 +23,8 @@ export default {
         DataDictionary: () => import('./DataDictionary')
     },
     created(){
-        get(dictionaryAPI).then(res => {
-            this.treeData = res.tree;
-            console.log(res);
+        get(getTreeAPI).then(res => {
+            this.treeData = res.data;
         })
         .catch(err => {
             console.log(err);

@@ -7,9 +7,10 @@ export const homeAPI = '/basic/menu/selmenutree/'
 // 菜单下拉接口
 export const dropAPI = '/basic/menu/selmenudrop/'
 // 数据字典菜单接口
-export const dictionaryAPI = '/basic/datadictionary/seldictree/'
+export const dictionaryAPI = '/basic/datadictionary/seldictree/' //暂时不用
+export const getTreeAPI = 'basic/datadictionary/gettree'
 // 数据字典项接口
-export const termDicAPI = `/basic/datadictionary/seldatadic/`
+export const termDicAPI = '/basic/datadictionary/seldatadic'
 // 项目管理获取项目下拉列表
 export const projectSelectAPI = '/ssm/ssm/project/'
 // 项目管理页面。点击修改，对项目信息进行维护

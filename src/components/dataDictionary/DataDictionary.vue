@@ -69,9 +69,9 @@
                     <div class="status">
                         <span class="title">启用</span>
                         <el-switch
-                        v-model="value1"
-                        active-color="#0066cc"
-                        inactive-color="#cdcdcd">
+                            v-model="value1"
+                            active-color="#0066cc"
+                            inactive-color="#cdcdcd">
                         </el-switch>
                     </div> 
                 </div>
@@ -92,10 +92,13 @@
                 </div>
             </el-col>
         </el-row>
+        <el-row class="row-table">
+           <DictionaryTable />
+        </el-row>
     </div>
 </template>
 <script>
-import { get } from '../../utils/http'
+import { get, post } from '../../utils/http'
 import { termDicAPI } from '../../utils/apiList';
 export default {
     name: 'DataDictionary',
@@ -108,15 +111,7 @@ export default {
                 create_time: '', //创建时间
                 mark: '',//备注 
             },
-            value:'',
-            value1: true,
-            category: '',
-            category_name: '',
-            created_by: '',
-            created_time: '',
-            remark: '',
-            father_id: '',
-            data: [{label: 1, value: 'aaa'},{label: 2, value: 'bbb'}],
+            value1: ''
         }
     },
     computed:{
@@ -126,23 +121,26 @@ export default {
     },
     watch:{
         dictionaryTreeData: function(newVal, oldVal){
-            console.log(newVal);
-            this.dictionaryMsg.dictionaryName = newVal.category_name;
-            this.dictionaryMsg.dictionaryTransfer = '';
-            this.dictionaryMsg.create_person = newVal.created_by;
-            this.dictionaryMsg.create_time = newVal.created_time;
-            this.dictionaryMsg.mark = newVal.remark;
+            post(termDicAPI, Number(newVal.id))
+            .then(res => {
+                this.dictionaryMsg.dictionaryName = res.category.category_name;
+                this.dictionaryMsg.dictionaryTransfer = '';
+                this.dictionaryMsg.create_person = res.category.created_by;
+                this.dictionaryMsg.create_time = res.category.created_time
+                this.dictionaryMsg.mark = res.category.categoryRemark;
+            })
         }
     },
     mounted(){
-        let menuMessage = JSON.parse(localStorage.getItem('dicMenuMessage'));
-        this.category_name = menuMessage.category.category_name;
-        this.created_by = menuMessage.category.created_by;
-        this.created_time = menuMessage.category.created_time;
-        this.remark = menuMessage.category.categoryRemark;
+        // let menuMessage = JSON.parse(localStorage.getItem('dicMenuMessage'));
+        // this.category_name = menuMessage.category.category_name;
+        // this.created_by = menuMessage.category.created_by;
+        // this.created_time = menuMessage.category.created_time;
+        // this.remark = menuMessage.category.categoryRemark;
     },
     components:{
-        InputBox: () => import('../common/InputBox')
+        InputBox: () => import('../common/InputBox'),
+        DictionaryTable: () => import('./DictionaryTable')
     }
 }
 </script>
