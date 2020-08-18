@@ -34,6 +34,7 @@ import TextField from './common/TextField'
 import { post } from '../utils/http'
 import { loginAPI } from '../utils/apiList'
 import {setCookie} from '@/utils/cookie'
+import jwt_decode from 'jwt-decode'
 export default {
     name:'Login',
     data(){
@@ -75,18 +76,20 @@ export default {
                     .then(res => {
                         console.log(res);
                         if(res.code === 200){
-                            // // 存储token
-                            localStorage.setItem('token', res.tokenid);
-                            localStorage.setItem('userData', JSON.stringify(res.data));
+                            // 存储token
+                            const token = res.data;
+                            window.localStorage.setItem('jwtToken', token);
+                            const decode = jwt_decode(token);
+                            console.log(decode);
 
                             // 把tokenid存储到cookie里面，让后端读取
-                            document.cookie = "token=" + res.tokenid;
+                            document.cookie = "token=" + decode.tokenid;
                             // setCookie.set('token', res.tokenid, 1);
 
                             //分发action，更改store里面的是否授权
-                            this.$store.dispatch('setIsAuthorization', !this.isEmpty(res.tokenid));
+                            this.$store.dispatch('setIsAuthorization', !this.isEmpty(decode));
                             //分发action，更改store里面的用户信息
-                            this.$store.dispatch('setUser', res.data);
+                            this.$store.dispatch('setUser', decode);
                             // 页面跳转
                             this.$router.push({path: '/Home'})
                         }else{

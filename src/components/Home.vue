@@ -198,6 +198,7 @@ export default {
           font-size: 16px;
           font-family: Microsoft YaHei;
           color: #fff;
+          padding-right: 5px;
         }
         .avatar{
           width: 20px;

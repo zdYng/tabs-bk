@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+import jwt_decode from 'jwt-decode'
 export default {
   name: 'App',
   data(){
@@ -12,11 +13,13 @@ export default {
     }
   },
   created(){
-    if(localStorage.token){
+      if(localStorage.jwtToken){
+        const decode = jwt_decode(localStorage.jwtToken);
         //分发action，更改store里面的是否授权
-        this.$store.dispatch('setIsAuthorization', !this.isEmpty(localStorage.token));
-        this.$store.dispatch('setUser', JSON.parse(localStorage.userData));
-    }
+        this.$store.dispatch('setIsAuthorization', !this.isEmpty(decode));
+        //分发action，更改store里面的用户信息
+        this.$store.dispatch('setUser', decode);
+      }
   },
   methods:{
     isEmpty(value){

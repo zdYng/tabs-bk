@@ -177,7 +177,7 @@ const router = new VueRouter({
 });
 // 全局守卫
 router.beforeEach((to, from, next) => {
-  let isLogin = localStorage.token ? true : false;
+  let isLogin = localStorage.jwtToken ? true : false;
   if(to.path == '/Login' || to.path == '/'){
     next();
   }else{
