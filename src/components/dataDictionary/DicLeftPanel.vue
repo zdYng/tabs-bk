@@ -130,11 +130,12 @@ export default {
         }
         .delete{
             display: block;
-            width: 100px;
+            width: 100%;
             height: 30px;
             line-height: 30px;
             padding-left: 12px;
             color:rgba(101,101,101,1);
+            box-sizing: border-box;
         }
         .add:hover,.delete:hover{
             background:rgba(233,243,253,1);
