@@ -7,7 +7,7 @@
         <div class="item-top">
           <span class="top-text">
             <span class="before-span"></span>
-            <span style="margin-left: .078125rem">登录页设置</span>
+            <span>登录页设置</span>
           </span>
           <button>保&nbsp;存</button>
         </div>
@@ -16,16 +16,13 @@
     <el-row>
       <el-col :span="8">
         <div class="item-input">
-          <div class="title">系统名称:</div>
-          <el-input></el-input>
+          <InputBox title="系统名称"/>
         </div>
         <div class="item-input">
-          <div class="title">企业URL:</div>
-          <el-input></el-input>
+          <InputBox title="企业URL"/>
         </div>
         <div class="item-input">
-          <div class="title">填充方式:</div>
-          <el-input></el-input>
+          <InputBox title="填充方式"/>
         </div>
       </el-col>
       <el-col :span="16 ">
@@ -35,14 +32,12 @@
           <!-- <div class="bg-img-choose">选择</div> -->
           <el-upload
             class="bg-img-upload upload-demo"
-            action="../../assets/img/login-bg-img.png"
-          >
+            action="../../assets/img/login-bg-img.png">
             <div class="bg-img-choose el-upload__text">
               选择
             </div>
           </el-upload>
         </div>
-        
       </el-col>
     </el-row>
     <el-row>
@@ -50,7 +45,7 @@
         <div class="item-top">
           <span class="top-text">
             <span class="before-span"></span>
-            <span style="margin-left: .078125rem">系统主题设置</span>
+            <span>系统主题设置</span>
           </span>
         </div>
       </el-col>
@@ -58,8 +53,7 @@
     <el-row>
       <el-col :span="8">
         <div class="item-input">
-          <div class="title">填充方式:</div>
-          <el-input></el-input>
+          <InputBox title="填充方式"/>
         </div>
       </el-col>
       <el-col :span="16">
@@ -78,62 +72,81 @@ export default {
     return {
       imgUrl: '/img/login-bg-img.3281967c.png'
     };
+  },
+  components:{
+    InputBox: () => import('../common/InputBox')
   }
 };
 </script>
-<style scoped>
-/* top-row */
-.custom-settings {
+<style lang="less" scoped>
+.custom-settings{
   width: 100%;
   height: 5.208333rem;
+  .el-row{
+    .item-top{
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      .top-text{
+        font-size: 0.114583rem;
+        display: flex;
+        align-items: center;
+        align-self: center;
+        .before-span{
+          display: inline-block;
+          width: 6px;
+          height: 14px;
+          background-color: #000;
+        }
+        span{
+          font-size: 16px;
+          margin-left: 10px;
+        }
+      }
+      button{
+        width: 80px;
+        height: 30px;
+        background: rgba(0, 102, 204, 1);
+        border-radius: 10px;
+        border: none;
+        font-size: 14px;
+        color: #fff;
+        outline: none;
+        align-self: center;
+      }
+    }
+    /deep/ .item-input{
+      width: 240px;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 108px;
+      .input-box{
+        .title{
+          span{
+            font-size: 14px;
+          }
+        }
+        .el-input{
+          .el-input__inner{
+
+          }
+        }
+      }
+    }
+  }
 }
-.item-top {
-  height: 0.3125rem;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 0.3125rem;
-}
-.item-top .top-text {
-  font-size: 0.114583rem;
-  display: flex;
-  vertical-align: center;
-  align-self: center;
-}
-.before-span {
-  display: inline-block;
-  width: 0.03125rem;
-  height: 0.114583rem;
-  background-color: #000;
-}
+</style>
+<style scoped>
+
 .item-top button {
-  width: 0.729167rem;
-  height: 0.234375rem;
-  background: rgba(0, 102, 204, 1);
-  border-radius: 20px;
-  border: none;
-  font-size: 0.104167rem;
-  color: #fff;
-  outline: none;
-  align-self: flex-end;
+  
 }
 
 .item-input {
-  width: 1.25rem;
-  height: 0.520833rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 0.416667rem;
-}
-.item-input .title {
-  font-size: 0.083333rem;
-  padding: 0 0 0.078125rem 0.026042rem;
-}
-.item-input .el-input >>> .el-input__inner {
-  width: 1.5625rem;
-  height: 0.260417rem;
-  border: 1px solid rgba(221, 221, 221, 1);
-  border-radius: 0.078125rem;
+  
 }
 .bg-img-container {
     position: relative;
@@ -144,7 +157,7 @@ export default {
 }
 
 .bg-img-text {
-  font-size: 0.083333rem;
+  font-size: 14px;
   height: 0.208333rem;
   line-height: 0.208333rem;
 }
@@ -154,9 +167,9 @@ export default {
   margin-right: .151042rem/* 29/16 */;
 }
 .bg-img-choose {
-  width: 2.5625rem ;
-  height: 1.25rem ;
-  font-size: 20px;
+  width: 2.5625rem;
+  height: 1.25rem;
+  font-size: 16px;
   font-family: Microsoft YaHei;
   font-weight: 400;
   color: rgba(0, 102, 204, 1);

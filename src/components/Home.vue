@@ -4,7 +4,7 @@
       <el-header height="15%">
         <div class="left">
           <img src="../assets/img/logo.png" alt />
-          <span>极联智能制造SaaS平台管理系统</span>
+          <span>极联智能制造SaaS平台后台管理系统</span>
         </div>
         <div class="right">
           <img class="buju" src="../assets/img/buju.png" />
@@ -172,28 +172,36 @@ export default {
         display: flex;
         vertical-align: -webkit-baseline-middle;
         img {
-          width: 0.3125rem;
-          height: 0.3125rem;
-          margin: 0.104167rem 0 0 0.15625rem;
+          width: 40px;
+          height: 40px;
+          margin: 35px 10px 0 0.15625rem;
         }
         span {
-          font-size: 0.1875rem;
+          font-size: 26px;
           color: #fff;
           align-self: flex-start;
-          margin: 0.182292rem 0 0 0;
+          margin: 42px 0 0 0;
+          font-family: sans-serif;
         }
       }
       .right {
-        height: 0.520833rem;
-        padding: 0.15625rem 0.15625rem 0 0;
+        height: 30px;
+        padding: 38px 0.15625rem 0 0;
+        display: flex;
+        align-items: flex-end;
         .buju {
           margin-right: 0.104167rem;
+          width: 15px;
+          height: 15px;
         }
         span {
-          font-size: 20px;
+          font-size: 16px;
           font-family: Microsoft YaHei;
           color: #fff;
-          margin-right: 0.104167rem;
+        }
+        .avatar{
+          width: 20px;
+          height: 20px;
         }
       }
     }
@@ -236,10 +244,11 @@ export default {
         }
       }
       .left-panel{
-        width: 16%;
+        width: 10%;
         height: 100%;
         background:rgba(235,245,255,1);
         overflow: hidden;
+        min-width: 150px;
         overflow-y: scroll;
         /deep/ .el-menu{
           border: none;
@@ -251,7 +260,7 @@ export default {
       /* main功能区域 */
       /deep/ .el-main {
         padding: 0;
-        width: 84%;
+        width: 90%;
         height: 100%;
         .lable-bar {
           width: 100%;
@@ -264,16 +273,21 @@ export default {
           align-items: center;
           .item {
             display: flex;
-            height: .15625rem;
+            height: 24px;
             justify-content: space-around;
             align-items: center;
-            font-size: 0.072917rem;
-            padding: 0 .026042rem;
+            font-size: 12px;
+            padding: 0 .026042rem 0 0;
+            color: #666;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+            border-radius: 2px;
             span{
-              width: .520833rem;
+              // width: 80px;
               height: .15625rem;
               line-height: .15625rem;
               text-align: center;
+              padding: 0 20px 0 10px;
             }
           }
           // .item:hover{
@@ -282,7 +296,8 @@ export default {
           // }
           .active{
             background-color: #a6d2ff;
-            // color: #fff;
+            color: #000;
+            border: none;
           }
         }
         .main-area {

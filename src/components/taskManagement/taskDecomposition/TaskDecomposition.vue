@@ -59,8 +59,14 @@ export default {
     width: 100%;
     height: 100%;
     display: flex;
+    background-color: #f5f5f5;
+    padding-top: 2px;
+    box-sizing: border-box;
     .left{
-        width: 40%;
+        width: 35%;
+        background-color: #fff;
+        box-sizing: border-box;
+        padding-right: 5px;
         .top{
             overflow: hidden;
             height: 7%;
@@ -73,10 +79,14 @@ export default {
         display: none;
     }
     .right{
-        width: 60%;
+        width: 66%;
         margin-left: 10px;
         overflow: hidden;
         overflow-y: scroll;
+        background-color: #fff;
+        margin-left: 8px;
+        padding-left: 20px;
+        box-sizing: border-box;
     }
     .right::-webkit-scrollbar{
         display: none;

@@ -7,11 +7,11 @@
         </div>
         <div class="nickname">
             <span class="title">我的昵称:</span>
-            <span>孩子气</span>
+            <span class="text">孩子气</span>
         </div>
         <div class="user-email">
             <span class="title">我的邮箱:</span>
-            <span>mytest@126.com</span>
+            <span class="text">mytest@126.com</span>
         </div>
         <div class="job-status">
             <span class="title">我的工作状态:</span>
@@ -26,7 +26,7 @@
         </div>
         <div class="custom-sign">
             <span class="title">我的个性签名:</span>
-            <span>梦想还是要有的，万一实现了呢？</span>
+            <span class="text">梦想还是要有的，万一实现了呢？</span>
         </div>
     </div>
 </template>
@@ -51,6 +51,9 @@ export default {
             ],
             value:''
         }
+    },
+    components:{
+        // SelectBox: () => import('../common/SelectBox')
     }
 }
 </script>
@@ -74,6 +77,7 @@ export default {
     height: .625rem;
     background-color: skyblue;
     margin-left: .104167rem;
+    border-radius: 10px;
 }
 .nickname{
     width: 3.125rem;
@@ -103,6 +107,16 @@ export default {
 }
 .job-status .el-select{
     margin-left: .104167rem;
+}
+>>> .el-input__inner{
+    border-radius: 8px;
+}
+>>> .el-input__inner::placeholder{
+    font-weight: 100;
+    font-size: 12px;
+}
+.text{
+    color: #666;
 }
 .title{
     display: inline-block;

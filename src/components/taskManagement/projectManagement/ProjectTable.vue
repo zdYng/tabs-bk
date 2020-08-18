@@ -10,7 +10,7 @@
           border style="width: 100%;">
             <el-table-column
               label="选择"
-              width="55"
+              width="70"
               align="center">
               <template slot-scope="scope">
                   <el-checkbox 
@@ -20,7 +20,7 @@
             </el-table-column>
             <el-table-column
               type="index"
-              width="50"
+              width="70"
               align="center"
               label="序号">
             </el-table-column>
@@ -80,15 +80,20 @@ export default {
 </script>
 <style lang="less" scoped>
 .pro-table{
-    width: 100%;
+    width: 1687px;
     /deep/ .el-table.tab-border-radius{
         border-radius: .052083rem;
         .el-table__header-wrapper{
-            .el-table__header{
+            .el-table__header{ 
                 .has-gutter{
                     font-family:Microsoft YaHei;
                     color: #000;
                     font-weight: 700;
+                    tr{
+                        th{
+                            background-color: #fafafa;
+                        }
+                    }
                 }
                 thead{
                     .el-table-column--selection{
@@ -101,8 +106,20 @@ export default {
         }
         .el-table__body-wrapper{
             .el-table__body{
-                .el-table__row{
+                .el-table__row, .current-row{
+                    height: 40px;
                     color:rgba(102,102,102,1);
+                    td{
+                        height: 40px;
+                        padding: 0;
+                        div{
+                            height: 20px;
+                            font-size: 13px;
+                            font-weight: 200;
+                            color: #666;
+                            font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif; 
+                        }
+                    }
                 }
             }
         }

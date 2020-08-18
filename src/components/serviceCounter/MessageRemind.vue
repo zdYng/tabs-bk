@@ -34,24 +34,26 @@ export default {
 </script>
 <style scoped>
 .container{
-    padding: .4rem 0 0 .4rem;
+    
 }
 .message-remind {
     width:430px;
     height:300px;
-    box-shadow:0px 0px 10px 0px rgba(0, 0, 0, 0.05);
+    /* box-shadow:0px 0px 10px 0px rgba(0, 0, 0, 0.05); */
     border-radius:20px;
     box-sizing: border-box;
     padding: .15625rem 0;
 }
 .item{
     width: 100%;
-    height: .625rem;
+    height: 80px;
     display: flex;
-    justify-content: space-around;
+    padding-left: 80px;
+    /* justify-content: space-around; */
     align-items: center;
 }
 .item .title{
-    font-size: .09375rem;
+    font-size: 16px;
+    margin-right: 80px;
 }
 </style>

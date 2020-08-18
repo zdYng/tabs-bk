@@ -23,7 +23,7 @@ export default {
     name: 'DialogBtnGroup',
     data(){
         return{
-            isShow: true
+            isShow: false
         }
     },
     methods:{
@@ -45,7 +45,7 @@ export default {
     align-items: center;
     margin-left: 10px;
     .el-icon{
-        font-size: 24px;
+        font-size: 18px;
         color: #0066cc;
         cursor: pointer;
     }
@@ -53,13 +53,22 @@ export default {
         width: .130208rem;
         height: .130208rem;
     }
-    .btn-group{
+    /deep/.btn-group{
         display: flex;
         align-items: center;
-        box-shadow:0px 0px 10px 0px rgba(0,102,204,0.05);
+        // box-shadow:0px 0px 10px 0px rgba(0,102,204,0.05);
         border-radius: 20px;
         overflow: hidden;
         margin-left: 10px;
+        .btn-item{
+            div{
+                .el-button{
+                    span{
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
         .delete-btn{
             width: 40px;
             display: inline-block;
@@ -70,10 +79,16 @@ export default {
         }
         .btn-item{
             color:rgba(102,102,102,1);
-            padding: 0 .052083rem;
+            padding: 0 5px;
         }
-        .btn-item:hover{
-            color: #409EFF;
+        /deep/ .btn-item:hover{
+            div{
+                .el-button{
+                    span{
+                        color: #0066cc;
+                    }
+                }
+            }
         }
     }
     /deep/ .el-button--text{

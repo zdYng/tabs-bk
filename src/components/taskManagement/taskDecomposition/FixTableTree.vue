@@ -129,10 +129,13 @@ export default {
             color:rgba(102,102,102,1); 
             td{
                 border-bottom: none;
+                padding: 0;
                 .cell{
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
+                    font-size: 13px;
+                    color: #333;
                 }
             }
         }

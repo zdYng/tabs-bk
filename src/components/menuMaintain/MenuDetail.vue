@@ -2,57 +2,56 @@
     <div class="right">
         <div class="menu-area">
             <el-row>
-                <el-col :span="8">
+                <el-col :span="5">
                     <InputBox :defalutValue="menuName" title="菜单名称" placeholder="请输入内容"/>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="5">
                     <SelectBox :defalutValue="menuTypeId" :options="menuType" title="菜单类型"/>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="5">
                     <InputBox :defalutValue="menuCode" title="菜单CODE" placeholder="请输入内容"/>
                 </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="8">
+                <el-col :span="5">
                     <SearchSelect :defalutValue="menuFunctionId" title="对应功能" :options="menuFunction"/>
                 </el-col>
-                <el-col :span="8">
+            </el-row>
+            <el-row>
+                <el-col :span="5">
                     <SelectBox :defalutValue="functionIconId" title="功能图标"/>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="5">
                     <SelectBox :defalutValue="statusId" :options="menuStatus" title="使用状态"/>
                 </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="8">
+                <el-col :span="5">
                     <InputBox :defalutValue="createdBy"  title="创建人" :disable="true" />
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="5">
                     <SelectBox :defalutValue="serialNumberId" title="序号"/>
-                </el-col>
-                <el-col :span="8">
-                    <SelectBox :defalutValue="menuChangeId" title="菜单转移"/>
                 </el-col>
             </el-row>
             <el-row>
-                <el-col :span="8">
+                <el-col :span="5">
+                    <SelectBox :defalutValue="menuChangeId" title="菜单转移"/>
+                </el-col>
+                <el-col :span="5">
                     <InputBox :defalutValue="createdTime" title="创建时间" :disable="true" />
                 </el-col>
-                <el-col :span="16">
+                <el-col :span="10">
                     <div class="remark">
                         <div class="title">
                             <span>备注</span>
                         </div>
                         <el-input 
-                            type="textarea" 
+                            type="text" 
                             v-model="remark" 
                             placeholder="请输入内容">
                         </el-input>
                     </div>
                 </el-col>
             </el-row>
+            <el-row class="space-blank"></el-row>
             <el-row>
-                <el-col :span="24">
+                <el-col :span="20">
                     <button class="submit">确&nbsp;定</button>
                 </el-col>
             </el-row>
@@ -167,39 +166,50 @@ export default {
 .right{
     width: 80%;
     height: 100%;
+    padding-left: 20px;
     .menu-area{
         height: 100%;
         .el-row{
             height: 20%;
             display: flex;
             align-items: center;
-            .el-col{
+            /deep/ .el-col{
                 display: flex;
                 justify-content: center;
+                .title{
+                    font-size: 14px;
+                }
                 .remark{
                     .title{
                         display: flex;
-                        font-size: 16px;
+                        font-size: 14px;
                         padding: 0 0 .078125rem 0;
                     }
-                    /deep/ .el-textarea__inner{
-                        width: 3.489583rem;
+                    /deep/ .el-input__inner{
+                        width: 528px;
                         height: 40px;
                         resize: none;
-                        border-radius: 10px;
+                        border-radius: 8px;
+                    }
+                    /deep/ .el-input__inner::placeholder{
+                        font-weight: 100;
+                        font-size: 12px;
                     }
                 }
                 .submit{
                     width: 1.041667rem;
-                    height: .260417rem;
-                    border-radius: .104167rem;
+                    height: 42px;
+                    border-radius: 20px;
                     color: #fff;
                     background-color: #0066cc;
                     outline: none;
                     border: none;
-                    font-size: .104167rem;
+                    font-size: 16px;
                 }
             }
+        }
+        .space-blank{
+            height: 100px;
         }
     }
 }

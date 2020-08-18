@@ -45,13 +45,13 @@ export default {
         color:rgba(51,51,51,1);
         .before-span{
             display: inline-block;
-            width: .026042rem;
-            height: .083333rem;
+            width: 6px;
+            height: 14px;
             background-color: #000;
             margin-right: .052083rem;
         }
         .title{
-            font-size: .104167rem;
+            font-size: 16px;
             font-family:Microsoft YaHei;
             font-weight:bold;
         }

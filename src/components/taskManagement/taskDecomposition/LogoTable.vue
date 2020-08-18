@@ -1,4 +1,5 @@
 <template>
+<!-- 暂时不用 -->
     <!-- 日志管理列表 -->
     <div class="table">
         <el-table class="tab-border-radius scroll-bar" :data="list" height="500px" border style="width: 100%;">

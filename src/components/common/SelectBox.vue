@@ -79,7 +79,7 @@ export default {
 //     margin-left: 0.133333rem;
 //   }
   /deep/ .el-input__inner {
-    border-radius: 10px;
+    border-radius: 8px;
     width: 1.25rem;
     height: 40px;
     border: 1px solid #e5e5e5;
@@ -88,7 +88,8 @@ export default {
     border: 1px solid #e5e5e5;
   }
   /deep/ .el-input__inner::-webkit-input-placeholder {
-    font-weight: 200;
+    font-weight: 100;
+    font-size: 12px;
   }
 }
 </style>

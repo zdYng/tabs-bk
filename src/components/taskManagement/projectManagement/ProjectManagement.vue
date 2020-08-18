@@ -32,9 +32,9 @@ export default {
             proStageSelect: [], //项目阶段下拉数据
             list: [],
             itemOptions:[
-                { id: 1, title: "项目名称", type: "text", key: "projectName", width:'150'},
+                { id: 1, title: "项目名称", type: "text", key: "projectName", width:'160'},
                 { id: 2, title: "项目CODE", type: "text", key: "projectCode", width:'150' },
-                { id: 3, title: "项目类型", type: "text", key: "projectType", width:'100' },
+                { id: 3, title: "项目类型", type: "text", key: "projectType", width:'108' },
                 { id: 4, title: "项目阶段", type: "text", key: "projectStage", width:'100' },
                 { id: 5, title: "项目创建时间", type: "text", key: "createTime", width:'179' },
                 { id: 6, title: "计划周期", type: "text", key: "planCycle", width:'200' },
@@ -159,26 +159,60 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+@deep: ~'>>>';
 .pro-management{
     width: 100%;
     header{
         width: 100%;
-        padding-top: .133333rem;
+        padding-top: 20px;
         display: flex;
         justify-content: space-between;
-        .input-group{
+        @{deep} .input-group{
             display: flex;
             align-items: center;
+            // padding-left: 10px;
+            .input-search{
+                .title{
+                    font-size: 13px;
+                    color: #303133;
+                    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+                }
+                .el-input{
+                    .el-input__inner{
+                        width: 150px;
+                    }
+                    .el-input__inner::placeholder{
+                        font-weight: 100;
+                        font-size: 12px;
+                    }
+                }
+            }
+            .select-search{
+                .title{
+                    font-size: 14px;
+                    color: #303133;
+                    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif; 
+                }
+                .el-select{
+                    .el-input__inner{
+                        width: 150px;
+                    }
+                    .el-input__inner::placeholder{
+                        font-weight: 100;
+                        font-size: 12px;
+                    }
+                }
+            }
             .margin-left{
-                margin-left: .078125rem;
+                margin-left: 30px;
             }
             .select-btn{
-                width: .416667rem;
+                width: 70px;
                 height: 30px;
                 background-color: #fff;
                 border-radius: .052083rem;
                 border: solid 1px #0066cc;
-                font-size: .083333rem;
+                font-size: 14px;
                 color: #0066cc;
                 margin-left: .104167rem;
                 outline: none;
@@ -193,7 +227,7 @@ export default {
                 background-color: #fff;
                 border-radius: 10px;
                 border: solid 1px #0066cc;
-                font-size: .083333rem;
+                font-size: 14px;
                 color: #0066cc;
                 margin-left: .104167rem;
                 outline: none;
@@ -206,7 +240,7 @@ export default {
                 background-color: #fff;
                 border-radius: .052083rem;
                 border: solid 1px #0066cc;
-                font-size: .083333rem;
+                font-size: 14px;
                 color: #0066cc;
                 margin-left: .104167rem;
                 outline: none;
@@ -217,7 +251,7 @@ export default {
                 height: 30px;
                 background-color: #0066cc;
                 border-radius: 10px;
-                font-size: .083333rem;
+                font-size: 14px;
                 color: #fff;
                 border: none;
                 margin: 0 .104167rem 0 .104167rem;
@@ -229,7 +263,7 @@ export default {
     .tab-section{
         display: flex;
         justify-content: center;
-        padding: .15625rem .104167rem 0 .104167rem;
+        padding: 20px 20px 0 20px;
     }
 }
 </style>

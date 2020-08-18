@@ -2,54 +2,43 @@
     <!-- ---------------------任务信息----------------------------- -->
     <div class="task-msg">
         <el-row>
-            <el-col :span="12">
+            <el-col :span="6">
                 <InputBox @inputChange="getTaskNameChange" :defalutValue='taskMsgData.taskName' title="任务名称" />
             </el-col>
-            <el-col :span="12">
+            <el-col :span="6">
                 <SelectBox @selectEvent="getPrincipalChange" :defaultValue="taskMsgData.principalId" title="负责人" :options="maintainer"/>
             </el-col>
-        </el-row>
-        <!-- ---------------------日期选择----------------------------- -->
-        <div class="date-select">
-            <el-row>
-                <el-col :span="24">
-                    <div>
-                        <div class="title">
-                            <span>计划任务周期</span>
-                        </div>
+            <el-col class="col-date" :span="12">
+                <div class="date">
+                    <div class="title">
+                        <span>计划任务周期</span>
+                    </div>
                         <DateSelect @pickDate="getPlanCycleChange" :defaultDateTime="formDate"/>
                     </div>
-                </el-col>
-            </el-row>
-        </div>
+            </el-col>
+        </el-row>
         <!-- ---------------------任务优先级----------------------------- -->
         <el-row>
-            <el-col :span="12">
+            <el-col :span="6">
                 <SelectBox @selectEvent="getPriorityChange" :defaultValue="taskMsgData.priorityId"  title="任务优先级" :options="priority"/>
             </el-col>
-            <el-col :span="12">
+            <el-col :span="6">
                 <InputBox @inputChange="getWorkloadChange" :defalutValue='taskMsgData.workload' title="计划投入工作量" />
+            </el-col>
+            <el-col :span="6">
+                <SelectBox @selectEvent="getTimeSheetChange" :defaultValue="taskMsgData.timeSheetId" title="标准工时" :options="normalHours"/>
             </el-col>
         </el-row>
         <!-- ---------------------标准工时----------------------------- -->
         <el-row>
-            <el-col :span="12">
-                <SelectBox @selectEvent="getTimeSheetChange" :defaultValue="taskMsgData.timeSheetId" title="标准工时" :options="normalHours"/>
-            </el-col>
-            <el-col :span="12">
+            <el-col :span="6">
                 <SelectBox @selectEvent="getStageChange" :defaultValue="taskMsgData.stageId" title="任务当前阶段" :options="taskStage"/>
             </el-col>
-        </el-row>
-        <!-- ---------------------任务完成百分比----------------------------- -->
-        <el-row>
-            <el-col :span="12">
+            <el-col :span="6">
                 <InputBox @inputChange="getPercentageChange" :defalutValue='taskMsgData.percentage' title="任务完成百分比" />
             </el-col>
-        </el-row>
-        <!-- ---------------------任务描述----------------------------- -->
-        <el-row class="task-describe">
-            <el-col :span="24">
-                <div>
+            <el-col class="col-describe" :span="12">
+                <div class="describe">
                     <div class="title">
                         <span>任务描述</span>
                     </div>
@@ -267,47 +256,75 @@ export default {
         display: flex;
         height: 90px;
         align-items: center;
-        .el-col{
+        /deep/ .el-col{
             display: flex;
             // justify-content: center;
-        }
-    }
-    .date-select{
-       display: flex;
-       .el-row{
-           .title{
-                font-size: .083333rem;
-                padding: 0 0 .078125rem 0;
-           }
-           /deep/ .el-input__inner{
-                width: 720px;
-                height: 40px;
-                border-radius: 10px;
-                .el-range-separator{
-                    line-height: 30px;
+            .input-box{
+                .title{
+                    font-size: 14px;
                 }
-           }
-       }
-    }
-    .task-describe{
-        height: .625rem;
-        .title{
-            font-size: .083333rem;
-            padding: 0 0 .078125rem 0;
+                .el-input__inner{
+                    
+                }
+            }
+            .select-box{
+                .title{
+                    font-size: 14px;
+                }
+                .el-input__inner{
+                    padding: 0 10px;
+                }
+            }
         }
-        /deep/ .el-textarea__inner{
-            width: 720px;
-            height: .416667rem;
-            border-radius: 10px;
-            resize: none;
+        /deep/ .col-date{
+            .date{
+                .title{
+                    padding-bottom: 15px;
+                    span{
+                        font-size: 14px;
+                    }
+                }
+                .date-select{
+                    .el-date-editor{
+                        width: 400px;
+                        border-radius: 8px;
+                        .el-range-input{
+                            width: 150px;
+                        }
+                        .el-range-input::placeholder{
+                            font-weight: 100;
+                            font-size: 12px;
+                        }
+                        .el-range-separator{
+                            line-height: 32px;
+                        }
+                    }
+                }
+            }
+        }
+        /deep/ .col-describe{
+            .describe{
+                .title{
+                    padding-bottom: 15px;
+                    font-size: 14px;
+                }
+                .el-textarea{
+                    .el-textarea__inner{
+                        width: 400px;
+                        height: 40px;
+                        resize: none;
+                        border-radius: 8px;
+                    }
+                }
+            }
         }
     }
     .btn-group{
-        height: 120px;
+        height: 250px;
         button{
             width: 150px;
             height: .208333rem;
-            border-radius: 10px;
+            border-radius: 20px;
             font-size: 14px;
             outline: none;
             font-family: Microsoft YaHei;

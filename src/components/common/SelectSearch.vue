@@ -52,7 +52,17 @@ export default {
             .el-input__inner{
                 width: 180px;
                 height: 35px;
-                border-radius: 10px;
+                border-radius: 8px;
+                padding: 0 10px;
+            }
+            .el-input__suffix{
+                .el-input__suffix-inner{
+                    i{
+                        color: #333;
+                        height: 35px;
+                        line-height: 35px;
+                    }
+                }
             }
         }
     }

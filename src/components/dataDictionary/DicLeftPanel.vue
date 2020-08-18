@@ -9,7 +9,7 @@
           highlight-current
           :default-expand-all="false"
           :expand-on-click-node="false">
-          <span class="content" slot-scope="{ node, data}">
+          <span @mouseenter="handleShowIcon" @mouseleave="handleCloseIcon" class="content" slot-scope="{ node, data}">
               <span :id="data.id">{{node.label}}</span>
               <i class="el-icon-more" @mousedown="handleMousedown"></i>
           </span>
@@ -40,7 +40,7 @@ export default {
             clientX: '',
             ClientY: '',
             isShowTooltips: false,
-            setTimeout: null
+            setTimeout: null,
         }
     },
     methods:{
@@ -73,13 +73,21 @@ export default {
             this.$refs.tooltips.style.position = 'absolute';
             this.$refs.tooltips.style.left = (this.clientX - 110) + 'px';
             this.$refs.tooltips.style.top = this.clientY + 'px';
+        },
+        handleShowIcon(e){
+            let showIcon = e.target.getElementsByTagName('i')[0];
+            showIcon.style.visibility = 'visible';
+        },
+        handleCloseIcon(e){
+            let showIcon = e.target.getElementsByTagName('i')[0];
+            showIcon.style.visibility = 'hidden';
         }
     }
 }
 </script>
 <style lang="less" scoped>
 .left-tree{
-    width: 300px;
+    width: 200px;
     height: 100%;
     box-shadow:0px 0px 15px 0px rgba(0, 0, 0, 0.05);
     overflow: hidden;
@@ -99,8 +107,9 @@ export default {
             i{
                 width: 20px;
                 height: 20px;
-                font-size: 16px;
+                font-size: 14px;
                 line-height: 40px;
+                visibility: hidden;
             }
         }
     }

@@ -7,10 +7,10 @@
         </div>
         <div class="right">
             <el-row>
-                <el-col :span="8">
+                <el-col :span="5">
                     <InputBox @inputChange="getMainHourName" :defalutValue="mainHourName" title="工时名称"/>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="5">
                     <InputBox :defalutValue="mainHour" @inputChange="getMainHour" title="工时"/>
                 </el-col>
             </el-row>
@@ -113,7 +113,7 @@ export default {
     height: 100%;
     display: flex;
     .left{
-        width: 19%;
+        width: 250px;
         height: 100%;
         box-shadow:0px 0px 15px 0px rgba(0, 0, 0, 0.05);
     }
@@ -123,20 +123,32 @@ export default {
             height: 150px;
             display: flex;
             align-items: center;
+            padding-left: 10px;
             .el-col{
                 display: flex;
                 justify-content: center;
+                .input-box{
+                    .title{
+                        font-size: 14px;
+                    }
+                    .el-input{
+                        .el-input__inner{
+
+                        }
+                    }
+                }
             }
         }
         .row-save-btn{
             display: flex;
-            justify-content: center;
+            // justify-content: center;
+            margin-left: 200px;
             .saveBtn{
-                width:250px;
-                height:50px;
+                width:200px;
+                height:40px;
                 background:rgba(0,102,204,1);
-                border-radius:15px;
-                font-size:20px;
+                border-radius: 20px;
+                font-size:16px;
                 font-family:Microsoft YaHei;
                 color:rgba(255,255,255,1);
                 border: none;

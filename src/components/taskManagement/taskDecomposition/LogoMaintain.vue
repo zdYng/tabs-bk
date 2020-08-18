@@ -98,7 +98,7 @@
                 prop="notes"
                 label="备注"
                 align="center"
-                width="421">   
+                width="528">   
               </el-table-column>
             </el-table>
         </div>
@@ -220,10 +220,10 @@ export default {
     height: 100%;
     .logo-top{
         width: 100%;
-        height: .416667rem;
+        height: 60px;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-end;
         .search-group{
           display: flex;
           /deep/ .input-box{
@@ -245,31 +245,32 @@ export default {
           }
           .search-btn{
               width: .416667rem;
-              height: 30px;
+              height: 35px;
               background-color: #fff;
               border-radius: .052083rem;
               border: solid 1px #0066cc;
-              font-size: .083333rem;
+              font-size: 14px;
               color: #0066cc;
               outline: none;
               text-align: center;
-              margin-bottom: 5px;
               align-self: flex-end;
+              box-sizing: border-box;
+              margin-bottom: 2px;
           }
         }
         .dialog{
           .add-remark{
-            width: .625rem;
-            height: .208333rem;
+            width: 100px;
+            height: 35px;
             background:rgba(0,102,204,1);
             border-radius:15px;
-            font-size:18px;
+            font-size: 14px;
             font-family:Microsoft YaHei;
-            font-weight:500;
             color:rgba(255,255,255,1);
             border: none;
             outline: none;
-            margin-right: .104167rem;
+            margin-right: 30px;
+            box-sizing: border-box;
           }
           /deep/ .custom-dialog{
             .el-dialog{
@@ -348,8 +349,8 @@ export default {
         }
     }
     /deep/ .log-table{
-        width: 100%;
-        padding: .104167rem .104167rem 0 .104167rem;
+        width: 1700px;
+        padding: .104167rem 0 0 .104167rem;
         box-sizing: border-box;
         .el-table{
           .el-table__header-wrapper{

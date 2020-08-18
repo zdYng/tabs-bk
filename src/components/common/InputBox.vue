@@ -55,7 +55,11 @@ export default {
     /deep/ .el-input__inner{
         width: 1.25rem;
         height: 40px;
-        border-radius: 10px;
+        border-radius: 8px;
+    }
+    /deep/ .el-input__inner::placeholder{
+        font-weight: 100;
+        font-size: 12px;
     }
 }
 </style>

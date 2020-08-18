@@ -35,17 +35,20 @@ export default {
 </script>
 <style lang="less" scoped>
 .menu-left-panel{
-    width: 1.5625rem;
+    width: 200px;
     min-width: 200px;
     height: 100%;
     box-shadow:0px 0px 15px 0px rgba(0, 0, 0, 0.05);
     .menu-tree{
         height: 100%;
         /deep/ .el-tree-node__content{
-            height: .260417rem;
-            font-size: .067708rem;
+            height: 30px;
+            // font-size: .067708rem;
             color: #303133;
             position: relative;
+            .el-tree-node__label{
+                font-size: 12px;
+            }
             .menu-icon{
                 display: flex;
                 width: 100%;

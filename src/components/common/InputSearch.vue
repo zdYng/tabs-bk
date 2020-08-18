@@ -47,6 +47,7 @@ export default {
             width: 180px;
             height: 35px;
             border-radius: 8px;
+            padding: 0 10px;
         }
     }
 }

@@ -5,7 +5,7 @@
       border>
       <el-table-column
         label="选择"
-        width="50"
+        width="100"
         align="center">
         <template slot-scope="scope">
           <el-checkbox
@@ -16,28 +16,28 @@
       <el-table-column
         type="index"
         label="序号"
-        width="50"
+        width="100"
         align="center">
       </el-table-column>
       <el-table-column
         prop="dictionary_name"
         label="字典项名称"
-        width="150">
+        width="200">
       </el-table-column>
       <el-table-column
         prop="dictionary_unit"
         label="字典项单位"
-        width="150">
+        width="200">
       </el-table-column>
       <el-table-column
         prop="dictionaryStatus"
         label="启用状态"
-        width="150">
+        width="200">
       </el-table-column>
       <el-table-column
         prop="dictionaryRemark"
         label="备注"
-        width="150">
+        width="200">
       </el-table-column>
     </el-table>
   </div>
@@ -89,5 +89,10 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-
+.dictonary-table{
+  width: 1001px;
+  margin-left: 130px;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
 </style>

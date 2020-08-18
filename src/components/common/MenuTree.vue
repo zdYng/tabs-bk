@@ -81,10 +81,13 @@ export default {
     // background:rgba(235,245,255,1);
     /deep/ .el-submenu {
         .el-submenu__title{
-            font-size: 16px;
+            font-size: 14px;
+            height: 45px;
             color: #000;
             font-family:Microsoft YaHei;
             background:rgba(235,245,255,1);
+            display: flex;
+            align-items: center;
             i{
                 color: #303133;
                 font-size: 16px;
@@ -92,6 +95,7 @@ export default {
             }
             /deep/ .el-submenu__icon-arrow{
                 color: #000 !important;
+                font-size: 14px;
             }
         }
         .el-submenu__title:hover{
@@ -103,12 +107,14 @@ export default {
         /deep/ .el-menu--inline{
             background:rgba(217,236,255,1);
             .el-menu-item{
-                font-size: 14px;
+                font-size: 13px;
                 font-family:Microsoft YaHei;
+                height: 40px;
                 span{
                     display: block;
                     width: 100%;
                     height: 100%;
+                    line-height: 40px;
                     a{
                         display: block;
                         width: 100%;
