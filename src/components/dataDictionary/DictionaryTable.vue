@@ -22,22 +22,26 @@
       <el-table-column
         prop="dictionary_name"
         label="字典项名称"
-        width="200">
+        width="200"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="dictionary_unit"
         label="字典项单位"
-        width="200">
+        width="200"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="dictionaryStatus"
         label="启用状态"
-        width="200">
+        width="200"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="dictionaryRemark"
         label="备注"
-        width="200">
+        width="200"
+        align="center">
       </el-table-column>
     </el-table>
   </div>
@@ -94,5 +98,18 @@ export default {
   margin-left: 130px;
   margin-top: 20px;
   box-sizing: border-box;
+  /deep/ .el-table{
+    .el-table__header-wrapper{
+      .el-table__header{
+        .has-gutter{
+          tr{
+            th{
+              color: #333;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 </style>

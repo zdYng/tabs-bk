@@ -8,6 +8,8 @@
                         <InputBox title="请输入旧密码"/>
                     </div>
                 </el-col>
+            </el-row>
+            <el-row>
                 <el-col :span="6" :offset="2">
                     <div class="item-input">
                         <InputBox title="请输入新密码"/>
@@ -20,6 +22,8 @@
                         <InputBox title="请确认新密码"/>
                     </div>
                 </el-col>
+            </el-row>
+            <el-row>
                 <el-col :span="6" :offset="2">
                     <div class="item-input">
                         <InputBox title="请输入验证码"/>
@@ -60,8 +64,9 @@ export default {
         // box-shadow:0px 0px 10px 0px rgba(0, 0, 0, 0.05);
         border-radius:20px;
         box-sizing: border-box;
+        padding-top: 20px;
         .item-input{
-            height: 130px;
+            height: 100px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -90,9 +95,9 @@ export default {
         }
         .row-confit-btn{
             display: flex;
-            height: 240px;
+            height: 150px;
             align-items: flex-end;
-            margin-left: 250px;
+            margin-left: 230px;
             .confirm-btn{
                 width: 200px;
                 height: 40px;

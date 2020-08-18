@@ -28,7 +28,7 @@
       <el-col :span="16 ">
         <div class="bg-img-container">
           <div class="bg-img-text">登录页面背景图片:</div>
-          <img class="bg-img" :src="imgUrl"/>
+          <img class="bg-img" src="@/assets/img/login-bg-img.png"/>
           <!-- <div class="bg-img-choose">选择</div> -->
           <el-upload
             class="bg-img-upload upload-demo"
@@ -59,7 +59,7 @@
       <el-col :span="16">
         <div>
           <div class="bg-img-text">系统主题背景图片:</div>
-          <img class="bg-img" :src="imgUrl" />
+          <img class="bg-img" src="@/assets/img/login-bg-img.png" />
         </div>
       </el-col>
     </el-row>
@@ -70,7 +70,7 @@ export default {
   name: "CustomSettings",
   data() {
     return {
-      imgUrl: '/img/login-bg-img.3281967c.png'
+      // imgUrl: '/img/login-bg-img.3281967c.png'
     };
   },
   components:{
@@ -81,7 +81,7 @@ export default {
 <style lang="less" scoped>
 .custom-settings{
   width: 100%;
-  height: 5.208333rem;
+  height: 100%;
   .el-row{
     .item-top{
       height: 60px;
@@ -140,14 +140,6 @@ export default {
 }
 </style>
 <style scoped>
-
-.item-top button {
-  
-}
-
-.item-input {
-  
-}
 .bg-img-container {
     position: relative;
 }

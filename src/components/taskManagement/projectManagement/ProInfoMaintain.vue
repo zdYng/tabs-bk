@@ -9,7 +9,7 @@
             </el-row>
             <div v-show="isShowBaseInfo">
                 <el-row>
-                    <el-col :span="12" class="el-col-class">
+                    <el-col :span="8" class="el-col-class">
                         <div class="item-input">
                             <InputBox :defalutValue="selectId.projectName" @inputChange="getProNameValue" :showIcon="true" title="项目名称"/>
                         </div>
@@ -17,7 +17,7 @@
                             <SelectBox :defaultValue="selectId.projectTypeId" @selectEvent="getProTypeId" :options="proTypeSelect" :showIcon="true" title="项目类型"/>
                         </div>
                     </el-col>
-                    <el-col :span="12" class="el-col-class">
+                    <el-col :span="8" class="el-col-class">
                         <div class="item-input">
                         <SelectBox :defaultValue="selectId.projectStageId" @selectEvent="getProStageId" :options="proStageSelect" :showIcon="true" title="项目阶段"/>
                         </div>
@@ -27,7 +27,7 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="12" class="el-col-class">
+                    <el-col :span="8" class="el-col-class">
                         <div class="item-input">
                             <div class="title">
                                 <span>项目Code</span>
@@ -35,7 +35,7 @@
                             <el-input v-model="selectId.projectCode" class="input-code" :disabled="true"></el-input>
                         </div>
                     </el-col>
-                    <el-col :span="12" class="el-col-class">
+                    <el-col :span="8" class="el-col-class">
                         <div class="item-input">
                         <SelectBox :defaultValue="selectId.projectBDId" @selectEvent="getProBDId" :options="proBDSelect" :showIcon="false" title="项目BD"/>
                         </div>
@@ -45,7 +45,7 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="12" class="el-col-class">
+                    <el-col :span="8" class="el-col-class">
                         <div class="item-input">
                             <div class="title">
                                 <span>计划周期</span>
@@ -53,7 +53,7 @@
                             <DateSelect @pickDate="getPlanPickDate" :defaultDateTime="planDateTime"/>
                         </div>
                     </el-col>
-                    <el-col :span="12" class="el-col-class">
+                    <el-col :span="8" class="el-col-class">
                         <div class="item-input">
                             <div class="title">
                                 <span>实际周期</span>
@@ -63,7 +63,7 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="24" class="el-col-class col-remark">
+                    <el-col :span="16" class="el-col-class col-remark">
                         <div style="height: 120px" class="item-input">
                             <div class="title">
                                 <span>需求描述</span>
@@ -81,12 +81,10 @@
             </el-row>
             <div v-show="isShowCustomInfo">
                 <el-row class="row-custom">
-                    <el-col :span="6" class="col-custom">
+                    <el-col :span="8" class="col-custom">
                         <div class="item-input">
                             <InputBox :showIcon="false" title="自定义"/>
                         </div>
-                    </el-col>
-                    <el-col :span="6" class="col-custom">
                         <div class="item-input">
                             <InputBox :showIcon="false" title="自定义"/>
                         </div>
@@ -101,24 +99,20 @@
             </el-row>
             <div v-show="isShowUserInfo">
                 <el-row class="row-user-info">
-                    <el-col :span="6" class="col-user-info">
+                    <el-col :span="12" class="col-user-info">
                         <div class="item-input">
                             <SelectBox @selectEvent="getProTypeId" :options="customerSelect" title="客户名称"/>
                         </div>
-                    </el-col>
-                    <el-col :span="6" class="col-user-info">
                         <div class="item-input">
                             <SelectBox @selectEvent="getProTypeId" :options="customerGrade" title="客户等级"/>
                         </div>
-                    </el-col>
-                    <el-col :span="6" class="col-user-info">
                         <div class="item-input">
                             <SelectBox @selectEvent="getProTypeId" :options="customerType" title="客户类型"/>
                         </div>
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="24" class="el-col-class">
+                    <el-col :span="16" class="el-col-class">
                         <div style="height: 120px" class="item-input">
                             <div class="title">
                                 <span>客户信息描述</span>
@@ -373,6 +367,10 @@ export default {
     height: 100%;
     overflow: hidden;
     overflow-y: scroll;
+    .el-row{
+        box-sizing: border-box;
+        padding: 0 20px;
+    }
     .el-col-class{
         display: flex;
         justify-content: space-around;
@@ -386,19 +384,25 @@ export default {
         flex-direction: column;
         justify-content: center;
         .title{
-            font-size: .083333rem;
+            font-size: 14px;
             padding: 0 0 .078125rem 0;
             display: flex;
         }
         .date-select{
-            .el-range-separator{
-                line-height: 32px;
+            .el-date-editor{
+                width: 527px;
+                .el-range-separator{
+                    line-height: 32px;
+                }
             }
         }
         .input-code {
             .el-input__inner{
                 border: none;
                 color: rgb(96, 98, 102);
+            }
+            .el-textarea__inner{
+                width: 1101px;
             }
         }
     }
@@ -407,7 +411,7 @@ export default {
         flex-wrap: wrap;
         .col-custom{
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
         }
     }
     .row-user-info{
@@ -415,7 +419,7 @@ export default {
         flex-wrap: wrap;
         .col-user-info{
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
         }
     }
     .row-btn{
@@ -424,14 +428,14 @@ export default {
         justify-content: center;
         align-items: center;
         .save-btn{
-            width: 1.041667rem;
-            height: .260417rem;
+            width: 200px;
+            height: 40px;
             background:rgba(0,102,203,1);
-            border-radius: .104167rem;
+            border-radius: 20px;
             color: #fff;
             border: none;
             outline: none;
-            font-size: .104167rem;
+            font-size: 16px;
         }
     }
 }
@@ -443,7 +447,7 @@ export default {
 }
 /deep/ .input-code{
     .el-input__inner{
-        width: 3.385417rem;
+        width: 527px;
         height: 40px;
     }
 }

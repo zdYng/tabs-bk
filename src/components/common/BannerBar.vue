@@ -43,16 +43,16 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 80px 0 80px;
+    padding: 0 80px 0 20px;
     .top-text{
-        font-size: .114583rem;
+        font-size: 16px;
         display: flex;
         vertical-align: center;
-        align-self: center;
+       align-items: center;
         .before-span{
             display: inline-block;
-            width: .03125rem;
-            height: .114583rem;
+            width: 6px;
+            height: 14px;
             background-color: #000;
         }
     }
