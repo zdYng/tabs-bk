@@ -7,7 +7,7 @@
         </div>
         <div class="nickname">
             <span class="title">我的昵称:</span>
-            <span class="text">孩子气</span>
+            <span class="text">{{userData.nickName}}</span>
         </div>
         <div class="user-email">
             <span class="title">我的邮箱:</span>
@@ -50,6 +50,11 @@ export default {
                 },
             ],
             value:''
+        }
+    },
+    computed:{
+        userData(){
+            return this.$store.state.user;
         }
     },
     components:{
