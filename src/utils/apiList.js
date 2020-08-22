@@ -11,6 +11,14 @@ export const dictionaryAPI = '/basic/datadictionary/seldictree/' //暂时不用
 export const getTreeAPI = 'basic/datadictionary/gettree'
 // 数据字典项接口
 export const termDicAPI = '/basic/datadictionary/seldatadic'
+// 数据字典新增接口
+export const insertAPI = 'basic/datadictionary/insert'
+// 数据字典菜单树删除接口
+export const dictionaryDeletetAPI = 'basic/datadictionary/delete'
+// 数据字典树形数据修改接口
+export const dictionaryUpdateAPI = 'basic/datadictionary/update'
+// 数据字典页面字典转移下拉框的下拉数据
+export const selectdataloadAPI = 'basic/datadictionary/selectdataload'
 // 项目管理获取项目下拉列表
 export const projectSelectAPI = '/ssm/ssm/project/'
 // 项目管理页面。点击修改，对项目信息进行维护

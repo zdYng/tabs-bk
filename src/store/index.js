@@ -20,7 +20,8 @@ const state = {
   MenuDetailData: {}, //菜单维护页面的菜单详情数据
   mainHourNodeData: {},//标准工时页面树形数据，点击后的当前节点的数据
   taskBoardTable: {}, // 任务分解页面，任务看板列表点击当前行的数据
-  dictionaryTreeData: {}, //数据字典页面，单击节点时获取的数据
+  dictionaryTreeData: {}, //数据字典页面，单击树形节点时获取的数据
+  dictionaryItem: {}, //数据字典页面的字典项列表和行数据
 }
 
 export default new Vuex.Store({

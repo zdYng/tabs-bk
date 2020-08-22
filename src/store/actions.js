@@ -50,3 +50,7 @@ export const setTaskBoardTable = ({commit}, data) => {
 export const setDictionaryTreeData = ({commit}, data) => {
     commit('setDictionaryTreeData', data);
 }
+//数据字典页面的字典项列表和行数据
+export const setDictionaryItem = ({commit}, data) => {
+    commit('setDictionaryItem', data);
+  }

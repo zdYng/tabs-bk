@@ -51,3 +51,7 @@ export const setTaskBoardTable = (state, data) => {
 export const setDictionaryTreeData = (state, data) => {
   state.dictionaryTreeData = data;
 }
+//数据字典页面的字典项列表和行数据
+export const setDictionaryItem = (state, data) => {
+  state.dictionaryItem = data;
+}

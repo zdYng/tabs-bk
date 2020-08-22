@@ -90,3 +90,38 @@ export default axios
           })
       })
   }
+
+
+  /**
+   * delete
+   * @param {String} url [请求的url地址]
+   * @param {Object} params [请求时携带的参数]
+   */
+export function deletefn(url, data){
+    return new Promise((resolve, reject) => {
+        axios.delete(url, {data})
+        .then(res => {
+            resolve(res.data);
+        })
+        .catch(err => {
+            reject(err);
+        })
+    })
+}
+
+/**
+   * delete
+   * @param {String} url [请求的url地址]
+   * @param {Number} params [请求时携带的参数]
+   */
+//   export function put(url, data = null){
+//     return new Promise((resolve, reject) => {
+//         axios.put(url, data = null)
+//         .then(res => {
+//             resolve(res.data);
+//         })
+//         .catch(err => {
+//             reject(err);
+//         })
+//     })
+// }

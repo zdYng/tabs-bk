@@ -47,11 +47,11 @@ Vue.use(VueRouter)
         path: 'DictionaryClass',
         component: () => import('../components/dataDictionary/DictionaryClass.vue'),
         children:[
-          {
-            name: 'DictionaryDetail',
-            path: 'DictionaryDetail',
-            component: () => import('../components/dataDictionary/DictionaryDetail.vue')
-          },
+          // {
+          //   name: 'DictionaryDetail',
+          //   path: 'DictionaryDetail',
+          //   component: () => import('../components/dataDictionary/DictionaryDetail.vue')
+          // },
           {
             name: 'DataDictionary',
             path: 'DataDictionary/',

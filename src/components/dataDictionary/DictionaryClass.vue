@@ -3,11 +3,11 @@
     <div class="container">
         <DicLeftPanel :treeData="treeData"/>
         <!-- <router-view></router-view> -->
-        <DataDictionary />
+        <DataDictionary/>
     </div>
 </template>
 <script>
-import { get } from '../../utils/http'
+import { get, post } from '../../utils/http'
 import { getTreeAPI,  termDicAPI, dicget } from '../../utils/apiList'
 export default {
     name: 'DictionaryClass',
@@ -24,14 +24,12 @@ export default {
     },
     created(){
         get(getTreeAPI).then(res => {
+            console.log(res);
             this.treeData = res.data;
         })
         .catch(err => {
             console.log(err);
         })
-    },
-    destroyed(){
-        console.log('DicClass destoryed');
     },
     watch:{
         $route(to, from){
@@ -41,7 +39,10 @@ export default {
                 });
             }
         }
-    }    
+    },
+    methods:{
+
+    }   
 }
 </script>
 <style scoped>
